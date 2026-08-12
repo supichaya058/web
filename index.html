@@ -508,7 +508,7 @@ body{
     }
 
     .chart{
-        height:650px;
+        height:680px;
     }
 }
 
@@ -555,9 +555,6 @@ body{
 
 <div id="home" class="page active">
 
-
-    <!-- HERO -->
-
     <section class="hero glass">
 
         <h1>
@@ -582,8 +579,6 @@ body{
     </section>
 
 
-    <!-- OVERVIEW -->
-
     <section class="section glass">
 
         <h3>
@@ -599,8 +594,6 @@ body{
 
         <div class="cards">
 
-
-            <!-- GENERAL CARD -->
 
             <div class="card">
 
@@ -623,8 +616,6 @@ body{
 
             </div>
 
-
-            <!-- HARDWARE CARD -->
 
             <div class="card">
 
@@ -653,26 +644,27 @@ body{
     </section>
 
 
-    <!-- IMPORTANT FINDINGS -->
-
     <section class="section glass">
 
         <h3>
-            ข้อค้นพบสำคัญ
+            ข้อค้นพบสำคัญจากการวิเคราะห์
         </h3>
 
         <p>
-            ผลการวิเคราะห์แสดงให้เห็นว่าทั้งสองสาขาวิชามีความเชื่อมโยง
-            กับเทคโนโลยีปัญญาประดิษฐ์อย่างชัดเจน
-            โดยสาขา General Computer Science
-            เน้นการพัฒนาอัลกอริทึมและโมเดล AI
-            ส่วนสาขา Hardware and Architecture
-            เน้นการพัฒนาโครงสร้างพื้นฐานและฮาร์ดแวร์
-            ที่รองรับการประมวลผล AI
-        </p>
+    ผลการวิเคราะห์ชี้ให้เห็นว่า งานวิจัยในสาขา General Computer Science
+    มีความโดดเด่นด้านปัญญาประดิษฐ์ การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลสมัยใหม่
+    ขณะที่สาขา Hardware and Architecture มุ่งเน้น FPGA, Edge AI
+    และสถาปัตยกรรมฮาร์ดแวร์ประสิทธิภาพสูง
+</p>
+
+<p>
+    แม้ทั้งสองสาขาจะมีลักษณะหัวข้อวิจัยแตกต่างกัน แต่ผลลัพธ์สะท้อนแนวโน้มร่วมกันคือ
+    การพัฒนาปัญญาประดิษฐ์และการพัฒนาฮาร์ดแวร์มีความเชื่อมโยงกันอย่างใกล้ชิด
+    และเป็นทิศทางสำคัญของงานวิจัยด้านคอมพิวเตอร์ในปัจจุบัน
+</p>
+
 
     </section>
-
 
 </div>
 
@@ -682,7 +674,6 @@ body{
 ===================================================== -->
 
 <div id="general" class="page">
-
 
     <section class="hero glass">
 
@@ -705,7 +696,6 @@ body{
 
 
     <section class="section glass">
-
 
         <div class="chart-header">
 
@@ -763,9 +753,7 @@ body{
 
         </div>
 
-
     </section>
-
 
 </div>
 
@@ -775,7 +763,6 @@ body{
 ===================================================== -->
 
 <div id="hardware" class="page">
-
 
     <section class="hero glass">
 
@@ -799,7 +786,6 @@ body{
 
 
     <section class="section glass">
-
 
         <div class="chart-header">
 
@@ -859,17 +845,13 @@ body{
 
         </div>
 
-
     </section>
-
 
 </div>
 
 
 <div class="footer">
-
     Scopus Research Topic Analysis 2025
-
 </div>
 
 
@@ -915,17 +897,13 @@ function showPage(pageId, btn){
     }else{
 
         const pageIndex = {
-
             home:0,
             general:1,
             hardware:2
-
         };
-
 
         const buttons =
             document.querySelectorAll(".nav button");
-
 
         if(buttons[pageIndex[pageId]]){
 
@@ -942,11 +920,6 @@ function showPage(pageId, btn){
         behavior:"smooth"
     });
 
-
-    /*
-       เมื่อเปลี่ยนหน้า Plotly ต้อง resize
-       เพื่อให้กราฟคำนวณขนาดใหม่
-    */
 
     setTimeout(function(){
 
@@ -973,7 +946,7 @@ function showPage(pageId, btn){
 
 /* =====================================================
    GENERAL COMPUTER SCIENCE
-   LOLLIPOP / DOT PLOT
+   LOLLIPOP CHART
 ===================================================== */
 
 const generalTopics = [
@@ -1003,13 +976,12 @@ const generalValues = [
 ];
 
 
-/*
-   สร้างเส้นแนวนอน
-   จาก 0 ไปยังค่าของแต่ละหัวข้อ
-*/
-
 const generalLines = [];
 
+
+/*
+   เส้นจาก 0 ไปยังจุด
+*/
 
 for(
     let i = 0;
@@ -1048,7 +1020,11 @@ for(
 
 
 /*
-   สร้างจุดวงกลม
+   จุดและข้อความ
+
+   สำคัญ:
+   ใช้ top center แทน middle right
+   เพื่อไม่ให้ข้อความอยู่ทับเส้น
 */
 
 generalLines.push({
@@ -1078,7 +1054,7 @@ generalLines.push({
         value => value + " บทความ"
     ),
 
-    textposition:"middle right",
+    textposition:"top center",
 
     textfont:{
         color:"#f8fafc",
@@ -1107,8 +1083,8 @@ Plotly.newPlot(
 
         margin:{
             l:220,
-            r:130,
-            t:20,
+            r:90,
+            t:50,
             b:55
         },
 
@@ -1159,6 +1135,7 @@ Plotly.newPlot(
         hoverlabel:{
             bgcolor:"#1e1b4b",
             bordercolor:"#8b5cf6",
+
             font:{
                 family:"Sarabun",
                 color:"#ffffff"
@@ -1180,7 +1157,7 @@ Plotly.newPlot(
 
 /* =====================================================
    HARDWARE AND ARCHITECTURE
-   LOLLIPOP / DOT PLOT
+   LOLLIPOP CHART
 ===================================================== */
 
 const hardwareTopics = [
@@ -1210,12 +1187,12 @@ const hardwareValues = [
 ];
 
 
-/*
-   สร้างเส้นแนวนอน
-*/
-
 const hardwareLines = [];
 
+
+/*
+   เส้นจาก 0 ไปยังจุด
+*/
 
 for(
     let i = 0;
@@ -1254,7 +1231,10 @@ for(
 
 
 /*
-   สร้างจุดวงกลม
+   จุดและข้อความ
+
+   ใช้ top center
+   เพื่อไม่ให้ข้อความทับเส้น
 */
 
 hardwareLines.push({
@@ -1284,7 +1264,7 @@ hardwareLines.push({
         value => value + " บทความ"
     ),
 
-    textposition:"middle right",
+    textposition:"top center",
 
     textfont:{
         color:"#f8fafc",
@@ -1313,8 +1293,8 @@ Plotly.newPlot(
 
         margin:{
             l:240,
-            r:130,
-            t:20,
+            r:90,
+            t:50,
             b:55
         },
 
@@ -1365,6 +1345,7 @@ Plotly.newPlot(
         hoverlabel:{
             bgcolor:"#1e1b4b",
             bordercolor:"#c084fc",
+
             font:{
                 family:"Sarabun",
                 color:"#ffffff"
@@ -1382,7 +1363,6 @@ Plotly.newPlot(
     }
 
 );
-
 
 </script>
 
