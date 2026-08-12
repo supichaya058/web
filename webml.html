@@ -1,6 +1,6 @@
+
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,16 +46,9 @@ body{
     box-shadow:0 10px 24px rgba(37,99,235,.18);
 }
 
-.header-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
 .header h1{
     margin:0;
     font-size:32px;
-    font-weight:700;
 }
 
 .header h2{
@@ -67,32 +60,23 @@ body{
 
 .header p{
     margin:18px 0 0;
-    max-width:900px;
-}
-
-.year{
-    background:rgba(255,255,255,.16);
-    border:1px solid rgba(255,255,255,.25);
-    padding:10px 18px;
-    border-radius:20px;
-    font-size:13px;
 }
 
 /* KPI */
 
 .kpi-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:16px;
     margin-bottom:24px;
 }
 
 .kpi{
     background:white;
-    border:1px solid #e5e7eb;
     border-radius:16px;
     padding:22px;
-    box-shadow:0 4px 12px rgba(0,0,0,.04);
+    box-shadow:0 4px 14px rgba(0,0,0,.05);
+    text-align:center;
 }
 
 .kpi-label{
@@ -103,61 +87,49 @@ body{
 .kpi-number{
     font-size:30px;
     font-weight:700;
-    margin-top:8px;
     color:#1e40af;
+    margin-top:8px;
 }
 
 /* CARD */
 
 .card{
     background:white;
-    border:1px solid #e5e7eb;
     border-radius:18px;
-    padding:24px;
-    margin-bottom:22px;
-    box-shadow:0 4px 12px rgba(0,0,0,.04);
+    padding:26px;
+    margin-bottom:24px;
+    box-shadow:0 4px 16px rgba(0,0,0,.05);
 }
 
-.card-title{
-    font-size:20px;
-    font-weight:700;
+.card h3{
+    margin:0 0 8px;
+    font-size:22px;
     color:#111827;
 }
 
-.card-subtitle{
+.card p{
+    margin:0 0 18px;
     color:#64748b;
-    font-size:14px;
-    margin-top:6px;
 }
 
-#barChart{
+#chart1,#chart2{
     width:100%;
-    height:480px;
+    height:520px;
 }
 
-#donutChart{
-    width:100%;
-    height:420px;
-}
-
-.explain{
+.note{
     margin-top:18px;
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:14px;
     padding:18px;
-    font-size:14px;
-}
-
-.explain strong{
-    color:#1e40af;
+    background:#f8fafc;
+    border-left:5px solid #2563eb;
+    border-radius:12px;
+    line-height:1.8;
 }
 
 /* SUMMARY */
 
 .summary{
-    margin-top:20px;
-    background:#111827;
+    background:#0f172a;
     color:white;
     border-radius:18px;
     padding:28px;
@@ -169,7 +141,7 @@ body{
 }
 
 .summary p{
-    color:#e5e7eb;
+    color:#e2e8f0;
 }
 
 /* FOOTER */
@@ -183,19 +155,18 @@ body{
 
 /* RESPONSIVE */
 
-@media(max-width:900px){
+@media(max-width:768px){
 
     .kpi-grid{
         grid-template-columns:1fr;
     }
 
-    .header-top{
-        display:block;
+    .header{
+        padding:24px;
     }
 
-    .year{
-        display:inline-block;
-        margin-top:14px;
+    .header h1{
+        font-size:26px;
     }
 
 }
@@ -210,27 +181,18 @@ body{
 
     <div class="header">
 
-        <div class="header-top">
-
-            <div>
-                <h1>ภาพรวมแนวโน้มงานวิจัยจาก Scopus</h1>
-                <h2>Scopus Research Landscape</h2>
-            </div>
-
-            <div class="year">2025</div>
-
-        </div>
+        <h1>ภาพรวมแนวโน้มงานวิจัยจาก Scopus</h1>
+        <h2>Scopus Research Landscape 2025</h2>
 
         <p>
-            รายงานฉบับนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล
-            <strong>Scopus</strong>
-            โดยใช้ข้อมูล
-            <strong>Subject Area</strong>
-            จำนวน 2 สาขา ได้แก่
+            รายงานฉบับนี้นำเสนอการวิเคราะห์ข้อมูลจากฐานข้อมูล Scopus
+            โดยใช้ข้อมูลจาก <strong>2 ชุดข้อมูลที่เป็นอิสระต่อกัน</strong>
+            ได้แก่
             <strong>General Computer Science</strong>
             และ
             <strong>Hardware and Architecture</strong>
-            เพื่อศึกษาการกระจายตัวของผลงานวิจัยในแต่ละสาขา
+            ดังนั้นการวิเคราะห์จึงนำเสนอแยกเป็นรายชุดข้อมูล
+            และไม่ทำการเปรียบเทียบกันโดยตรง
         </p>
 
     </div>
@@ -240,79 +202,75 @@ body{
     <div class="kpi-grid">
 
         <div class="kpi">
-            <div class="kpi-label">จำนวนสาขาที่วิเคราะห์</div>
-            <div class="kpi-number">2</div>
+            <div class="kpi-label">ชุดข้อมูลที่ 1</div>
+            <div class="kpi-number">General Computer Science</div>
         </div>
 
         <div class="kpi">
-            <div class="kpi-label">General Computer Science</div>
-            <div class="kpi-number">60%</div>
-        </div>
-
-        <div class="kpi">
-            <div class="kpi-label">Hardware and Architecture</div>
-            <div class="kpi-number">40%</div>
+            <div class="kpi-label">ชุดข้อมูลที่ 2</div>
+            <div class="kpi-number">Hardware and Architecture</div>
         </div>
 
     </div>
 
-    <!-- CHART 1 -->
+    <!-- VISUALIZATION 1 -->
 
     <div class="card">
 
-        <div class="card-title">
-            การเปรียบเทียบจำนวนผลงานวิจัยตามสาขา
-        </div>
+        <h3>ชุดข้อมูลที่ 1 : General Computer Science</h3>
 
-        <div class="card-subtitle">
-            แสดงจำนวนผลงานวิจัยในแต่ละ Subject Area
-        </div>
+        <p>
+            กราฟนี้แสดงหัวข้อวิจัยที่พบในชุดข้อมูลด้านวิทยาการคอมพิวเตอร์ทั่วไป
+            โดยใช้ Author Keywords ที่ปรากฏในข้อมูล Scopus
+        </p>
 
-        <div id="barChart"></div>
+        <div id="chart1"></div>
 
-        <div class="explain">
+        <div class="note">
 
-            <strong>คำอธิบาย:</strong>
+            <strong>ข้อสังเกต</strong><br>
 
-            ผลการวิเคราะห์พบว่า
-            <strong>General Computer Science</strong>
-            มีสัดส่วนของผลงานวิจัยมากกว่า
-            <strong>Hardware and Architecture</strong>
-            แสดงให้เห็นว่างานวิจัยในชุดข้อมูลนี้กระจุกตัวอยู่ในสาขาวิทยาการคอมพิวเตอร์ทั่วไปมากกว่า
+            หัวข้อที่พบมากที่สุด ได้แก่
+            <strong>Artificial intelligence</strong>,
+            <strong>Machine learning</strong>,
+            <strong>Large language models</strong>
+            และ
+            <strong>Computer science</strong>
+
+            แสดงให้เห็นว่าชุดข้อมูลนี้มุ่งเน้นงานวิจัยด้านปัญญาประดิษฐ์
+            การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลร่วมสมัย
 
         </div>
 
     </div>
 
-    <!-- CHART 2 -->
+    <!-- VISUALIZATION 2 -->
 
     <div class="card">
 
-        <div class="card-title">
-            สัดส่วนของสาขาวิชางานวิจัย
-        </div>
+        <h3>ชุดข้อมูลที่ 2 : Hardware and Architecture</h3>
 
-        <div class="card-subtitle">
-            การกระจายตัวของผลงานวิจัยตาม Subject Area
-        </div>
+        <p>
+            กราฟนี้แสดงหัวข้อวิจัยที่พบในชุดข้อมูลด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
+            โดยใช้ Author Keywords จากข้อมูล Scopus
+        </p>
 
-        <div id="donutChart"></div>
+        <div id="chart2"></div>
 
-        <div class="explain">
+        <div class="note">
 
-            <strong>คำอธิบาย:</strong>
+            <strong>ข้อสังเกต</strong><br>
 
-            กราฟโดนัทแสดงให้เห็นว่า
-            <strong>General Computer Science</strong>
-            คิดเป็นประมาณ
-            <strong>60%</strong>
-            ของข้อมูลทั้งหมด
-            ในขณะที่
-            <strong>Hardware and Architecture</strong>
-            คิดเป็นประมาณ
-            <strong>40%</strong>
+            หัวข้อที่พบมากที่สุด ได้แก่
+            <strong>FPGA</strong>,
+            <strong>Machine learning</strong>,
+            <strong>Edge AI</strong>,
+            <strong>Edge Computing</strong>
+            และ
+            <strong>Hardware security</strong>
 
-            ซึ่งสะท้อนความสัมพันธ์ระหว่างงานวิจัยด้านวิทยาการคอมพิวเตอร์และสถาปัตยกรรมฮาร์ดแวร์
+            สะท้อนความสนใจด้านระบบฮาร์ดแวร์อัจฉริยะ
+            การประมวลผลที่ขอบเครือข่าย และการออกแบบสถาปัตยกรรมคอมพิวเตอร์สมัยใหม่
 
         </div>
 
@@ -325,26 +283,21 @@ body{
         <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
 
         <p>
-            การวิเคราะห์ข้อมูล Subject Area จากฐานข้อมูล Scopus พบว่า
-            งานวิจัยส่วนใหญ่อยู่ในสาขา
-            <strong>General Computer Science</strong>
-            โดยมีสัดส่วนประมาณ
-            <strong>60%</strong>
-            ของข้อมูลทั้งหมด
+            ชุดข้อมูลด้าน <strong>General Computer Science</strong>
+            มีความโดดเด่นในประเด็นที่เกี่ยวข้องกับปัญญาประดิษฐ์
+            การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลสมัยใหม่
         </p>
 
         <p>
-            ในขณะที่สาขา
-            <strong>Hardware and Architecture</strong>
-            มีสัดส่วนประมาณ
-            <strong>40%</strong>
-            แสดงให้เห็นว่างานวิจัยด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์ยังคงมีบทบาทสำคัญในชุดข้อมูลนี้
+            ขณะที่ชุดข้อมูลด้าน <strong>Hardware and Architecture</strong>
+            มีความโดดเด่นด้าน FPGA, Edge AI, Hardware Security
+            และเทคโนโลยีฮาร์ดแวร์ประสิทธิภาพสูง
         </p>
 
         <p>
-            โดยภาพรวม ชุดข้อมูลสะท้อนให้เห็นถึงการเชื่อมโยงระหว่าง
-            วิทยาการคอมพิวเตอร์และเทคโนโลยีฮาร์ดแวร์
-            ซึ่งเป็นพื้นฐานสำคัญของการพัฒนาระบบคอมพิวเตอร์สมัยใหม่
+            เนื่องจากทั้งสองชุดข้อมูลเป็นคนละชุดข้อมูล
+            การวิเคราะห์จึงมุ่งนำเสนอภาพรวมของแต่ละสาขาวิชาแยกจากกัน
+            เพื่อให้เห็นลักษณะเฉพาะของงานวิจัยในแต่ละด้านอย่างชัดเจน
         </p>
 
     </div>
@@ -357,62 +310,92 @@ body{
 
 <script>
 
-/* SUBJECT AREA DATA */
+/* =========================
+   DATASET 1
+========================= */
 
-const subjectAreas = [
-    "General Computer Science",
-    "Hardware and Architecture"
+const keywords1 = [
+    "Artificial intelligence",
+    "Machine learning",
+    "Large language models",
+    "Computer science",
+    "Computational thinking",
+    "Cognition",
+    "Computer-Based Learning",
+    "Education"
 ];
 
-const values = [60,40];
-
-/* BAR CHART */
+const counts1 = [21,15,6,6,4,4,4,4];
 
 Plotly.newPlot(
-    "barChart",
+    "chart1",
     [{
-        x: subjectAreas,
-        y: values,
+        x: counts1.slice().reverse(),
+        y: keywords1.slice().reverse(),
         type: "bar",
-        text: values.map(v => v + "%"),
+        orientation: "h",
+        text: counts1.slice().reverse(),
         textposition: "outside",
         marker:{
-            color:["#2563eb","#0f766e"]
-        }
+            color:"#2563eb"
+        },
+        hovertemplate:"<b>%{y}</b><br>จำนวน Publications: %{x}<extra></extra>"
     }],
     {
-        margin:{t:30,l:60,r:20,b:70},
-        yaxis:{
-            title:"สัดส่วน (%)",
-            range:[0,70]
+        margin:{l:240,r:40,t:10,b:40},
+        xaxis:{
+            title:"จำนวน Publications",
+            gridcolor:"#e5e7eb"
         },
-        xaxis:{title:"Subject Area"},
+        yaxis:{automargin:true},
         paper_bgcolor:"white",
         plot_bgcolor:"white",
-        font:{family:"Sarabun"}
+        font:{family:"Sarabun", size:14}
     },
     {responsive:true, displaylogo:false}
 );
 
-/* DONUT CHART */
+/* =========================
+   DATASET 2
+========================= */
+
+const keywords2 = [
+    "FPGA",
+    "Machine learning",
+    "Edge AI",
+    "Edge Computing",
+    "Internet of Things (IoT)",
+    "Deep learning",
+    "Hardware security",
+    "Hardware-software co-design"
+];
+
+const counts2 = [14,10,4,4,4,4,4,3];
 
 Plotly.newPlot(
-    "donutChart",
+    "chart2",
     [{
-        labels: subjectAreas,
-        values: values,
-        type: "pie",
-        hole: 0.58,
-        textinfo: "label+percent",
+        x: counts2.slice().reverse(),
+        y: keywords2.slice().reverse(),
+        type: "bar",
+        orientation: "h",
+        text: counts2.slice().reverse(),
+        textposition: "outside",
         marker:{
-            colors:["#2563eb","#0f766e"]
-        }
+            color:"#0f766e"
+        },
+        hovertemplate:"<b>%{y}</b><br>จำนวน Publications: %{x}<extra></extra>"
     }],
     {
-        margin:{t:20,l:20,r:20,b:20},
-        showlegend:false,
+        margin:{l:260,r:40,t:10,b:40},
+        xaxis:{
+            title:"จำนวน Publications",
+            gridcolor:"#e5e7eb"
+        },
+        yaxis:{automargin:true},
         paper_bgcolor:"white",
-        font:{family:"Sarabun"}
+        plot_bgcolor:"white",
+        font:{family:"Sarabun", size:14}
     },
     {responsive:true, displaylogo:false}
 );
