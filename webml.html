@@ -1,270 +1,265 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>รายงานวิเคราะห์ข้อมูล Scopus</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scopus Research Overview</title>
 
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{
+    margin:0;
+    font-family:"Sarabun", Arial, sans-serif;
+    background:#f4f6fa;
+    color:#172033;
+}
 
-  <style>
-    *{
-      box-sizing:border-box;
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+    padding:30px 0;
+}
+
+.header{
+    background:linear-gradient(135deg,#172554,#2563eb);
+    color:white;
+    padding:30px;
+    border-radius:20px;
+    margin-bottom:20px;
+}
+
+.header h1{
+    margin:0;
+    font-size:30px;
+}
+
+.header h2{
+    margin-top:8px;
+    font-weight:400;
+    opacity:.9;
+}
+
+.header p{
+    margin-top:16px;
+    line-height:1.8;
+}
+
+.kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:16px;
+    margin-bottom:20px;
+}
+
+.kpi{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+    text-align:center;
+}
+
+.kpi .label{
+    color:#667085;
+    font-size:14px;
+}
+
+.kpi .number{
+    font-size:32px;
+    font-weight:700;
+    color:#1d4ed8;
+    margin-top:10px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.card h3{
+    margin-top:0;
+    color:#172554;
+}
+
+#docChart{height:450px;}
+#subjectChart{height:380px;}
+
+.summary{
+    margin-top:20px;
+    background:#111827;
+    color:white;
+    padding:24px;
+    border-radius:18px;
+    line-height:1.8;
+}
+
+.footer{
+    text-align:center;
+    margin-top:20px;
+    color:#98a2b3;
+    font-size:13px;
+}
+
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:1fr;
     }
-
-    body{
-      margin:0;
-      font-family:'Sarabun',sans-serif;
-      background:#f4f7fb;
-      color:#222;
-      line-height:1.7;
-    }
-
-    .container{
-      max-width:1000px;
-      margin:40px auto;
-      background:#fff;
-      border-radius:18px;
-      padding:32px;
-      box-shadow:0 6px 24px rgba(0,0,0,.08);
-    }
-
-    h1{
-      text-align:center;
-      color:#0f4c81;
-      margin-bottom:10px;
-    }
-
-    .subtitle{
-      text-align:center;
-      color:#666;
-      margin-bottom:30px;
-    }
-
-    .summary{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:16px;
-      margin-bottom:30px;
-    }
-
-    .card{
-      background:#eef4ff;
-      border-radius:14px;
-      padding:22px;
-      text-align:center;
-      border:1px solid #d8e5ff;
-    }
-
-    .card h2{
-      margin:0;
-      font-size:2rem;
-      color:#0f4c81;
-    }
-
-    .card p{
-      margin-top:8px;
-      color:#444;
-      font-weight:600;
-    }
-
-    .chart-box{
-      background:#fff;
-      border:1px solid #e5e7eb;
-      border-radius:16px;
-      padding:20px;
-      margin:20px 0 30px;
-    }
-
-    h3{
-      color:#0f4c81;
-      margin-top:32px;
-    }
-
-    ul,ol{
-      padding-left:22px;
-    }
-
-    li{
-      margin-bottom:10px;
-    }
-
-    .note{
-      background:#fff8e1;
-      border-left:6px solid #ffb300;
-      padding:16px;
-      border-radius:10px;
-      margin-top:24px;
-    }
-
-    .footer{
-      margin-top:40px;
-      text-align:center;
-      font-size:.9rem;
-      color:#777;
-    }
-
-    .btn{
-      display:inline-block;
-      margin-top:16px;
-      padding:12px 20px;
-      background:#0f4c81;
-      color:#fff;
-      text-decoration:none;
-      border-radius:10px;
-      font-weight:600;
-    }
-
-    .btn:hover{
-      background:#0c3d67;
-    }
-
-    @media (max-width:600px){
-      .container{
-        margin:16px;
-        padding:20px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>รายงานวิเคราะห์ข้อมูล Scopus</h1>
-    <p class="subtitle">Scopus Data Analysis Report (2025 Dataset)</p>
+    <!-- HEADER -->
+    <div class="header">
+        <h1>ภาพรวมงานวิจัยจาก Scopus</h1>
+        <h2>Scopus Research Overview 2025</h2>
 
-    <!-- Summary -->
+        <p>
+            รายงานนี้วิเคราะห์ข้อมูลบทความจากฐานข้อมูล <strong>Scopus</strong>
+            เพื่อศึกษาประเภทเอกสารและสาขาวิชาที่มีความโดดเด่นในชุดข้อมูล
+        </p>
+    </div>
+
+    <!-- KPI -->
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="label">จำนวนเอกสารทั้งหมด</div>
+            <div class="number">300</div>
+        </div>
+
+        <div class="kpi">
+            <div class="label">Article</div>
+            <div class="number">207</div>
+        </div>
+
+        <div class="kpi">
+            <div class="label">Conference paper</div>
+            <div class="number">47</div>
+        </div>
+
+        <div class="kpi">
+            <div class="label">Review</div>
+            <div class="number">37</div>
+        </div>
+
+    </div>
+
+    <!-- VISUALIZATION -->
+    <div class="grid">
+
+        <!-- Chart 1 -->
+        <div class="card">
+            <h3>📄 ประเภทเอกสารในฐานข้อมูล Scopus</h3>
+            <p>แสดงจำนวนเอกสารแต่ละประเภทในชุดข้อมูล</p>
+            <div id="docChart"></div>
+        </div>
+
+        <!-- Chart 2 -->
+        <div class="card">
+            <h3>📚 สาขาวิชาของงานวิจัย</h3>
+            <p>แสดงสัดส่วน Subject Area</p>
+            <div id="subjectChart"></div>
+
+            <ul>
+                <li><strong>General Computer Science</strong> : 60%</li>
+                <li><strong>Hardware and Architecture</strong> : 40%</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- SUMMARY -->
     <div class="summary">
 
-      <div class="card">
-        <h2>300</h2>
-        <p>จำนวนเอกสารทั้งหมด</p>
-      </div>
+        <h3>🎤 สรุปสำหรับการนำเสนอ</h3>
 
-      <div class="card">
-        <h2>Article</h2>
-        <p>ประเภทที่พบมากที่สุด</p>
-      </div>
+        <p>
+            จากข้อมูล Scopus จำนวน <strong>300 รายการ</strong>
+            พบว่าเอกสารส่วนใหญ่เป็น <strong>Article</strong>
+            จำนวน <strong>207 รายการ</strong> รองลงมาคือ
+            <strong>Conference paper</strong> และ <strong>Review</strong>
+        </p>
 
-      <div class="card">
-        <h2>207</h2>
-        <p>จำนวนบทความประเภท Article</p>
-      </div>
+        <p>
+            เมื่อพิจารณาสาขาวิชา พบว่างานวิจัยส่วนใหญ่อยู่ในกลุ่ม
+            <strong>General Computer Science</strong> และ
+            <strong>Hardware and Architecture</strong>
+            สะท้อนแนวโน้มงานวิจัยด้านคอมพิวเตอร์และฮาร์ดแวร์ที่มีบทบาทสำคัญในปี 2025
+        </p>
 
     </div>
-
-    <!-- Chart -->
-    <h3>Visualization</h3>
-    <p>กราฟแท่งแสดงจำนวนเอกสารแต่ละประเภทในฐานข้อมูล Scopus</p>
-
-    <div class="chart-box">
-      <canvas id="docChart"></canvas>
-    </div>
-
-    <!-- Analysis -->
-    <h3>ผลการวิเคราะห์ข้อมูล</h3>
-
-    <ul>
-      <li>ข้อมูลทั้งหมด <strong>300 รายการ</strong></li>
-      <li>เอกสารส่วนใหญ่เป็น <strong>Article จำนวน 207 รายการ</strong></li>
-      <li>รองลงมาคือ <strong>Conference paper จำนวน 47 รายการ</strong></li>
-      <li>และ <strong>Review จำนวน 37 รายการ</strong></li>
-      <li>ชุดข้อมูลนี้สะท้อนว่าผลงานวิจัยส่วนใหญ่ถูกตีพิมพ์ในรูปแบบบทความวิชาการมากกว่าประเภทอื่น</li>
-    </ul>
-
-    <!-- Presentation -->
-    <h3>แนวทางการนำเสนอให้ผู้อื่นเข้าใจง่าย</h3>
-
-    <ol>
-      <li><strong>เริ่มจากภาพรวม</strong> : “เราวิเคราะห์ข้อมูล Scopus จำนวน 300 รายการ”</li>
-      <li><strong>ชี้ให้เห็นประเด็นหลักจากกราฟ</strong> : แท่งของ Article สูงที่สุดอย่างชัดเจน</li>
-      <li><strong>อธิบายความหมาย</strong> : แสดงว่าการเผยแพร่ผลงานวิจัยส่วนใหญ่เกิดในวารสารวิชาการ</li>
-      <li><strong>สรุปสั้น ๆ</strong> : “ชุดข้อมูลนี้เหมาะสำหรับศึกษางานวิจัยเชิงวารสารและแนวโน้มการตีพิมพ์ทางวิชาการ”</li>
-    </ol>
-
-    <!-- Key takeaway -->
-    <div class="note">
-      <strong>Key Takeaway:</strong>
-      ในชุดข้อมูล Scopus นี้ <strong>Article เป็นรูปแบบการเผยแพร่หลัก</strong>
-      คิดเป็นสัดส่วนมากที่สุดของข้อมูลทั้งหมด
-    </div>
-
-    <!-- GitHub Pages -->
-    <h3>การใช้งานบน GitHub Pages</h3>
-
-    <ol>
-      <li>บันทึกไฟล์นี้เป็น <strong>index.html</strong></li>
-      <li>อัปโหลดไปยัง GitHub Repository แบบ Public</li>
-      <li>ไปที่ <strong>Settings → Pages</strong></li>
-      <li>เลือก <strong>Deploy from a branch</strong></li>
-      <li>เลือก branch <strong>main</strong> และโฟลเดอร์ <strong>/(root)</strong></li>
-      <li>กด <strong>Save</strong></li>
-    </ol>
-
-    <p>เมื่อระบบสร้างเว็บไซต์เสร็จ ลิงก์จะมีรูปแบบดังนี้</p>
-
-    <pre>https://USERNAME.github.io/scopus-report/</pre>
 
     <div class="footer">
-      Generated from Scopus CSV Dataset • August 2026
+        Scopus Research Visualization • 2025
     </div>
 
-  </div>
+</div>
 
-  <script>
-    const ctx = document.getElementById('docChart');
+<script>
 
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Article', 'Conference paper', 'Review', 'Editorial', 'Note'],
-        datasets: [{
-          label: 'จำนวนเอกสาร',
-          data: [207, 47, 37, 5, 4],
-          borderWidth: 1,
-          borderRadius: 8
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Document Types in Scopus Dataset'
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              precision: 0
-            },
-            title: {
-              display: true,
-              text: 'จำนวนเอกสาร'
-            }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'ประเภทเอกสาร'
-            }
-          }
+/* -------------------------------
+   Visualization 1 : Document Type
+--------------------------------*/
+Plotly.newPlot(
+    'docChart',
+    [{
+        x:['Article','Conference paper','Review','Editorial','Note'],
+        y:[207,47,37,5,4],
+        type:'bar',
+        text:[207,47,37,5,4],
+        textposition:'outside',
+        marker:{
+            color:['#2563eb','#3b82f6','#60a5fa','#93c5fd','#bfdbfe']
         }
-      }
-    });
-  </script>
+    }],
+    {
+        margin:{t:20,l:60,r:20,b:60},
+        yaxis:{title:'จำนวนเอกสาร'},
+        xaxis:{title:'Document Type'},
+        paper_bgcolor:'white',
+        plot_bgcolor:'white'
+    },
+    {responsive:true, displaylogo:false}
+);
+
+/* -------------------------------
+   Visualization 2 : Subject Area
+--------------------------------*/
+Plotly.newPlot(
+    'subjectChart',
+    [{
+        labels:['General Computer Science','Hardware and Architecture'],
+        values:[60,40],
+        type:'pie',
+        hole:0.55,
+        textinfo:'label+percent',
+        marker:{
+            colors:['#2563eb','#60a5fa']
+        }
+    }],
+    {
+        margin:{t:20,l:20,r:20,b:20},
+        showlegend:false,
+        paper_bgcolor:'white'
+    },
+    {responsive:true, displaylogo:false}
+);
+
+</script>
 
 </body>
 </html>
