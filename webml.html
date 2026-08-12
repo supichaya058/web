@@ -13,185 +13,168 @@
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
     margin:0;
-    font-family:"Sarabun", "TH Sarabun New", Arial, sans-serif;
-    background:#f5f7fb;
+    font-family:"Sarabun",sans-serif;
+    background:#f4f7fb;
     color:#1f2937;
-    line-height:1.8;
+    line-height:1.85;
 }
 
 .container{
     width:92%;
     max-width:1200px;
     margin:auto;
-    padding:35px 0 50px;
+    padding:32px 0 48px;
 }
 
-/* HEADER */
+/* HERO */
 
-.header{
+.hero{
     background:linear-gradient(135deg,#1e3a8a,#2563eb);
     color:white;
-    border-radius:18px;
-    padding:32px 36px;
-    margin-bottom:24px;
-    box-shadow:0 10px 24px rgba(37,99,235,.18);
+    border-radius:22px;
+    padding:40px;
+    margin-bottom:28px;
+    box-shadow:0 12px 28px rgba(37,99,235,.18);
 }
 
-.header h1{
+.hero h1{
     margin:0;
-    font-size:32px;
+    font-size:36px;
+    font-weight:700;
 }
 
-.header h2{
-    margin:6px 0 0;
+.hero h2{
+    margin:8px 0 18px;
     font-size:18px;
     font-weight:400;
-    opacity:.92;
+    opacity:.9;
 }
 
-.header p{
-    margin:18px 0 0;
+.hero p{
+    max-width:900px;
+    margin:0;
 }
 
-/* SCOPE */
+/* OVERVIEW */
 
-.scope-card{
+.overview{
     background:white;
-    border-radius:18px;
-    padding:24px;
-    margin-bottom:26px;
+    border-radius:20px;
+    padding:28px;
+    margin-bottom:28px;
     box-shadow:0 4px 16px rgba(0,0,0,.05);
 }
 
-.scope-header{
-    font-size:20px;
-    font-weight:700;
-    color:#111827;
-    margin-bottom:18px;
-    border-bottom:1px solid #e5e7eb;
-    padding-bottom:12px;
+.overview h3{
+    margin-top:0;
+    font-size:24px;
 }
 
-.scope-grid{
+.overview-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:18px;
+    margin-top:20px;
 }
 
-.scope-item{
+.overview-item{
     border:1px solid #e5e7eb;
-    border-radius:14px;
+    border-radius:16px;
     padding:20px;
+    text-align:center;
     background:#fafbff;
 }
 
-.scope-label{
-    font-size:12px;
-    color:#64748b;
-    text-transform:uppercase;
-    letter-spacing:.5px;
-    margin-bottom:8px;
-}
-
-.scope-title{
-    font-size:24px;
+.overview-item .num{
+    font-size:34px;
     font-weight:700;
     color:#1e40af;
-    line-height:1.3;
-    margin-bottom:8px;
 }
 
-.scope-desc{
+.overview-item .label{
+    color:#64748b;
+    margin-top:6px;
     font-size:14px;
-    color:#475569;
 }
 
 /* CARD */
 
 .card{
     background:white;
-    border-radius:18px;
-    padding:26px;
-    margin-bottom:24px;
-    box-shadow:0 4px 16px rgba(0,0,0,.05);
+    border-radius:20px;
+    padding:28px;
+    margin-bottom:28px;
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
 }
 
 .card h3{
-    margin:0 0 8px;
-    font-size:22px;
+    margin-top:0;
+    font-size:24px;
     color:#111827;
 }
 
 .card p{
-    margin:0 0 18px;
-    color:#64748b;
+    color:#4b5563;
 }
 
-#chart1,#chart2{
-    width:100%;
+.chart{
     height:520px;
 }
 
-.note{
-    margin-top:18px;
-    padding:18px;
+.interpret{
+    margin-top:22px;
     background:#f8fafc;
     border-left:5px solid #2563eb;
     border-radius:12px;
-    line-height:1.8;
+    padding:18px;
+}
+
+.interpret h4{
+    margin-top:0;
+    margin-bottom:10px;
+    color:#1e40af;
 }
 
 /* SUMMARY */
 
 .summary{
-    background:#0f172a;
+    background:#111827;
     color:white;
-    border-radius:18px;
-    padding:28px;
+    border-radius:20px;
+    padding:32px;
 }
 
 .summary h3{
     margin-top:0;
-    font-size:22px;
+    font-size:24px;
 }
 
 .summary p{
-    color:#e2e8f0;
+    color:#e5e7eb;
 }
-
-/* FOOTER */
 
 .footer{
     text-align:center;
     color:#94a3b8;
-    font-size:12px;
-    margin-top:24px;
+    font-size:13px;
+    margin-top:22px;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:768px){
-
-    .scope-grid{
+@media(max-width:800px){
+    .overview-grid{
         grid-template-columns:1fr;
     }
 
-    .header{
-        padding:24px;
+    .hero{
+        padding:28px;
     }
 
-    .header h1{
-        font-size:26px;
-    }
-
-    .scope-title{
-        font-size:20px;
+    .hero h1{
+        font-size:28px;
     }
 }
 </style>
@@ -203,124 +186,153 @@ body{
 <div class="container">
 
 ```
-<div class="header">
+<!-- HERO -->
+
+<section class="hero">
+
     <h1>ภาพรวมแนวโน้มงานวิจัยจากฐานข้อมูล Scopus</h1>
     <h2>Scopus Research Landscape 2025</h2>
 
     <p>
-        รายงานฉบับนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล Scopus
-        โดยใช้ข้อมูลจากสองสาขาวิชาที่เป็นอิสระต่อกัน ได้แก่
+        หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
+        เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
         <strong>General Computer Science</strong> และ
         <strong>Hardware and Architecture</strong>
-        เพื่อศึกษาหัวข้อวิจัยที่ปรากฏในแต่ละสาขา
+        โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
+        เพื่อให้ผู้อ่านเข้าใจทิศทางของงานวิจัยในแต่ละสาขาได้อย่างรวดเร็ว
     </p>
-</div>
 
-<div class="scope-card">
+</section>
 
-    <div class="scope-header">
-        ขอบเขตการวิเคราะห์ (Scope of Analysis)
-    </div>
+<!-- OVERVIEW -->
 
-    <div class="scope-grid">
+<section class="overview">
 
-        <div class="scope-item">
-            <div class="scope-label">Subject Area</div>
-            <div class="scope-title">General Computer Science</div>
-            <div class="scope-desc">
-                งานวิจัยด้านวิทยาการคอมพิวเตอร์ทั่วไป
-            </div>
+    <h3>ภาพรวมการวิเคราะห์</h3>
+
+    <p>
+        การวิเคราะห์ครั้งนี้แบ่งข้อมูลออกเป็นสองชุดข้อมูลอิสระตามสาขาวิชา
+        และพิจารณาความถี่ของ Author Keywords ที่ปรากฏในงานวิจัย
+        เพื่อระบุหัวข้อที่ได้รับความสนใจมากที่สุดในแต่ละสาขา
+    </p>
+
+    <div class="overview-grid">
+
+        <div class="overview-item">
+            <div class="num">2</div>
+            <div class="label">ชุดข้อมูลที่วิเคราะห์</div>
         </div>
 
-        <div class="scope-item">
-            <div class="scope-label">Subject Area</div>
-            <div class="scope-title">Hardware and Architecture</div>
-            <div class="scope-desc">
-                งานวิจัยด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
-            </div>
+        <div class="overview-item">
+            <div class="num">General Computer Science</div>
+            <div class="label">ชุดข้อมูลที่ 1</div>
+        </div>
+
+        <div class="overview-item">
+            <div class="num">Hardware and Architecture</div>
+            <div class="label">ชุดข้อมูลที่ 2</div>
         </div>
 
     </div>
 
-</div>
+</section>
 
-<div class="card">
+<!-- DATASET 1 -->
+
+<section class="card">
 
     <h3>ชุดข้อมูลที่ 1 : General Computer Science</h3>
 
     <p>
-        กราฟนี้แสดงหัวข้อวิจัยที่พบในชุดข้อมูลด้านวิทยาการคอมพิวเตอร์ทั่วไป
-        โดยใช้ Author Keywords จากข้อมูล Scopus
+        กราฟต่อไปนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+        <strong>General Computer Science</strong>
+        โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
     </p>
 
-    <div id="chart1"></div>
+    <div id="chart1" class="chart"></div>
 
-    <div class="note">
-        <strong>ข้อสังเกต</strong><br>
-        หัวข้อที่พบมาก ได้แก่
-        <strong>Artificial intelligence</strong>,
-        <strong>Machine learning</strong>,
-        <strong>Large language models</strong>
-        และ
-        <strong>Computer science</strong>
-        แสดงให้เห็นว่าชุดข้อมูลนี้มุ่งเน้นงานวิจัยด้านปัญญาประดิษฐ์
-        การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลร่วมสมัย
+    <div class="interpret">
+
+        <h4>การตีความผลลัพธ์</h4>
+
+        <p>
+            หัวข้อที่โดดเด่นที่สุดคือ
+            <strong>Artificial intelligence</strong>
+            รองลงมาคือ
+            <strong>Machine learning</strong>
+            และ
+            <strong>Large language models</strong>
+            ซึ่งสะท้อนให้เห็นว่าการวิจัยในสาขาวิทยาการคอมพิวเตอร์ทั่วไป
+            มีความสนใจอย่างมากต่อเทคโนโลยีปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง
+            รวมถึงโมเดลภาษาขนาดใหญ่ที่กำลังได้รับความนิยมในปัจจุบัน
+        </p>
+
     </div>
 
-</div>
+</section>
 
-<div class="card">
+<!-- DATASET 2 -->
+
+<section class="card">
 
     <h3>ชุดข้อมูลที่ 2 : Hardware and Architecture</h3>
 
     <p>
-        กราฟนี้แสดงหัวข้อวิจัยที่พบในชุดข้อมูลด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
-        โดยใช้ Author Keywords จากข้อมูล Scopus
+        กราฟนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+        <strong>Hardware and Architecture</strong>
+        ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
+        และระบบประมวลผลสมัยใหม่
     </p>
 
-    <div id="chart2"></div>
+    <div id="chart2" class="chart"></div>
 
-    <div class="note">
-        <strong>ข้อสังเกต</strong><br>
-        หัวข้อที่พบมาก ได้แก่
-        <strong>FPGA</strong>,
-        <strong>Machine learning</strong>,
-        <strong>Edge AI</strong>,
-        <strong>Edge Computing</strong>
-        และ
-        <strong>Hardware security</strong>
-        สะท้อนความสนใจด้านระบบฮาร์ดแวร์อัจฉริยะ
-        การประมวลผลที่ขอบเครือข่าย และการออกแบบสถาปัตยกรรมคอมพิวเตอร์สมัยใหม่
+    <div class="interpret">
+
+        <h4>การตีความผลลัพธ์</h4>
+
+        <p>
+            หัวข้อที่พบมากที่สุดคือ
+            <strong>FPGA</strong>
+            รองลงมาคือ
+            <strong>Machine learning</strong>,
+            <strong>Edge AI</strong>
+            และ
+            <strong>Edge Computing</strong>
+            แสดงให้เห็นว่างานวิจัยในสาขานี้มุ่งเน้นการออกแบบฮาร์ดแวร์ที่สามารถรองรับงาน AI
+            และการประมวลผลที่ต้องการประสิทธิภาพสูงในอุปกรณ์ปลายทาง
+        </p>
+
     </div>
 
-</div>
+</section>
 
-<div class="summary">
+<!-- SUMMARY -->
+
+<section class="summary">
 
     <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
 
     <p>
-        ชุดข้อมูลด้าน <strong>General Computer Science</strong>
-        มีความโดดเด่นในประเด็นที่เกี่ยวข้องกับปัญญาประดิษฐ์
-        การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลสมัยใหม่
+        การวิเคราะห์ข้อมูล Scopus ทั้งสองชุดแสดงให้เห็นว่า
+        งานวิจัยในสาขา <strong>General Computer Science</strong>
+        มีความโดดเด่นด้านปัญญาประดิษฐ์ การเรียนรู้ของเครื่อง
+        และเทคโนโลยีดิจิทัลสมัยใหม่
+        ขณะที่สาขา <strong>Hardware and Architecture</strong>
+        มีความโดดเด่นด้าน FPGA, Edge AI และสถาปัตยกรรมฮาร์ดแวร์ประสิทธิภาพสูง
     </p>
 
     <p>
-        ขณะที่ชุดข้อมูลด้าน <strong>Hardware and Architecture</strong>
-        มีความโดดเด่นด้าน FPGA, Edge AI, Hardware Security
-        และเทคโนโลยีฮาร์ดแวร์ประสิทธิภาพสูง
+        แม้ทั้งสองชุดข้อมูลจะเป็นคนละสาขา
+        แต่ผลการวิเคราะห์สะท้อนแนวโน้มร่วมกันคือ
+        การบูรณาการระหว่าง <strong>Artificial Intelligence</strong>
+        และ <strong>Computer Hardware</strong>
+        ซึ่งเป็นทิศทางสำคัญของงานวิจัยด้านคอมพิวเตอร์ในปัจจุบัน
     </p>
 
-    <p>
-        เนื่องจากทั้งสองชุดข้อมูลเป็นคนละชุดข้อมูล
-        การวิเคราะห์จึงนำเสนอภาพรวมของแต่ละสาขาแยกจากกัน
-        เพื่อให้เห็นลักษณะเฉพาะของงานวิจัยในแต่ละด้านอย่างชัดเจน
-    </p>
-
-</div>
+</section>
 
 <div class="footer">
-    รายงานการวิเคราะห์ข้อมูล Scopus ประจำปี 2025
+    Scopus Research Landscape 2025
 </div>
 ```
 
@@ -328,94 +340,133 @@ body{
 
 <script>
 
-/* DATASET 1 */
+/* ---------- DATASET 1 : LOLLIPOP CHART ---------- */
 
-const keywords1 = [
-    "Artificial intelligence",
-    "Machine learning",
-    "Large language models",
-    "Computer science",
-    "Computational thinking",
-    "Cognition",
+const y1 = [
+    "Education",
     "Computer-Based Learning",
-    "Education"
+    "Cognition",
+    "Computational thinking",
+    "Computer science",
+    "Large language models",
+    "Machine learning",
+    "Artificial intelligence"
 ];
 
-const counts1 = [21,15,6,6,4,4,4,4];
+const x1 = [4,4,4,4,6,6,15,21];
+
+const line1 = [];
+for(let i=0;i<x1.length;i++){
+    line1.push({
+        type:"scatter",
+        mode:"lines",
+        x:[0,x1[i]],
+        y:[y1[i],y1[i]],
+        line:{color:"#93c5fd",width:3},
+        hoverinfo:"skip",
+        showlegend:false
+    });
+}
+
+line1.push({
+    type:"scatter",
+    mode:"markers+text",
+    x:x1,
+    y:y1,
+    marker:{
+        size:16,
+        color:"#2563eb",
+        line:{color:"#ffffff",width:2}
+    },
+    text:x1.map(v=>v+" บทความ"),
+    textposition:"right",
+    hovertemplate:"<b>%{y}</b><br>จำนวนบทความ: %{x}<extra></extra>",
+    showlegend:false
+});
 
 Plotly.newPlot(
     "chart1",
-    [{
-        x: counts1.slice().reverse(),
-        y: keywords1.slice().reverse(),
-        type: "bar",
-        orientation: "h",
-        text: counts1.slice().reverse(),
-        textposition: "outside",
-        marker:{
-            color:"#2563eb"
-        },
-        hovertemplate:"<b>%{y}</b><br>จำนวน Publications: %{x}<extra></extra>"
-    }],
+    line1,
     {
-        margin:{l:240,r:40,t:10,b:40},
+        margin:{l:240,r:110,t:10,b:40},
         xaxis:{
-            title:"จำนวน Publications",
-            gridcolor:"#e5e7eb"
+            title:"จำนวนบทความ",
+            range:[0,24],
+            gridcolor:"#e5e7eb",
+            zeroline:false
         },
         yaxis:{automargin:true},
         paper_bgcolor:"white",
         plot_bgcolor:"white",
-        font:{family:"Sarabun", size:14}
+        font:{family:"Sarabun",size:14}
     },
-    {responsive:true, displaylogo:false}
+    {responsive:true,displaylogo:false}
 );
 
-/* DATASET 2 */
+/* ---------- DATASET 2 : LOLLIPOP CHART ---------- */
 
-const keywords2 = [
-    "FPGA",
-    "Machine learning",
-    "Edge AI",
-    "Edge Computing",
-    "Internet of Things (IoT)",
-    "Deep learning",
+const y2 = [
+    "Hardware-software co-design",
     "Hardware security",
-    "Hardware-software co-design"
+    "Deep learning",
+    "Internet of Things (IoT)",
+    "Edge Computing",
+    "Edge AI",
+    "Machine learning",
+    "FPGA"
 ];
 
-const counts2 = [14,10,4,4,4,4,4,3];
+const x2 = [3,4,4,4,4,4,10,14];
+
+const line2 = [];
+for(let i=0;i<x2.length;i++){
+    line2.push({
+        type:"scatter",
+        mode:"lines",
+        x:[0,x2[i]],
+        y:[y2[i],y2[i]],
+        line:{color:"#99f6e4",width:3},
+        hoverinfo:"skip",
+        showlegend:false
+    });
+}
+
+line2.push({
+    type:"scatter",
+    mode:"markers+text",
+    x:x2,
+    y:y2,
+    marker:{
+        size:16,
+        color:"#0f766e",
+        line:{color:"#ffffff",width:2}
+    },
+    text:x2.map(v=>v+" บทความ"),
+    textposition:"right",
+    hovertemplate:"<b>%{y}</b><br>จำนวนบทความ: %{x}<extra></extra>",
+    showlegend:false
+});
 
 Plotly.newPlot(
     "chart2",
-    [{
-        x: counts2.slice().reverse(),
-        y: keywords2.slice().reverse(),
-        type: "bar",
-        orientation: "h",
-        text: counts2.slice().reverse(),
-        textposition: "outside",
-        marker:{
-            color:"#0f766e"
-        },
-        hovertemplate:"<b>%{y}</b><br>จำนวน Publications: %{x}<extra></extra>"
-    }],
+    line2,
     {
-        margin:{l:260,r:40,t:10,b:40},
+        margin:{l:260,r:110,t:10,b:40},
         xaxis:{
-            title:"จำนวน Publications",
-            gridcolor:"#e5e7eb"
+            title:"จำนวนบทความ",
+            range:[0,16],
+            gridcolor:"#e5e7eb",
+            zeroline:false
         },
         yaxis:{automargin:true},
         paper_bgcolor:"white",
         plot_bgcolor:"white",
-        font:{family:"Sarabun", size:14}
+        font:{family:"Sarabun",size:14}
     },
-    {responsive:true, displaylogo:false}
+    {responsive:true,displaylogo:false}
 );
 
 </script>
 
 </body>
 </html>
-
