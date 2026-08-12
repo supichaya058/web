@@ -1,16 +1,942 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
+
 <head>
-    <title>คณะวิทยาการสารสนเทศ</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NOISE | Rock Music</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080808;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        /* NAVBAR */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(8,8,8,0.95);
+
+            border-bottom: 1px solid #292929;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            letter-spacing: 5px;
+        }
+
+        .logo span {
+            color: #e50914;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 30px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e50914;
+        }
+
+
+        /* HERO */
+
+        .hero {
+
+            min-height: 650px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 80px 7%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #080808 10%,
+                    rgba(8,8,8,.85) 45%,
+                    rgba(8,8,8,.2)
+                ),
+
+                url(
+                    "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85"
+                )
+
+                center / cover;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero small {
+            color: #e50914;
+            letter-spacing: 5px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-size: 90px;
+            line-height: .9;
+            margin: 20px 0;
+            letter-spacing: -5px;
+        }
+
+        .hero h1 span {
+            color: #e50914;
+        }
+
+        .hero p {
+            color: #bbb;
+            line-height: 1.8;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            background: #e50914;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 4px;
+
+            font-weight: bold;
+
+            transition: .3s;
+        }
+
+        .button:hover {
+            background: #ff1723;
+            transform: translateY(-3px);
+        }
+
+
+        /* CONTENT */
+
+        main {
+            width: 86%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h2 {
+            font-size: 32px;
+        }
+
+        .title p {
+            color: #777;
+            margin-top: 8px;
+        }
+
+
+        /* ARTISTS */
+
+        .artists {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 25px;
+        }
+
+        .artist {
+            text-align: center;
+        }
+
+        .artist img {
+
+            width: 100%;
+            aspect-ratio: 1;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 2px solid transparent;
+
+            transition: .3s;
+        }
+
+        .artist img:hover {
+            border-color: #e50914;
+            transform: scale(1.05);
+        }
+
+        .artist h3 {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        .artist p {
+            color: #777;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+
+        /* SONGS */
+
+        .songs {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .song {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 15px;
+
+            background: #111;
+
+            border: 1px solid #222;
+
+            border-radius: 6px;
+
+            transition: .3s;
+        }
+
+        .song:hover {
+            border-color: #e50914;
+            background: #151515;
+        }
+
+        .song img {
+
+            width: 65px;
+            height: 65px;
+
+            object-fit: cover;
+
+            border-radius: 5px;
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-info h3 {
+            font-size: 16px;
+        }
+
+        .song-info p {
+            color: #777;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        audio {
+            width: 180px;
+        }
+
+
+        /* ALBUMS */
+
+        .albums {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .album {
+
+            background: #111;
+
+            padding: 15px;
+
+            border-radius: 6px;
+
+            transition: .3s;
+        }
+
+        .album:hover {
+            transform: translateY(-6px);
+            background: #161616;
+        }
+
+        .album img {
+
+            width: 100%;
+
+            aspect-ratio: 1;
+
+            object-fit: cover;
+
+            border-radius: 5px;
+        }
+
+        .album h3 {
+            margin-top: 13px;
+        }
+
+        .album p {
+            color: #777;
+            margin-top: 5px;
+        }
+
+
+        /* ABOUT */
+
+        .about {
+
+            text-align: center;
+
+            background: #111;
+
+            padding: 80px 10%;
+        }
+
+        .about p {
+
+            max-width: 750px;
+
+            margin: auto;
+
+            color: #aaa;
+
+            line-height: 2;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+
+            text-align: center;
+
+            padding: 40px;
+
+            color: #666;
+
+            background: #050505;
+
+            border-top: 1px solid #222;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .artists {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .albums {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 0 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                min-height: 600px;
+                padding: 60px 5%;
+            }
+
+            .hero h1 {
+                font-size: 55px;
+            }
+
+            main {
+                width: 90%;
+            }
+
+            .artists {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .songs {
+                grid-template-columns: 1fr;
+            }
+
+            .song {
+                flex-wrap: wrap;
+            }
+
+            audio {
+                width: 100%;
+            }
+
+            .albums {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <h1>ข้อมูลนักศึกษา</h1>
 
-    <p>ชื่อ: นางสาวสุพิชญา คูคำ</p>
-    <p>รหัสนิสิต: 66011211058</p>
-    <p>สาขา: เทคโนโลยีสารสนเทศ</p>
+<!-- NAVIGATION -->
+
+<header>
+
+    <div class="logo">
+        NOISE<span>.</span>
+    </div>
+
+    <nav>
+
+        <a href="#home">
+            หน้าแรก
+        </a>
+
+        <a href="#artists">
+            ศิลปิน
+        </a>
+
+        <a href="#songs">
+            เพลง
+        </a>
+
+        <a href="#albums">
+            อัลบั้ม
+        </a>
+
+        <a href="#about">
+            เกี่ยวกับ
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <div class="hero-content">
+
+        <small>
+            ROCK MUSIC PLATFORM
+        </small>
+
+        <h1>
+            BREAK<br>
+            THE <span>SILENCE</span>
+        </h1>
+
+        <p>
+
+            พื้นที่สำหรับคนที่หลงใหลในเสียงกีตาร์
+            เสียงกลอง และพลังของดนตรีร็อก
+
+            ค้นพบเพลงใหม่ ศิลปินใหม่
+            และอัลบั้มที่เต็มไปด้วยพลัง
+
+        </p>
+
+        <a
+            href="#songs"
+            class="button"
+        >
+            เริ่มฟังเพลง
+        </a>
+
+    </div>
+
+</section>
+
+
+<main>
+
+
+<!-- ARTISTS -->
+
+<section id="artists">
+
+    <div class="title">
+
+        <h2>
+            ศิลปินยอดนิยม
+        </h2>
+
+        <p>
+            ศิลปินร็อกที่น่าสนใจ
+        </p>
+
+    </div>
+
+
+    <div class="artists">
+
+
+        <div class="artist">
+
+            <img
+                src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=600&q=80"
+                alt="Black Fire"
+            >
+
+            <h3>
+                BLACK FIRE
+            </h3>
+
+            <p>
+                Alternative Rock
+            </p>
+
+        </div>
+
+
+        <div class="artist">
+
+            <img
+                src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=600&q=80"
+                alt="The Rebels"
+            >
+
+            <h3>
+                THE REBELS
+            </h3>
+
+            <p>
+                Hard Rock
+            </p>
+
+        </div>
+
+
+        <div class="artist">
+
+            <img
+                src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=600&q=80"
+                alt="Loud Heart"
+            >
+
+            <h3>
+                LOUD HEART
+            </h3>
+
+            <p>
+                Rock
+            </p>
+
+        </div>
+
+
+        <div class="artist">
+
+            <img
+                src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=80"
+                alt="Red Line"
+            >
+
+            <h3>
+                RED LINE
+            </h3>
+
+            <p>
+                Post Rock
+            </p>
+
+        </div>
+
+
+        <div class="artist">
+
+            <img
+                src="https://images.unsplash.com/photo-1524368535947-8f8d4c6f3d8a?auto=format&fit=crop&w=600&q=80"
+                alt="Noise Theory"
+            >
+
+            <h3>
+                NOISE THEORY
+            </h3>
+
+            <p>
+                Alternative
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SONGS -->
+
+<section id="songs">
+
+    <div class="title">
+
+        <h2>
+            เพลงแนะนำ
+        </h2>
+
+        <p>
+            เลือกเพลงที่ต้องการฟัง
+        </p>
+
+    </div>
+
+
+    <div class="songs">
+
+
+        <div class="song">
+
+            <img
+                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=500&q=80"
+                alt="เสียงแห่งไฟ"
+            >
+
+            <div class="song-info">
+
+                <h3>
+                    เสียงแห่งไฟ
+                </h3>
+
+                <p>
+                    BLACK FIRE
+                </p>
+
+            </div>
+
+            <audio controls>
+
+                <source
+                    src="music/song1.mp3"
+                    type="audio/mpeg"
+                >
+
+                เบราว์เซอร์ของคุณไม่รองรับ Audio
+
+            </audio>
+
+        </div>
+
+
+        <div class="song">
+
+            <img
+                src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=500&q=80"
+                alt="คืนที่ไม่มีวันจบ"
+            >
+
+            <div class="song-info">
+
+                <h3>
+                    คืนที่ไม่มีวันจบ
+                </h3>
+
+                <p>
+                    THE REBELS
+                </p>
+
+            </div>
+
+            <audio controls>
+
+                <source
+                    src="music/song2.mp3"
+                    type="audio/mpeg"
+                >
+
+                เบราว์เซอร์ของคุณไม่รองรับ Audio
+
+            </audio>
+
+        </div>
+
+
+        <div class="song">
+
+            <img
+                src="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=500&q=80"
+                alt="Guitar Storm"
+            >
+
+            <div class="song-info">
+
+                <h3>
+                    Guitar Storm
+                </h3>
+
+                <p>
+                    LOUD HEART
+                </p>
+
+            </div>
+
+            <audio controls>
+
+                <source
+                    src="music/song3.mp3"
+                    type="audio/mpeg"
+                >
+
+                เบราว์เซอร์ของคุณไม่รองรับ Audio
+
+            </audio>
+
+        </div>
+
+
+        <div class="song">
+
+            <img
+                src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=500&q=80"
+                alt="Born To Rock"
+            >
+
+            <div class="song-info">
+
+                <h3>
+                    Born To Rock
+                </h3>
+
+                <p>
+                    RED LINE
+                </p>
+
+            </div>
+
+            <audio controls>
+
+                <source
+                    src="music/song4.mp3"
+                    type="audio/mpeg"
+                >
+
+                เบราว์เซอร์ของคุณไม่รองรับ Audio
+
+            </audio>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ALBUMS -->
+
+<section id="albums">
+
+    <div class="title">
+
+        <h2>
+            อัลบั้มแนะนำ
+        </h2>
+
+        <p>
+            รวมอัลบั้มเพลงร็อกที่น่าสนใจ
+        </p>
+
+    </div>
+
+
+    <div class="albums">
+
+
+        <div class="album">
+
+            <img
+                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=700&q=80"
+                alt="Burn The Night"
+            >
+
+            <h3>
+                Burn The Night
+            </h3>
+
+            <p>
+                BLACK FIRE
+            </p>
+
+        </div>
+
+
+        <div class="album">
+
+            <img
+                src="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=700&q=80"
+                alt="Broken Strings"
+            >
+
+            <h3>
+                Broken Strings
+            </h3>
+
+            <p>
+                THE REBELS
+            </p>
+
+        </div>
+
+
+        <div class="album">
+
+            <img
+                src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=700&q=80"
+                alt="After Midnight"
+            >
+
+            <h3>
+                After Midnight
+            </h3>
+
+            <p>
+                LOUD HEART
+            </p>
+
+        </div>
+
+
+        <div class="album">
+
+            <img
+                src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=700&q=80"
+                alt="Into The Noise"
+            >
+
+            <h3>
+                Into The Noise
+            </h3>
+
+            <p>
+                NOISE THEORY
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ABOUT -->
+
+<section
+    class="about"
+    id="about"
+>
+
+    <div class="title">
+
+        <h2>
+            เกี่ยวกับ NOISE
+        </h2>
+
+    </div>
+
+    <p>
+
+        NOISE เป็นเว็บไซต์นำเสนอเพลงร็อก
+        ที่ออกแบบมาเพื่อรวบรวมเพลง
+        ศิลปิน และอัลบั้มไว้ในหน้าเดียว
+
+        เว็บไซต์เน้นการออกแบบที่ทันสมัย
+        ใช้งานง่าย และรองรับการแสดงผล
+        บนคอมพิวเตอร์และโทรศัพท์มือถือ
+
+    </p>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    NOISE MUSIC PLATFORM
+
+    <br><br>
+
+    Rock Music Streaming Experience
+
+</footer>
+
 
 </body>
+
 </html>
