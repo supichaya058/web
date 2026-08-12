@@ -1,18 +1,15 @@
-
 <!DOCTYPE html>
+
 <html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Scopus Research Landscape 2025</title>
 
-<!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-<!-- Plotly -->
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
@@ -62,33 +59,57 @@ body{
     margin:18px 0 0;
 }
 
-/* KPI */
+/* SCOPE */
 
-.kpi-grid{
+.scope-card{
+    background:white;
+    border-radius:18px;
+    padding:24px;
+    margin-bottom:26px;
+    box-shadow:0 4px 16px rgba(0,0,0,.05);
+}
+
+.scope-header{
+    font-size:20px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:18px;
+    border-bottom:1px solid #e5e7eb;
+    padding-bottom:12px;
+}
+
+.scope-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:16px;
-    margin-bottom:24px;
+    gap:18px;
 }
 
-.kpi{
-    background:white;
-    border-radius:16px;
-    padding:22px;
-    box-shadow:0 4px 14px rgba(0,0,0,.05);
-    text-align:center;
+.scope-item{
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:20px;
+    background:#fafbff;
 }
 
-.kpi-label{
+.scope-label{
+    font-size:12px;
     color:#64748b;
-    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    margin-bottom:8px;
 }
 
-.kpi-number{
-    font-size:30px;
+.scope-title{
+    font-size:24px;
     font-weight:700;
     color:#1e40af;
-    margin-top:8px;
+    line-height:1.3;
+    margin-bottom:8px;
+}
+
+.scope-desc{
+    font-size:14px;
+    color:#475569;
 }
 
 /* CARD */
@@ -157,7 +178,7 @@ body{
 
 @media(max-width:768px){
 
-    .kpi-grid{
+    .scope-grid{
         grid-template-columns:1fr;
     }
 
@@ -169,150 +190,145 @@ body{
         font-size:26px;
     }
 
+    .scope-title{
+        font-size:20px;
+    }
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- HEADER -->
+```
+<div class="header">
+    <h1>ภาพรวมแนวโน้มงานวิจัยจากฐานข้อมูล Scopus</h1>
+    <h2>Scopus Research Landscape 2025</h2>
 
-    <div class="header">
+    <p>
+        รายงานฉบับนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล Scopus
+        โดยใช้ข้อมูลจากสองสาขาวิชาที่เป็นอิสระต่อกัน ได้แก่
+        <strong>General Computer Science</strong> และ
+        <strong>Hardware and Architecture</strong>
+        เพื่อศึกษาหัวข้อวิจัยที่ปรากฏในแต่ละสาขา
+    </p>
+</div>
 
-        <h1>ภาพรวมแนวโน้มงานวิจัยจาก Scopus</h1>
-        <h2>Scopus Research Landscape 2025</h2>
+<div class="scope-card">
 
-        <p>
-            รายงานฉบับนี้นำเสนอการวิเคราะห์ข้อมูลจากฐานข้อมูล Scopus
-            โดยใช้ข้อมูลจาก <strong>2 ชุดข้อมูลที่เป็นอิสระต่อกัน</strong>
-            ได้แก่
-            <strong>General Computer Science</strong>
-            และ
-            <strong>Hardware and Architecture</strong>
-            ดังนั้นการวิเคราะห์จึงนำเสนอแยกเป็นรายชุดข้อมูล
-            และไม่ทำการเปรียบเทียบกันโดยตรง
-        </p>
-
+    <div class="scope-header">
+        ขอบเขตการวิเคราะห์ (Scope of Analysis)
     </div>
 
-    <!-- KPI -->
+    <div class="scope-grid">
 
-    <div class="kpi-grid">
-
-        <div class="kpi">
-            <div class="kpi-label">ชุดข้อมูลที่ 1</div>
-            <div class="kpi-number">General Computer Science</div>
+        <div class="scope-item">
+            <div class="scope-label">Subject Area</div>
+            <div class="scope-title">General Computer Science</div>
+            <div class="scope-desc">
+                งานวิจัยด้านวิทยาการคอมพิวเตอร์ทั่วไป
+            </div>
         </div>
 
-        <div class="kpi">
-            <div class="kpi-label">ชุดข้อมูลที่ 2</div>
-            <div class="kpi-number">Hardware and Architecture</div>
-        </div>
-
-    </div>
-
-    <!-- VISUALIZATION 1 -->
-
-    <div class="card">
-
-        <h3>ชุดข้อมูลที่ 1 : General Computer Science</h3>
-
-        <p>
-            กราฟนี้แสดงหัวข้อวิจัยที่พบในชุดข้อมูลด้านวิทยาการคอมพิวเตอร์ทั่วไป
-            โดยใช้ Author Keywords ที่ปรากฏในข้อมูล Scopus
-        </p>
-
-        <div id="chart1"></div>
-
-        <div class="note">
-
-            <strong>ข้อสังเกต</strong><br>
-
-            หัวข้อที่พบมากที่สุด ได้แก่
-            <strong>Artificial intelligence</strong>,
-            <strong>Machine learning</strong>,
-            <strong>Large language models</strong>
-            และ
-            <strong>Computer science</strong>
-
-            แสดงให้เห็นว่าชุดข้อมูลนี้มุ่งเน้นงานวิจัยด้านปัญญาประดิษฐ์
-            การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลร่วมสมัย
-
+        <div class="scope-item">
+            <div class="scope-label">Subject Area</div>
+            <div class="scope-title">Hardware and Architecture</div>
+            <div class="scope-desc">
+                งานวิจัยด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
+            </div>
         </div>
 
     </div>
 
-    <!-- VISUALIZATION 2 -->
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <h3>ชุดข้อมูลที่ 2 : Hardware and Architecture</h3>
+    <h3>ชุดข้อมูลที่ 1 : General Computer Science</h3>
 
-        <p>
-            กราฟนี้แสดงหัวข้อวิจัยที่พบในชุดข้อมูลด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
-            โดยใช้ Author Keywords จากข้อมูล Scopus
-        </p>
+    <p>
+        กราฟนี้แสดงหัวข้อวิจัยที่พบในชุดข้อมูลด้านวิทยาการคอมพิวเตอร์ทั่วไป
+        โดยใช้ Author Keywords จากข้อมูล Scopus
+    </p>
 
-        <div id="chart2"></div>
+    <div id="chart1"></div>
 
-        <div class="note">
-
-            <strong>ข้อสังเกต</strong><br>
-
-            หัวข้อที่พบมากที่สุด ได้แก่
-            <strong>FPGA</strong>,
-            <strong>Machine learning</strong>,
-            <strong>Edge AI</strong>,
-            <strong>Edge Computing</strong>
-            และ
-            <strong>Hardware security</strong>
-
-            สะท้อนความสนใจด้านระบบฮาร์ดแวร์อัจฉริยะ
-            การประมวลผลที่ขอบเครือข่าย และการออกแบบสถาปัตยกรรมคอมพิวเตอร์สมัยใหม่
-
-        </div>
-
+    <div class="note">
+        <strong>ข้อสังเกต</strong><br>
+        หัวข้อที่พบมาก ได้แก่
+        <strong>Artificial intelligence</strong>,
+        <strong>Machine learning</strong>,
+        <strong>Large language models</strong>
+        และ
+        <strong>Computer science</strong>
+        แสดงให้เห็นว่าชุดข้อมูลนี้มุ่งเน้นงานวิจัยด้านปัญญาประดิษฐ์
+        การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลร่วมสมัย
     </div>
 
-    <!-- SUMMARY -->
+</div>
 
-    <div class="summary">
+<div class="card">
 
-        <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
+    <h3>ชุดข้อมูลที่ 2 : Hardware and Architecture</h3>
 
-        <p>
-            ชุดข้อมูลด้าน <strong>General Computer Science</strong>
-            มีความโดดเด่นในประเด็นที่เกี่ยวข้องกับปัญญาประดิษฐ์
-            การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลสมัยใหม่
-        </p>
+    <p>
+        กราฟนี้แสดงหัวข้อวิจัยที่พบในชุดข้อมูลด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
+        โดยใช้ Author Keywords จากข้อมูล Scopus
+    </p>
 
-        <p>
-            ขณะที่ชุดข้อมูลด้าน <strong>Hardware and Architecture</strong>
-            มีความโดดเด่นด้าน FPGA, Edge AI, Hardware Security
-            และเทคโนโลยีฮาร์ดแวร์ประสิทธิภาพสูง
-        </p>
+    <div id="chart2"></div>
 
-        <p>
-            เนื่องจากทั้งสองชุดข้อมูลเป็นคนละชุดข้อมูล
-            การวิเคราะห์จึงมุ่งนำเสนอภาพรวมของแต่ละสาขาวิชาแยกจากกัน
-            เพื่อให้เห็นลักษณะเฉพาะของงานวิจัยในแต่ละด้านอย่างชัดเจน
-        </p>
-
+    <div class="note">
+        <strong>ข้อสังเกต</strong><br>
+        หัวข้อที่พบมาก ได้แก่
+        <strong>FPGA</strong>,
+        <strong>Machine learning</strong>,
+        <strong>Edge AI</strong>,
+        <strong>Edge Computing</strong>
+        และ
+        <strong>Hardware security</strong>
+        สะท้อนความสนใจด้านระบบฮาร์ดแวร์อัจฉริยะ
+        การประมวลผลที่ขอบเครือข่าย และการออกแบบสถาปัตยกรรมคอมพิวเตอร์สมัยใหม่
     </div>
 
-    <div class="footer">
-        รายงานการวิเคราะห์ข้อมูล Scopus ประจำปี 2025
-    </div>
+</div>
+
+<div class="summary">
+
+    <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
+
+    <p>
+        ชุดข้อมูลด้าน <strong>General Computer Science</strong>
+        มีความโดดเด่นในประเด็นที่เกี่ยวข้องกับปัญญาประดิษฐ์
+        การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลสมัยใหม่
+    </p>
+
+    <p>
+        ขณะที่ชุดข้อมูลด้าน <strong>Hardware and Architecture</strong>
+        มีความโดดเด่นด้าน FPGA, Edge AI, Hardware Security
+        และเทคโนโลยีฮาร์ดแวร์ประสิทธิภาพสูง
+    </p>
+
+    <p>
+        เนื่องจากทั้งสองชุดข้อมูลเป็นคนละชุดข้อมูล
+        การวิเคราะห์จึงนำเสนอภาพรวมของแต่ละสาขาแยกจากกัน
+        เพื่อให้เห็นลักษณะเฉพาะของงานวิจัยในแต่ละด้านอย่างชัดเจน
+    </p>
+
+</div>
+
+<div class="footer">
+    รายงานการวิเคราะห์ข้อมูล Scopus ประจำปี 2025
+</div>
+```
 
 </div>
 
 <script>
 
-/* =========================
-   DATASET 1
-========================= */
+/* DATASET 1 */
 
 const keywords1 = [
     "Artificial intelligence",
@@ -355,9 +371,7 @@ Plotly.newPlot(
     {responsive:true, displaylogo:false}
 );
 
-/* =========================
-   DATASET 2
-========================= */
+/* DATASET 2 */
 
 const keywords2 = [
     "FPGA",
@@ -404,3 +418,4 @@ Plotly.newPlot(
 
 </body>
 </html>
+
