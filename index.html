@@ -1,75 +1,426 @@
-<!doctype html>
-<html lang="th">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Scopus Research Landscape Dashboard 2025</title>
-<style>
-body{font-family:Arial,"Noto Sans Thai",sans-serif;background:#f5f7fb;color:#1f2937;margin:0}
-.container{max-width:1400px;margin:auto;padding:28px}
-.card{background:white;border-radius:16px;padding:22px;margin-bottom:22px;box-shadow:0 4px 18px rgba(0,0,0,.07)}
-h1{margin:0 0 8px;font-size:30px} h2{margin-top:0}
-.note{color:#4b5563;line-height:1.65}
-table{border-collapse:collapse;width:100%} th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left}
-th{background:#f3f4f6}
-.insight{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-.insight div{background:#f8fafc;border-left:4px solid #64748b;padding:14px;border-radius:8px;line-height:1.55}
-.small{font-size:13px;color:#6b7280}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scopus Research Visualization</title>
+
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .stat-card .label {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .chart-description {
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        #chart {
+            width: 100%;
+            height: 650px;
+        }
+
+        .insight {
+            margin-top: 20px;
+            padding: 22px;
+            background: #f8fafc;
+            border-radius: 12px;
+            line-height: 1.7;
+        }
+
+        .insight h2 {
+            margin-top: 0;
+        }
+
+        .insight li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #64748b;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 25px;
+            }
+
+            #chart {
+                height: 550px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
 <div class="container">
-<div class="card">
-<h1>Scopus Research Landscape Dashboard</h1>
-<p class="note">แดชบอร์ดนี้สร้างจากไฟล์ Scopus 2 ชุด ชุดละ 300 รายการ โดยข้อมูลทั้งหมดอยู่ในปี 2025
-สามารถ hover, zoom และกด legend เพื่อกรองการแสดงผลของกราฟได้</p>
+
+    <!-- HEADER -->
+    <div class="header">
+
+        <h1>
+            Scopus Research Landscape — 2025
+        </h1>
+
+        <p>
+            Visualization and analysis of research topics based on
+            Author Keywords from the Scopus dataset.
+        </p>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="label">
+                Total Publications
+            </div>
+
+            <div class="value">
+                599
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="label">
+                Total Citations
+            </div>
+
+            <div class="value">
+                1,991
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="label">
+                Average Citations
+            </div>
+
+            <div class="value">
+                3.32
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CHART -->
+    <div class="chart-card">
+
+        <div class="chart-title">
+            Top 15 Research Keywords
+        </div>
+
+        <div class="chart-description">
+            Number of publications containing each author keyword.
+        </div>
+
+        <div id="chart"></div>
+
+    </div>
+
+
+    <!-- INSIGHTS -->
+    <div class="chart-card" style="margin-top: 20px;">
+
+        <div class="insight">
+
+            <h2>
+                Key Findings
+            </h2>
+
+            <ul>
+
+                <li>
+                    <strong>Machine Learning</strong>
+                    is the most frequent keyword,
+                    appearing in 29 publications.
+                </li>
+
+                <li>
+                    <strong>Artificial Intelligence</strong>
+                    is the second most frequent keyword,
+                    appearing in 26 publications.
+                </li>
+
+                <li>
+                    <strong>Deep Learning</strong>
+                    appears in 15 publications.
+                </li>
+
+                <li>
+                    <strong>FPGA</strong> appears in
+                    14 publications, showing an important
+                    hardware-related research direction.
+                </li>
+
+                <li>
+                    Other notable topics include
+                    <strong>Edge Computing</strong>,
+                    <strong>Hardware Security</strong>,
+                    <strong>Edge AI</strong>,
+                    and <strong>Large Language Models</strong>.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <div class="footer">
+
+        Scopus Research Visualization • 2025
+
+    </div>
+
 </div>
 
-<div class="card">
-<h2>ภาพรวมข้อมูล</h2>
-<table>
-<thead><tr><th>ชุดข้อมูล</th><th>จำนวนเอกสาร</th><th>การอ้างอิงรวม</th><th>อ้างอิงเฉลี่ย/บทความ</th><th>Open Access</th></tr></thead>
-<tbody><tr><td>ชุดข้อมูล 1</td><td>300</td><td>1,330</td><td>4.43</td><td>201</td></tr><tr><td>ชุดข้อมูล 2</td><td>300</td><td>661</td><td>2.20</td><td>217</td></tr></tbody>
-</table>
-</div>
 
-<div class="card">
-<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="76925fa8-6dab-4150-85b5-5a3adb744d1b" class="plotly-graph-div" style="height:1250px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("76925fa8-6dab-4150-85b5-5a3adb744d1b")) {                    Plotly.newPlot(                        "76925fa8-6dab-4150-85b5-5a3adb744d1b",                        [{"hovertemplate":"%{x}\u003cbr\u003eบทความ: %{y}\u003cextra\u003e\u003c\u002fextra\u003e","name":"Publications","x":["ชุดข้อมูล 1","ชุดข้อมูล 2"],"y":{"dtype":"i2","bdata":"LAEsAQ=="},"type":"bar","xaxis":"x","yaxis":"y"},{"hovertemplate":"%{x}\u003cbr\u003eเฉลี่ย: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","name":"Avg citations","x":["ชุดข้อมูล 1","ชุดข้อมูล 2"],"y":{"dtype":"f8","bdata":"vLu7u7u7EUCg0wY6baABQA=="},"type":"bar","xaxis":"x2","yaxis":"y2"},{"hovertemplate":"%{x}\u003cbr\u003e%{y} เอกสาร\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"ชุดข้อมูล 1","name":"ชุดข้อมูล 1","x":["Article","Conference paper","Review","Note","Editorial"],"y":{"dtype":"i2","bdata":"zwAvACUABQAEAA=="},"type":"bar","xaxis":"x3","yaxis":"y3"},{"hovertemplate":"%{x}\u003cbr\u003e%{y} เอกสาร\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"ชุดข้อมูล 2","name":"ชุดข้อมูล 2","x":["Article","Conference paper","Review","Conference review","Erratum","Note","Short survey"],"y":{"dtype":"i2","bdata":"wwBbAAgAAgACAAEAAQA="},"type":"bar","xaxis":"x3","yaxis":"y3"},{"hovertemplate":"%{y}\u003cbr\u003e%{x} เอกสาร\u003cextra\u003e\u003c\u002fextra\u003e","name":"Sources","orientation":"h","showlegend":false,"x":{"dtype":"i1","bdata":"BgYHCAgKDA0NDw=="},"y":["Nature","ACM Transactions on Reconfigurable Tec","Proceedings of Science","Electronics (Switzerland)","Proceedings of 2nd International Sympo","Nature Communications ","Proceedings of SPIE - The Internationa","Scientific Reports","54th International Conference on Paral","ACM Transactions on Architecture and C"],"type":"bar","xaxis":"x4","yaxis":"y4"},{"hovertemplate":"%{y}\u003cbr\u003e%{x} occurrences\u003cextra\u003e\u003c\u002fextra\u003e","name":"Keywords","orientation":"h","showlegend":false,"x":{"dtype":"i1","bdata":"BQUGBgYHCAsODxgd"},"y":["computational thinking","internet of things (iot)","edge computing","edge ai","neural networks","hardware security","large language models","computer science","fpga","deep learning","artificial intelligence","machine learning"],"type":"bar","xaxis":"x5","yaxis":"y5"},{"hovertemplate":"%{y}\u003cbr\u003e%{x} publications\u003cextra\u003e\u003c\u002fextra\u003e","name":"Authors","orientation":"h","showlegend":false,"x":{"dtype":"i1","bdata":"CAgICgoKCwsLDQ=="},"y":["Zhang Y.","Chen Z.","Wang X.","Wang H.","Wang Y.","Li J.","Li Y.","Li X.","Wang J.","Liu Y."],"type":"bar","xaxis":"x6","yaxis":"y6"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,0.45]},"yaxis":{"anchor":"x","domain":[0.7533333333333334,1.0]},"xaxis2":{"anchor":"y2","domain":[0.55,1.0]},"yaxis2":{"anchor":"x2","domain":[0.7533333333333334,1.0]},"xaxis3":{"anchor":"y3","domain":[0.0,0.45],"tickangle":-25},"yaxis3":{"anchor":"x3","domain":[0.3766666666666667,0.6233333333333334]},"xaxis4":{"anchor":"y4","domain":[0.55,1.0]},"yaxis4":{"anchor":"x4","domain":[0.3766666666666667,0.6233333333333334]},"xaxis5":{"anchor":"y5","domain":[0.0,0.45]},"yaxis5":{"anchor":"x5","domain":[0.0,0.24666666666666667]},"xaxis6":{"anchor":"y6","domain":[0.55,1.0]},"yaxis6":{"anchor":"x6","domain":[0.0,0.24666666666666667]},"annotations":[{"font":{"size":16},"showarrow":false,"text":"จำนวนเอกสารและการอ้างอิง","x":0.225,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"ค่าเฉลี่ยการอ้างอิงต่อบทความ","x":0.775,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"ประเภทเอกสาร","x":0.225,"xanchor":"center","xref":"paper","y":0.6233333333333334,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Top 10 แหล่งตีพิมพ์","x":0.775,"xanchor":"center","xref":"paper","y":0.6233333333333334,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Top 12 Keywords","x":0.225,"xanchor":"center","xref":"paper","y":0.24666666666666667,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Top 10 Authors","x":0.775,"xanchor":"center","xref":"paper","y":0.24666666666666667,"yanchor":"bottom","yref":"paper"},{"align":"left","font":{"size":14},"showarrow":false,"text":"รวม 600 เอกสาร | การอ้างอิงรวม 1,991 ครั้ง | Open Access 418 เอกสาร | ปีข้อมูล 2025","x":0,"xref":"paper","y":1.075,"yref":"paper"}],"margin":{"t":90,"l":60,"r":40,"b":50},"title":{"text":"Scopus Research Landscape Dashboard — 2025"},"height":1250,"hovermode":"closest","barmode":"group"},                        {"responsive": true}                    )                };            </script>        </div>
-</div>
+<script>
 
-<div class="card">
-<h2>ประเด็นที่อ่านจากข้อมูลได้</h2>
-<div class="insight">
-<div><b>1. เปรียบเทียบชุดข้อมูล</b><br>
-ทั้งสองชุดมี 300 เอกสาร แต่มีโครงสร้างแหล่งตีพิมพ์และประเภทเอกสารต่างกัน
-จึงสามารถใช้เปรียบเทียบ “ลักษณะของงานวิจัย” ระหว่างสองชุดได้</div>
-<div><b>2. Citation impact</b><br>
-ชุดข้อมูล 1 มีค่าเฉลี่ยการอ้างอิงประมาณ 4.43 ครั้ง/บทความ ขณะที่ชุดข้อมูล 2 ประมาณ 2.20 ครั้ง/บทความ
-จึงควรดูทั้งค่าเฉลี่ยและการกระจาย เพราะ citation มีความเบ้และมีบทความที่ถูกอ้างอิงสูงบางรายการ</div>
-<div><b>3. Research themes</b><br>
-ชุดข้อมูล 1 พบคำสำคัญเด่นด้าน Artificial Intelligence, Machine Learning, LLM และ Education
-ส่วนชุดข้อมูล 2 เด่นด้าน FPGA, Edge AI, Hardware Security, IoT และ Hardware Accelerator</div>
-<div><b>4. Communication</b><br>
-ใช้แดชบอร์ดนี้เป็น “ภาพกลาง” ในการคุยกับอาจารย์หรือทีม โดยเริ่มจากภาพรวม → แนวโน้ม → keywords → แหล่งตีพิมพ์
-แล้วค่อยเปิดรายการบทความที่ต้องการตรวจสอบต่อ</div>
-</div>
-</div>
+    /*
+    ==========================================
+    SCOPUS KEYWORD DATA
+    ==========================================
+    */
 
-<div class="card">
-<h2>นำไปสื่อสารกับคนอื่นอย่างไร</h2>
-<p class="note">
-<b>อาจารย์/ที่ปรึกษา:</b> ใช้ KPI + Top Keywords + Top Sources เพื่ออธิบายว่าข้อมูลกำลังชี้ไปทางหัวข้อใด
-และถามต่อว่า “ควรเจาะ theme ไหนเป็น literature review?”<br><br>
-<b>สมาชิกทีม:</b> ใช้กราฟเปรียบเทียบสองชุดเพื่อแบ่งงาน เช่น คนหนึ่งดู AI/LLM อีกคนดู FPGA/Edge AI
-แล้วนำผลกลับมารวมเป็น research map เดียวกัน<br><br>
-<b>การนำเสนอ:</b> ไม่ควรอ่านตัวเลขทั้งหมด ให้เล่าเป็นเรื่อง: “ข้อมูลมาจากไหน → พบอะไร → ต่างกันอย่างไร → มีความหมายต่อหัวข้อวิจัยอย่างไร”
-<br><br>
-<b>การแชร์:</b> ไฟล์ HTML นี้สามารถส่งให้คนอื่นเปิดใน browser ได้ และสามารถนำขึ้น GitHub Pages, เว็บภายในทีม
-หรือระบบแชร์ไฟล์ของมหาวิทยาลัยได้
-</p>
-<p class="small">หมายเหตุ: ค่า keyword นับจาก Author Keywords และรวมตัวพิมพ์เล็ก/ใหญ่ให้เป็นคำเดียวเพื่อการวิเคราะห์เบื้องต้น</p>
-</div>
-</div>
+    const keywords = [
+
+        "Machine Learning",
+        "Artificial Intelligence",
+        "Deep Learning",
+        "FPGA",
+        "Computer Science",
+        "Large Language Models",
+        "Neural Networks",
+        "Edge Computing",
+        "Hardware Security",
+        "Edge AI",
+        "Computational Thinking",
+        "Cognition",
+        "Computer Science Education",
+        "Education",
+        "Virtual Reality"
+
+    ];
+
+
+    const publicationCounts = [
+
+        29,
+        26,
+        15,
+        14,
+        11,
+        9,
+        9,
+        7,
+        7,
+        6,
+        5,
+        5,
+        5,
+        5,
+        5
+
+    ];
+
+
+    /*
+    ==========================================
+    CREATE BAR CHART
+    ==========================================
+    */
+
+    const chartData = [
+
+        {
+            x: publicationCounts.slice().reverse(),
+
+            y: keywords.slice().reverse(),
+
+            type: "bar",
+
+            orientation: "h",
+
+            hovertemplate:
+                "<b>%{y}</b>" +
+                "<br>Publications: %{x}" +
+                "<extra></extra>"
+        }
+
+    ];
+
+
+    /*
+    ==========================================
+    CHART LAYOUT
+    ==========================================
+    */
+
+    const layout = {
+
+        margin: {
+
+            l: 180,
+
+            r: 40,
+
+            t: 30,
+
+            b: 60
+
+        },
+
+        xaxis: {
+
+            title: "Number of Publications",
+
+            dtick: 5
+
+        },
+
+        yaxis: {
+
+            title: ""
+
+        },
+
+        paper_bgcolor: "white",
+
+        plot_bgcolor: "white",
+
+        font: {
+
+            family: "Arial",
+
+            size: 14
+
+        }
+
+    };
+
+
+    /*
+    ==========================================
+    RENDER CHART
+    ==========================================
+    */
+
+    Plotly.newPlot(
+
+        "chart",
+
+        chartData,
+
+        layout,
+
+        {
+
+            responsive: true,
+
+            displaylogo: false
+
+        }
+
+    );
+
+</script>
+
 </body>
 </html>
