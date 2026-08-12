@@ -17,108 +17,130 @@
 body{
     margin:0;
     font-family:"Sarabun",sans-serif;
-    background:#0f0f14;
-    color:#f3f4f6;
-    line-height:1.9;
+    color:#f8fafc;
+    background:
+        radial-gradient(circle at top left,#2e1065 0%,transparent 35%),
+        radial-gradient(circle at bottom right,#1e1b4b 0%,transparent 35%),
+        linear-gradient(135deg,#0b1020,#111827 60%,#0f172a);
+    min-height:100vh;
+    line-height:1.85;
 }
 
 .container{
     width:92%;
     max-width:1280px;
     margin:auto;
-    padding:36px 0 52px;
+    padding:40px 0 60px;
+}
+
+/* GLASS CARD */
+
+.glass{
+    background:rgba(17,24,39,.55);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:28px;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 /* HERO */
 
 .hero{
-    background:#171721;
-    border:1px solid #2a2a38;
-    border-radius:24px;
-    padding:42px;
-    margin-bottom:30px;
-    box-shadow:0 8px 24px rgba(0,0,0,.35);
+    padding:48px;
+    margin-bottom:32px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(168,85,247,.22),transparent 70%);
+    top:-80px;
+    right:-60px;
 }
 
 .hero h1{
     margin:0;
-    font-size:38px;
+    font-size:48px;
+    line-height:1.1;
     font-weight:700;
-    color:#ffffff;
+    letter-spacing:-1px;
 }
 
 .hero h2{
-    margin:10px 0 22px;
-    font-size:18px;
-    font-weight:400;
+    margin:14px 0 24px;
     color:#cbd5e1;
+    font-weight:400;
+    font-size:20px;
 }
 
 .hero p{
-    max-width:920px;
+    max-width:900px;
     color:#d1d5db;
+    font-size:17px;
 }
 
 /* SECTION */
 
-.overview,
-.chart-card,
-.summary{
-    background:#181824;
-    border:1px solid #2b2b3a;
-    border-radius:22px;
-    padding:30px;
-    box-shadow:0 4px 14px rgba(0,0,0,.25);
+.section{
+    padding:32px;
+    margin-bottom:32px;
 }
 
-.overview,
-.summary{
-    margin-bottom:30px;
-}
-
-.overview h3,
-.chart-card h3,
-.summary h3{
+.section h3{
     margin-top:0;
-    font-size:26px;
-    color:#ffffff;
-    border-left:4px solid #8b5cf6;
-    padding-left:12px;
+    font-size:28px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.overview p,
-.chart-card p,
-.summary p{
+.section h3::before{
+    content:"";
+    width:6px;
+    height:28px;
+    border-radius:999px;
+    background:linear-gradient(180deg,#a855f7,#ec4899);
+}
+
+.section p{
     color:#d1d5db;
 }
 
-/* OVERVIEW GRID */
+/* STATS */
 
-.overview-grid{
+.stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
-    margin-top:22px;
+    margin-top:24px;
 }
 
-.overview-item{
-    background:#12121a;
-    border:1px solid #2b2b3a;
-    border-radius:18px;
-    padding:22px;
+.stat{
+    padding:24px;
+    border-radius:22px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
     text-align:center;
 }
 
-.overview-item .num{
-    font-size:34px;
+.stat .num{
+    font-size:36px;
     font-weight:700;
-    color:#c4b5fd;
-    line-height:1.3;
+    color:#f5d0fe;
+    margin-bottom:6px;
 }
 
-.overview-item .label{
-    color:#a1a1aa;
-    margin-top:8px;
+.stat .label{
+    color:#cbd5e1;
     font-size:14px;
 }
 
@@ -128,57 +150,89 @@ body{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:24px;
-    margin-bottom:30px;
+    margin-bottom:32px;
+}
+
+.chart-card{
+    padding:28px;
+}
+
+.chart-card h3{
+    font-size:24px;
+    margin-top:0;
+}
+
+.chart-card p{
+    color:#d1d5db;
 }
 
 .chart{
-    height:500px;
+    height:520px;
 }
 
 /* INTERPRET */
 
 .interpret{
-    margin-top:24px;
-    background:#12121a;
-    border-left:5px solid #8b5cf6;
-    border-radius:14px;
-    padding:20px;
+    margin-top:22px;
+    padding:18px 20px;
+    border-radius:18px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
 }
 
 .interpret h4{
+    margin:0 0 10px;
+    color:#f5d0fe;
+}
+
+/* SUMMARY */
+
+.summary{
+    padding:36px;
+}
+
+.summary h3{
     margin-top:0;
-    color:#ddd6fe;
-    font-size:18px;
+    font-size:30px;
+}
+
+.summary p{
+    color:#e5e7eb;
 }
 
 /* FOOTER */
 
 .footer{
     text-align:center;
-    color:#71717a;
-    font-size:13px;
-    margin-top:22px;
-    letter-spacing:.8px;
+    color:#94a3b8;
+    font-size:14px;
+    margin-top:28px;
 }
 
 /* RESPONSIVE */
 
-@media(max-width:900px){
+@media(max-width:960px){
 
     .chart-grid{
         grid-template-columns:1fr;
     }
 
-    .overview-grid{
+    .stats{
         grid-template-columns:1fr;
     }
 
     .hero{
-        padding:28px;
+        padding:32px;
     }
 
     .hero h1{
-        font-size:30px;
+        font-size:34px;
+    }
+
+    .section,
+    .summary,
+    .chart-card{
+        padding:24px;
     }
 }
 </style>
@@ -188,164 +242,117 @@ body{
 
 <div class="container">
 
-<!-- HERO -->
-
-<section class="hero">
-
-    <h1>การวิเคราะห์หัวข้อวิจัยจากฐานข้อมูล Scopus</h1>
-    <h2>Scopus Research Topic Analysis 2025</h2>
-
-    <p>
-        หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
-        เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
-        <strong>General Computer Science</strong> และ
-        <strong>Hardware and Architecture</strong>
-        โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
-        เพื่อให้ผู้อ่านเข้าใจทิศทางของงานวิจัยในแต่ละสาขาได้อย่างรวดเร็ว
-    </p>
-
-</section>
-
-<!-- OVERVIEW -->
-
-<section class="overview">
-
-    <h3>ภาพรวมการวิเคราะห์</h3>
-
-    <p>
-        การวิเคราะห์ครั้งนี้ใช้ข้อมูลจากสองสาขาวิชาที่เป็นอิสระต่อกัน
-        และพิจารณาความถี่ของ Author Keywords ที่ปรากฏในงานวิจัย
-        เพื่อระบุหัวข้อที่ได้รับความสนใจมากที่สุดในแต่ละสาขา
-    </p>
-
-    <p>
-        ผลลัพธ์ที่นำเสนอช่วยให้เห็นภาพรวมของแนวโน้มงานวิจัยในแต่ละสาขาวิชา
-        ว่ามีประเด็นใดได้รับความสนใจมากเป็นพิเศษในฐานข้อมูล Scopus
-        โดยมุ่งเน้นการทำความเข้าใจลักษณะของงานวิจัยในแต่ละสาขา
-        มากกว่าการเปรียบเทียบว่าสาขาใดมีความสำคัญมากกว่ากัน
-    </p>
-
-    <div class="overview-grid">
-
-        <div class="overview-item">
-            <div class="num">2</div>
-            <div class="label">สาขาวิชาที่วิเคราะห์</div>
-        </div>
-
-        <div class="overview-item">
-            <div class="num">General Computer Science</div>
-            <div class="label">สาขาวิชาที่ 1</div>
-        </div>
-
-        <div class="overview-item">
-            <div class="num">Hardware and Architecture</div>
-            <div class="label">สาขาวิชาที่ 2</div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- CHARTS -->
-
-<section class="chart-grid">
-
-    <div class="chart-card">
-
-        <h3>สาขาวิชาที่ 1 : General Computer Science</h3>
+    <!-- HERO -->
+    <section class="hero glass">
+        <h1>การวิเคราะห์หัวข้อวิจัยจากฐานข้อมูล Scopus</h1>
+        <h2>Scopus Research Topic Analysis 2025</h2>
 
         <p>
-            แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
-            <strong>General Computer Science</strong>
-            โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
-        </p>
-
-        <div id="chart1" class="chart"></div>
-
-        <div class="interpret">
-
-            <h4>การตีความผลลัพธ์</h4>
-
-            <p>
-                หัวข้อที่โดดเด่นที่สุดคือ
-                <strong>Artificial intelligence</strong>
-                รองลงมาคือ
-                <strong>Machine learning</strong>
-                และ
-                <strong>Large language models</strong>
-                ซึ่งสะท้อนให้เห็นว่าการวิจัยในสาขาวิทยาการคอมพิวเตอร์ทั่วไป
-                มีความสนใจอย่างมากต่อเทคโนโลยีปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="chart-card">
-
-        <h3>สาขาวิชาที่ 2 : Hardware and Architecture</h3>
-
-        <p>
-            แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+            หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
+            เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
+            <strong>General Computer Science</strong> และ
             <strong>Hardware and Architecture</strong>
-            ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
-            และระบบประมวลผลสมัยใหม่
+            โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
+            เพื่อให้เห็นทิศทางของงานวิจัยและประเด็นที่ได้รับความสนใจในแต่ละสาขาอย่างชัดเจน
+        </p>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="section glass">
+        <h3>ภาพรวมการวิเคราะห์</h3>
+
+        <p>
+            การวิเคราะห์ครั้งนี้ใช้ข้อมูลจากสองสาขาวิชาที่เป็นอิสระต่อกัน
+            และพิจารณาความถี่ของ Author Keywords เพื่อระบุหัวข้อที่ปรากฏบ่อยที่สุดในงานวิจัยของแต่ละสาขา
         </p>
 
-        <div id="chart2" class="chart"></div>
+        <div class="stats">
+            <div class="stat">
+                <div class="num">2</div>
+                <div class="label">สาขาวิชาที่วิเคราะห์</div>
+            </div>
 
-        <div class="interpret">
+            <div class="stat">
+                <div class="num">General Computer Science</div>
+                <div class="label">สาขาวิชาที่ 1</div>
+            </div>
 
-            <h4>การตีความผลลัพธ์</h4>
+            <div class="stat">
+                <div class="num">Hardware and Architecture</div>
+                <div class="label">สาขาวิชาที่ 2</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHARTS -->
+    <section class="chart-grid">
+
+        <!-- LEFT -->
+        <div class="chart-card glass">
+            <h3>General Computer Science</h3>
 
             <p>
-                หัวข้อที่พบมากที่สุดคือ
-                <strong>FPGA</strong>
-                รองลงมาคือ
-                <strong>Machine learning</strong>,
-                <strong>Edge AI</strong>
-                และ
-                <strong>Edge Computing</strong>
-                แสดงให้เห็นว่างานวิจัยในสาขานี้มุ่งเน้นการออกแบบฮาร์ดแวร์ที่รองรับงาน AI
-                และการประมวลผลประสิทธิภาพสูง
+                แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา General Computer Science
+                โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
             </p>
 
+            <div id="chart1" class="chart"></div>
+
+            <div class="interpret">
+                <h4>การตีความผลลัพธ์</h4>
+                <p>
+                    หัวข้อที่โดดเด่นที่สุดคือ Artificial Intelligence รองลงมาคือ
+                    Machine Learning และ Large Language Models สะท้อนให้เห็นว่า
+                    งานวิจัยด้านวิทยาการคอมพิวเตอร์ทั่วไปให้ความสำคัญกับเทคโนโลยี AI อย่างชัดเจน
+                </p>
+            </div>
         </div>
 
+        <!-- RIGHT -->
+        <div class="chart-card glass">
+            <h3>Hardware and Architecture</h3>
+
+            <p>
+                แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา Hardware and Architecture
+                ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
+                และระบบประมวลผลสมัยใหม่
+            </p>
+
+            <div id="chart2" class="chart"></div>
+
+            <div class="interpret">
+                <h4>การตีความผลลัพธ์</h4>
+                <p>
+                    หัวข้อที่พบมากที่สุดคือ FPGA รองลงมาคือ Machine Learning,
+                    Edge AI และ Edge Computing แสดงถึงความสำคัญของฮาร์ดแวร์ประสิทธิภาพสูง
+                    ที่รองรับการประมวลผล AI ในอุปกรณ์ปลายทาง
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SUMMARY -->
+    <section class="summary glass">
+        <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
+
+        <p>
+            ผลการวิเคราะห์ชี้ให้เห็นว่า งานวิจัยในสาขา General Computer Science
+            มีความโดดเด่นด้านปัญญาประดิษฐ์ การเรียนรู้ของเครื่อง และเทคโนโลยีดิจิทัลสมัยใหม่
+            ขณะที่สาขา Hardware and Architecture มุ่งเน้น FPGA, Edge AI
+            และสถาปัตยกรรมฮาร์ดแวร์ประสิทธิภาพสูง
+        </p>
+
+        <p>
+            แม้ทั้งสองสาขาจะมีลักษณะหัวข้อวิจัยแตกต่างกัน แต่ผลลัพธ์สะท้อนแนวโน้มร่วมกันคือ
+            การพัฒนาปัญญาประดิษฐ์และการพัฒนาฮาร์ดแวร์มีความเชื่อมโยงกันอย่างใกล้ชิด
+            และเป็นทิศทางสำคัญของงานวิจัยด้านคอมพิวเตอร์ในปัจจุบัน
+        </p>
+    </section>
+
+    <div class="footer">
+        Scopus Research Topic Analysis 2025
     </div>
-
-</section>
-
-<!-- SUMMARY -->
-
-<section class="summary">
-
-    <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
-
-    <p>
-        การวิเคราะห์ข้อมูล Scopus ทั้งสองสาขาวิชาแสดงให้เห็นว่า
-        งานวิจัยในสาขา <strong>General Computer Science</strong>
-        มีความโดดเด่นด้านปัญญาประดิษฐ์ การเรียนรู้ของเครื่อง
-        และเทคโนโลยีดิจิทัลสมัยใหม่
-    </p>
-
-    <p>
-        ขณะที่สาขา <strong>Hardware and Architecture</strong>
-        มีความโดดเด่นด้าน FPGA, Edge AI และสถาปัตยกรรมฮาร์ดแวร์ประสิทธิภาพสูง
-        ซึ่งสะท้อนการพัฒนาโครงสร้างพื้นฐานสำหรับระบบคอมพิวเตอร์และระบบอัจฉริยะสมัยใหม่
-    </p>
-
-    <p>
-        แม้ทั้งสองสาขาจะมีลักษณะของหัวข้อวิจัยแตกต่างกัน
-        แต่ผลการวิเคราะห์ชี้ให้เห็นว่าการพัฒนาปัญญาประดิษฐ์และการพัฒนาฮาร์ดแวร์
-        มีความเชื่อมโยงกันอย่างใกล้ชิด และเป็นทิศทางสำคัญของงานวิจัยด้านคอมพิวเตอร์ในปัจจุบัน
-    </p>
-
-</section>
-
-<div class="footer">
-    Scopus Research Topic Analysis 2025
-</div>
 
 </div>
 
@@ -367,6 +374,7 @@ const y1 = [
 const x1 = [4,4,4,4,6,6,15,21];
 
 const line1 = [];
+
 for(let i=0;i<x1.length;i++){
     line1.push({
         type:"scatter",
@@ -391,7 +399,7 @@ line1.push({
     },
     text:x1.map(v=>v+" บทความ"),
     textposition:"right",
-    textfont:{color:"#f3f4f6"},
+    textfont:{color:"#f8fafc"},
     hovertemplate:"<b>%{y}</b><br>จำนวนบทความ: %{x}<extra></extra>",
     showlegend:false
 });
@@ -406,15 +414,15 @@ Plotly.newPlot(
             range:[0,24],
             gridcolor:"#2b2b3a",
             zeroline:false,
-            color:"#f3f4f6"
+            color:"#f8fafc"
         },
         yaxis:{
             automargin:true,
-            color:"#f3f4f6"
+            color:"#f8fafc"
         },
-        paper_bgcolor:"#181824",
-        plot_bgcolor:"#181824",
-        font:{family:"Sarabun",size:14,color:"#f3f4f6"}
+        paper_bgcolor:"rgba(0,0,0,0)",
+        plot_bgcolor:"rgba(0,0,0,0)",
+        font:{family:"Sarabun",size:14,color:"#f8fafc"}
     },
     {responsive:true,displaylogo:false}
 );
@@ -435,6 +443,7 @@ const y2 = [
 const x2 = [3,4,4,4,4,4,10,14];
 
 const line2 = [];
+
 for(let i=0;i<x2.length;i++){
     line2.push({
         type:"scatter",
@@ -454,12 +463,12 @@ line2.push({
     y:y2,
     marker:{
         size:16,
-        color:"#a78bfa",
+        color:"#c084fc",
         line:{color:"#ffffff",width:2}
     },
     text:x2.map(v=>v+" บทความ"),
     textposition:"right",
-    textfont:{color:"#f3f4f6"},
+    textfont:{color:"#f8fafc"},
     hovertemplate:"<b>%{y}</b><br>จำนวนบทความ: %{x}<extra></extra>",
     showlegend:false
 });
@@ -474,15 +483,15 @@ Plotly.newPlot(
             range:[0,16],
             gridcolor:"#2b2b3a",
             zeroline:false,
-            color:"#f3f4f6"
+            color:"#f8fafc"
         },
         yaxis:{
             automargin:true,
-            color:"#f3f4f6"
+            color:"#f8fafc"
         },
-        paper_bgcolor:"#181824",
-        plot_bgcolor:"#181824",
-        font:{family:"Sarabun",size:14,color:"#f3f4f6"}
+        paper_bgcolor:"rgba(0,0,0,0)",
+        plot_bgcolor:"rgba(0,0,0,0)",
+        font:{family:"Sarabun",size:14,color:"#f8fafc"}
     },
     {responsive:true,displaylogo:false}
 );
