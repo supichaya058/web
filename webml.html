@@ -1,447 +1,1142 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scopus Research Landscape 2025</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <title>Scopus Research Landscape 2025</title>
 
-<style>
-*{box-sizing:border-box;}
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
-body{
-    margin:0;
-    font-family:"Sarabun", Arial, sans-serif;
-    background:#f4f6fa;
-    color:#172033;
-}
+    <style>
 
-.container{
-    width:92%;
-    max-width:1300px;
-    margin:auto;
-    padding:30px 0 50px;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-.header{
-    background:linear-gradient(135deg,#172554,#2563eb);
-    color:white;
-    border-radius:22px;
-    padding:35px 40px;
-    margin-bottom:24px;
-    box-shadow:0 10px 25px rgba(37,99,235,.18);
-}
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "Noto Sans Thai", Arial, sans-serif;
+            background: #f4f6fa;
+            color: #172033;
+        }
 
-.header-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+        .container {
+            width: 92%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 35px 0 50px;
+        }
 
-.header h1{
-    margin:0;
-    font-size:34px;
-}
+        /* ================= HEADER ================= */
 
-.header h2{
-    margin-top:8px;
-    font-weight:400;
-    opacity:.9;
-}
+        .header {
+            background: linear-gradient(
+                135deg,
+                #172554,
+                #2563eb
+            );
 
-.header p{
-    margin-top:18px;
-    line-height:1.9;
-    max-width:980px;
-}
+            color: white;
 
-.year{
-    background:rgba(255,255,255,.15);
-    border:1px solid rgba(255,255,255,.25);
-    padding:10px 18px;
-    border-radius:20px;
-    font-size:14px;
-}
+            border-radius: 22px;
 
-.kpi-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    margin-bottom:24px;
-}
+            padding: 35px 40px;
 
-.kpi{
-    background:white;
-    border-radius:16px;
-    padding:22px;
-    border:1px solid #e7eaf0;
-    box-shadow:0 4px 14px rgba(0,0,0,.04);
-}
+            margin-bottom: 22px;
 
-.kpi-label{
-    color:#667085;
-    font-size:13px;
-}
+            box-shadow:
+                0 12px 30px
+                rgba(37, 99, 235, 0.18);
+        }
 
-.kpi-number{
-    font-size:30px;
-    font-weight:750;
-    margin-top:10px;
-    color:#1d4ed8;
-}
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.kpi-note{
-    color:#98a2b3;
-    font-size:12px;
-    margin-top:5px;
-}
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            letter-spacing: -0.5px;
+        }
 
-.visual-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:20px;
-}
+        .header h2 {
+            margin: 8px 0 0;
+            font-size: 18px;
+            font-weight: 400;
+            opacity: .85;
+        }
 
-.card{
-    background:white;
-    border-radius:18px;
-    border:1px solid #e7eaf0;
-    padding:24px;
-    box-shadow:0 4px 15px rgba(0,0,0,.04);
-}
+        .header p {
+            margin: 20px 0 0;
+            max-width: 950px;
+            line-height: 1.8;
+            opacity: .92;
+            font-size: 15px;
+        }
 
-.card-title{
-    font-size:20px;
-    font-weight:700;
-    color:#172554;
-}
+        .year {
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.2);
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
 
-.card-subtitle{
-    color:#667085;
-    font-size:13px;
-    margin-top:6px;
-    line-height:1.7;
-}
+        /* ================= KPI ================= */
 
-#docChart{height:520px;}
-#subjectChart{height:360px;}
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
 
-.explain{
-    margin-top:16px;
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:14px;
-    padding:16px;
-    line-height:1.8;
-    font-size:14px;
-}
+        .kpi {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            border: 1px solid #e7eaf0;
 
-.explain strong{
-    color:#1d4ed8;
-}
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,.04);
 
-.section-title{
-    margin-top:24px;
-    margin-bottom:12px;
-    font-size:22px;
-    font-weight:700;
-    color:#172554;
-}
+            transition: .2s;
+        }
 
-.theme-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-}
+        .kpi:hover {
+            transform: translateY(-3px);
 
-.theme{
-    background:white;
-    border:1px solid #e7eaf0;
-    border-radius:16px;
-    padding:20px;
-    box-shadow:0 4px 12px rgba(0,0,0,.03);
-}
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,.07);
+        }
 
-.theme-number{
-    font-size:26px;
-    font-weight:750;
-    color:#2563eb;
-}
+        .kpi-label {
+            color: #667085;
+            font-size: 13px;
+        }
 
-.theme-title{
-    font-weight:700;
-    margin:8px 0;
-}
+        .kpi-number {
+            font-size: 30px;
+            font-weight: 750;
+            margin-top: 10px;
+        }
 
-.theme-text{
-    color:#667085;
-    font-size:14px;
-    line-height:1.7;
-}
+        .kpi-note {
+            color: #98a2b3;
+            font-size: 12px;
+            margin-top: 5px;
+        }
 
-.summary{
-    margin-top:24px;
-    background:#111827;
-    color:white;
-    border-radius:18px;
-    padding:28px 30px;
-    line-height:1.9;
-}
+        /* ================= VISUALIZATION ================= */
 
-.summary h3{
-    margin-top:0;
-    font-size:22px;
-}
+        .visual-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
 
-.summary p{
-    color:#e5e7eb;
-    font-size:15px;
-}
+        .card {
+            background: white;
 
-.summary strong{
-    color:white;
-}
+            border-radius: 18px;
 
-.footer{
-    text-align:center;
-    color:#98a2b3;
-    font-size:12px;
-    margin-top:24px;
-}
+            border: 1px solid #e7eaf0;
 
-@media(max-width:1000px){
-    .kpi-grid{grid-template-columns:repeat(2,1fr);}
-    .visual-grid{grid-template-columns:1fr;}
-    .theme-grid{grid-template-columns:1fr;}
-}
+            padding: 24px;
 
-@media(max-width:650px){
-    .kpi-grid{grid-template-columns:1fr;}
-    .header-top{display:block;}
-    .year{display:inline-block;margin-top:15px;}
-    .header h1{font-size:28px;}
-}
-</style>
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,.04);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .card-subtitle {
+            color: #667085;
+
+            font-size: 13px;
+
+            margin-top: 5px;
+
+            line-height: 1.7;
+        }
+
+        #keywordChart {
+            width: 100%;
+            height: 650px;
+        }
+
+        #documentChart {
+            width: 100%;
+            height: 420px;
+        }
+
+        /* ================= INSIGHT ================= */
+
+        .insight {
+            margin-top: 18px;
+
+            background: #f5f8ff;
+
+            border: 1px solid #e0e9ff;
+
+            border-radius: 14px;
+
+            padding: 18px;
+
+            line-height: 1.75;
+
+            font-size: 14px;
+        }
+
+        .insight-title {
+            color: #1d4ed8;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        .insight strong {
+            color: #1d4ed8;
+        }
+
+        /* ================= RESEARCH THEMES ================= */
+
+        .section-title {
+            margin-top: 25px;
+
+            margin-bottom: 8px;
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+        .section-description {
+            color: #667085;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+
+            line-height: 1.7;
+        }
+
+        .bottom {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 16px;
+        }
+
+        .theme {
+            background: white;
+
+            border: 1px solid #e7eaf0;
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,.03);
+
+            transition: .2s;
+        }
+
+        .theme:hover {
+            transform: translateY(-3px);
+        }
+
+        .theme-number {
+            font-size: 26px;
+
+            font-weight: 750;
+
+            color: #2563eb;
+        }
+
+        .theme-title {
+            font-weight: 700;
+
+            margin: 7px 0;
+        }
+
+        .theme-text {
+            color: #667085;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        /* ================= SUMMARY ================= */
+
+        .summary {
+            margin-top: 20px;
+
+            background: #111827;
+
+            color: white;
+
+            border-radius: 18px;
+
+            padding: 28px 30px;
+
+            line-height: 1.8;
+        }
+
+        .summary h3 {
+            margin-top: 0;
+
+            margin-bottom: 15px;
+
+            font-size: 20px;
+        }
+
+        .summary p {
+            color: #d1d5db;
+
+            font-size: 14px;
+        }
+
+        .summary strong {
+            color: white;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+
+            color: #98a2b3;
+
+            font-size: 12px;
+
+            margin-top: 25px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 1000px) {
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .visual-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bottom {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width: 650px) {
+
+            .container {
+                width: 95%;
+            }
+
+            .header {
+                padding: 25px;
+            }
+
+            .header-top {
+                display: block;
+            }
+
+            .year {
+                display: inline-block;
+                margin-top: 15px;
+            }
+
+            .header h1 {
+                font-size: 25px;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #keywordChart {
+                height: 700px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
 <div class="container">
 
-    <!-- HEADER -->
+
+    <!-- ================= HEADER ================= -->
+
     <div class="header">
+
         <div class="header-top">
+
             <div>
-                <h1>ภาพรวมแนวโน้มงานวิจัยจาก Scopus</h1>
-                <h2>Scopus Research Landscape</h2>
+
+                <h1>
+                    ภาพรวมแนวโน้มงานวิจัยจาก Scopus
+                </h1>
+
+                <h2>
+                    Scopus Research Landscape
+                </h2>
+
             </div>
-            <div class="year">2025</div>
+
+            <div class="year">
+                2025
+            </div>
+
         </div>
 
+
         <p>
-            รายงานฉบับนี้นำเสนอการวิเคราะห์ข้อมูลบทความจากฐานข้อมูล
-            <strong>Scopus</strong> เพื่อศึกษาลักษณะของผลงานวิจัยในปี 2025
-            โดยมุ่งเน้นการวิเคราะห์ <strong>Document Types</strong>
-            และ <strong>Subject Areas</strong>
-            เพื่อให้เห็นภาพรวมของรูปแบบการเผยแพร่ผลงานและสาขาวิชาที่มีบทบาทสำคัญในชุดข้อมูล
+
+            หน้านี้นำเสนอผลการวิเคราะห์ข้อมูลบทความจากฐานข้อมูล
+            <strong>Scopus</strong>
+            จำนวน
+            <strong>300 publications</strong>
+
+            โดยวิเคราะห์
+            <strong>Author Keywords</strong>
+            และ
+            <strong>Document Type</strong>
+
+            เพื่อศึกษาว่า
+            <strong>งานวิจัยมีหัวข้อใดโดดเด่น</strong>
+            และมีการเผยแพร่ในรูปแบบใดมากที่สุด
+
         </p>
+
     </div>
 
-    <!-- KPI -->
+
+
+    <!-- ================= KPI ================= -->
+
     <div class="kpi-grid">
 
-        <div class="kpi">
-            <div class="kpi-label">จำนวนเอกสารทั้งหมด</div>
-            <div class="kpi-number">300</div>
-            <div class="kpi-note">Total Publications</div>
-        </div>
 
         <div class="kpi">
-            <div class="kpi-label">Article</div>
-            <div class="kpi-number">207</div>
-            <div class="kpi-note">Document Type</div>
+
+            <div class="kpi-label">
+                จำนวน Publications
+            </div>
+
+            <div class="kpi-number">
+                300
+            </div>
+
+            <div class="kpi-note">
+                Total Publications
+            </div>
+
         </div>
 
-        <div class="kpi">
-            <div class="kpi-label">Conference paper</div>
-            <div class="kpi-number">47</div>
-            <div class="kpi-note">Conference Publications</div>
-        </div>
 
         <div class="kpi">
-            <div class="kpi-label">Review</div>
-            <div class="kpi-number">37</div>
-            <div class="kpi-note">Review Articles</div>
+
+            <div class="kpi-label">
+                Article
+            </div>
+
+            <div class="kpi-number">
+                195
+            </div>
+
+            <div class="kpi-note">
+                65.0% ของทั้งหมด
+            </div>
+
         </div>
+
+
+        <div class="kpi">
+
+            <div class="kpi-label">
+                Conference Paper
+            </div>
+
+            <div class="kpi-number">
+                91
+            </div>
+
+            <div class="kpi-note">
+                30.3% ของทั้งหมด
+            </div>
+
+        </div>
+
+
+        <div class="kpi">
+
+            <div class="kpi-label">
+                Author Keywords
+            </div>
+
+            <div class="kpi-number">
+                254
+            </div>
+
+            <div class="kpi-note">
+                Publications ที่มี Keywords
+            </div>
+
+        </div>
+
 
     </div>
 
-    <!-- VISUALIZATION -->
+
+
+    <!-- ================= VISUALIZATION ================= -->
+
     <div class="visual-grid">
 
-        <!-- Chart 1 -->
+
+        <!-- ================= CHART 1 ================= -->
+
         <div class="card">
 
-            <div class="card-title">📄 ประเภทเอกสารที่พบในชุดข้อมูล</div>
+            <div class="card-title">
 
-            <div class="card-subtitle">
-                กราฟนี้แสดงจำนวนเอกสารแต่ละประเภทที่พบในฐานข้อมูล Scopus
-                เพื่อเปรียบเทียบสัดส่วนของรูปแบบการเผยแพร่ผลงานวิจัย
+                🔎 หัวข้อวิจัยที่พบมากที่สุด
+
             </div>
 
-            <div id="docChart"></div>
 
-            <div class="explain">
-                ผลการวิเคราะห์พบว่า <strong>Article</strong> เป็นประเภทเอกสารที่พบมากที่สุด
-                จำนวน <strong>207 รายการ</strong> คิดเป็นสัดส่วนหลักของข้อมูลทั้งหมด
-                รองลงมาคือ <strong>Conference paper</strong> และ <strong>Review</strong>
-                ซึ่งสะท้อนให้เห็นว่าการเผยแพร่ผลงานวิจัยในชุดข้อมูลนี้
-                มีลักษณะเน้นการตีพิมพ์ในวารสารวิชาการเป็นสำคัญ
+            <div class="card-subtitle">
+
+                Top 20 Author Keywords จากข้อมูล Scopus
+
+                <br>
+
+                กราฟนี้ช่วยตอบคำถามว่า
+                <strong>
+                    “งานวิจัยในชุดข้อมูลนี้กำลังศึกษาเรื่องอะไร?”
+                </strong>
+
+                <br>
+
+                จำนวนแสดงเป็นจำนวน Publications
+                ที่พบ Keyword นั้น
+
+            </div>
+
+
+            <div id="keywordChart"></div>
+
+
+            <div class="insight">
+
+                <div class="insight-title">
+                    💡 ประเด็นที่สังเกตได้
+                </div>
+
+                Keyword ที่พบมากที่สุดคือ
+                <strong>FPGA</strong>
+                จำนวน
+                <strong>14 publications</strong>
+
+                รองลงมาคือ
+                <strong>Machine Learning</strong>
+                จำนวน
+                <strong>12 publications</strong>
+
+                และ
+                <strong>Deep Learning</strong>
+                จำนวน
+                <strong>10 publications</strong>
+
+                ซึ่งสะท้อนให้เห็นถึงความสนใจด้าน
+                <strong>Hardware, AI และ Machine Learning</strong>
+                ในชุดข้อมูลนี้
+
             </div>
 
         </div>
 
-        <!-- Chart 2 -->
+
+
+        <!-- ================= CHART 2 ================= -->
+
         <div class="card">
 
-            <div class="card-title">📚 สาขาวิชาของงานวิจัย</div>
+            <div class="card-title">
+
+                📚 ประเภทการเผยแพร่ผลงานวิจัย
+
+            </div>
+
 
             <div class="card-subtitle">
-                แสดงสัดส่วนของ Subject Area ที่ปรากฏในชุดข้อมูล
-                เพื่อให้เห็นการกระจายตัวของสาขาวิชาที่เกี่ยวข้องกับงานวิจัย
+
+                Document Type Distribution
+
+                <br>
+
+                ใช้เพื่อดูว่า
+                <strong>
+                    “ผลงานวิจัยถูกเผยแพร่ในรูปแบบใด?”
+                </strong>
+
             </div>
 
-            <div id="subjectChart"></div>
 
-            <div class="explain">
-                งานวิจัยส่วนใหญ่อยู่ในกลุ่ม
-                <strong>General Computer Science</strong> และ
-                <strong>Hardware and Architecture</strong>
-                แสดงให้เห็นว่าชุดข้อมูลนี้มีความเชื่อมโยงระหว่าง
-                วิทยาการคอมพิวเตอร์ การประมวลผล และเทคโนโลยีด้านฮาร์ดแวร์
+            <div id="documentChart"></div>
+
+
+            <div class="insight">
+
+                <div class="insight-title">
+                    💡 ประเด็นที่สังเกตได้
+                </div>
+
+                จากทั้งหมด
+                <strong>300 publications</strong>
+
+                พบว่า
+                <strong>Article</strong>
+                มีจำนวนมากที่สุด
+                <strong>195 รายการ</strong>
+
+                หรือคิดเป็นประมาณ
+                <strong>65%</strong>
+
+                รองลงมาคือ
+                <strong>Conference paper</strong>
+                จำนวน
+                <strong>91 รายการ</strong>
+
+                หรือประมาณ
+                <strong>30.3%</strong>
+
             </div>
+
 
         </div>
+
 
     </div>
 
-    <!-- THEMES -->
-    <div class="section-title">🔬 ประเด็นสำคัญจากการวิเคราะห์ข้อมูล</div>
 
-    <div class="theme-grid">
 
-        <div class="theme">
-            <div class="theme-number">01</div>
-            <div class="theme-title">รูปแบบการเผยแพร่</div>
-            <div class="theme-text">
-                บทความวิชาการ (Article) เป็นรูปแบบการเผยแพร่หลักของชุดข้อมูล
-                สะท้อนการมุ่งเน้นงานวิจัยเชิงวารสาร
-            </div>
-        </div>
+    <!-- ================= RESEARCH THEMES ================= -->
 
-        <div class="theme">
-            <div class="theme-number">02</div>
-            <div class="theme-title">สาขาวิชาหลัก</div>
-            <div class="theme-text">
-                งานวิจัยกระจุกตัวในสาขา General Computer Science
-                และ Hardware and Architecture เป็นส่วนใหญ่
-            </div>
-        </div>
+    <div class="section-title">
 
-        <div class="theme">
-            <div class="theme-number">03</div>
-            <div class="theme-title">แนวโน้มด้านเทคโนโลยี</div>
-            <div class="theme-text">
-                ข้อมูลสะท้อนความเชื่อมโยงระหว่าง AI, Computing และ Hardware
-                ซึ่งเป็นแนวโน้มสำคัญของงานวิจัยปัจจุบัน
-            </div>
-        </div>
+        🔬 ประเด็นการวิจัยที่โดดเด่น
 
     </div>
 
-    <!-- SUMMARY -->
+
+    <div class="section-description">
+
+        จากการวิเคราะห์ Author Keywords สามารถมองเห็นกลุ่มหัวข้อ
+        ที่เกี่ยวข้องกับเทคโนโลยีคอมพิวเตอร์และปัญญาประดิษฐ์
+        โดยสามารถสรุปเป็นประเด็นสำคัญได้ดังนี้
+
+    </div>
+
+
+
+    <div class="bottom">
+
+
+        <div class="theme">
+
+            <div class="theme-number">
+                01
+            </div>
+
+            <div class="theme-title">
+                AI & Machine Learning
+            </div>
+
+            <div class="theme-text">
+
+                Machine Learning,
+                Deep Learning,
+                Neural Networks,
+                Edge AI
+
+                <br><br>
+
+                สะท้อนการนำ AI ไปใช้ร่วมกับระบบคอมพิวเตอร์
+                และการประมวลผลข้อมูล
+
+            </div>
+
+        </div>
+
+
+
+        <div class="theme">
+
+            <div class="theme-number">
+                02
+            </div>
+
+            <div class="theme-title">
+                Hardware & Computing
+            </div>
+
+            <div class="theme-text">
+
+                FPGA,
+                Hardware Accelerator,
+                Hardware Security,
+                Embedded Systems
+
+                <br><br>
+
+                แสดงความสนใจด้านการออกแบบและเพิ่มประสิทธิภาพ
+                ของระบบฮาร์ดแวร์
+
+            </div>
+
+        </div>
+
+
+
+        <div class="theme">
+
+            <div class="theme-number">
+                03
+            </div>
+
+            <div class="theme-title">
+                Emerging Technologies
+            </div>
+
+            <div class="theme-text">
+
+                Blockchain,
+                Internet of Things,
+                Transformer,
+                Neuromorphic Computing
+
+                <br><br>
+
+                สะท้อนการนำเทคโนโลยีใหม่มาประยุกต์ใช้
+                ในระบบคอมพิวเตอร์และ AI
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= KEY FINDINGS ================= -->
+
     <div class="summary">
 
-        <h3>📌 ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
+        <h3>
+            📌 ข้อค้นพบสำคัญจากการวิเคราะห์
+        </h3>
+
 
         <p>
-            การวิเคราะห์ข้อมูลจากฐานข้อมูล Scopus จำนวน
-            <strong>300 รายการ</strong>
-            แสดงให้เห็นว่าผลงานวิจัยส่วนใหญ่ถูกเผยแพร่ในรูปแบบ
-            <strong>Article</strong> ซึ่งเป็นประเภทเอกสารหลักของชุดข้อมูล
-            รองลงมาคือ <strong>Conference paper</strong> และ <strong>Review</strong>
+
+            จากข้อมูล Scopus จำนวน
+            <strong>300 publications</strong>
+
+            พบว่าผลงานส่วนใหญ่เป็น
+            <strong>Article จำนวน 195 รายการ</strong>
+            คิดเป็น
+            <strong>65%</strong>
+            ของข้อมูลทั้งหมด
+
         </p>
 
-        <p>
-            เมื่อพิจารณาด้านสาขาวิชา พบว่างานวิจัยมีการกระจุกตัวอยู่ใน
-            <strong>General Computer Science</strong>
-            และ <strong>Hardware and Architecture</strong>
-            สะท้อนให้เห็นถึงบทบาทสำคัญของวิทยาการคอมพิวเตอร์และเทคโนโลยีฮาร์ดแวร์
-            ในการพัฒนางานวิจัยร่วมสมัย
-        </p>
 
         <p>
-            โดยภาพรวม ชุดข้อมูลนี้ชี้ให้เห็นแนวโน้มของงานวิจัยที่ผสมผสานองค์ความรู้ด้าน
-            <strong>Computing, Artificial Intelligence และ Hardware Technology</strong>
-            ซึ่งเป็นทิศทางสำคัญของการวิจัยทางคอมพิวเตอร์ในปัจจุบัน
+
+            เมื่อพิจารณาด้านหัวข้อวิจัยจาก Author Keywords
+            พบว่า
+            <strong>FPGA</strong>
+            เป็น Keyword ที่พบมากที่สุด
+            จำนวน
+            <strong>14 publications</strong>
+
+            รองลงมาคือ
+            <strong>Machine Learning</strong>
+            จำนวน
+            <strong>12 publications</strong>
+
+            และ
+            <strong>Deep Learning</strong>
+            จำนวน
+            <strong>10 publications</strong>
+
+        </p>
+
+
+        <p>
+
+            ภาพรวมจึงแสดงให้เห็นว่า
+            งานวิจัยในชุดข้อมูลนี้มีความสนใจทั้งด้าน
+            <strong>Artificial Intelligence</strong>
+            และ
+            <strong>Computer Hardware</strong>
+
+            โดยเฉพาะการนำ Machine Learning และ Deep Learning
+            มาประยุกต์ใช้ร่วมกับระบบ Hardware
+            เช่น FPGA, Edge AI และ Hardware Accelerator
+
+        </p>
+
+
+        <p>
+
+            <strong>สรุป:</strong>
+
+            แนวโน้มของงานวิจัยมีลักษณะเป็นการเชื่อมโยงระหว่าง
+            <strong>AI + Computing + Hardware</strong>
+            ซึ่งสะท้อนการพัฒนาเทคโนโลยีที่ต้องการทั้ง
+            ความสามารถในการประมวลผลของ AI
+            และประสิทธิภาพของระบบ Hardware
+
         </p>
 
     </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
 
     <div class="footer">
+
         Scopus Research Visualization • 2025
+
+        <br>
+
+        Data source: Scopus CSV Export
+
     </div>
+
 
 </div>
 
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
 <script>
 
-// -------------------- Chart 1 --------------------
+
+/* =====================================================
+   VISUALIZATION 1
+   TOP 20 AUTHOR KEYWORDS
+
+   ข้อมูลจาก CSV ชุดใหม่
+===================================================== */
+
+
+const keywords = [
+
+    "FPGA",
+    "Machine Learning",
+    "Deep Learning",
+    "Hardware Security",
+    "Edge AI",
+    "Edge Computing",
+    "Neural Networks",
+    "Blockchain",
+    "Internet of Things (IoT)",
+    "Hardware Accelerator",
+    "Hardware-software Co-design",
+    "Anomaly Detection",
+    "Neuromorphic Computing",
+    "Deep Neural Networks",
+    "Systolic Array",
+    "Embedded Systems",
+    "Performance Optimization",
+    "Transformer",
+    "Field Programmable Gate Arrays",
+    "Depthwise Separable Convolution"
+
+];
+
+
+const keywordCounts = [
+
+    14,
+    12,
+    10,
+    7,
+    6,
+    6,
+    6,
+    5,
+    5,
+    5,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    3,
+    3,
+    3
+
+];
+
+
+
 Plotly.newPlot(
-    'docChart',
+
+    "keywordChart",
+
     [{
-        x:['Article','Conference paper','Review','Editorial','Note'],
-        y:[207,47,37,5,4],
-        type:'bar',
-        text:[207,47,37,5,4],
-        textposition:'outside',
-        marker:{
-            color:['#2563eb','#3b82f6','#60a5fa','#93c5fd','#bfdbfe']
-        }
+
+        x: keywordCounts
+            .slice()
+            .reverse(),
+
+        y: keywords
+            .slice()
+            .reverse(),
+
+        type: "bar",
+
+        orientation: "h",
+
+        text: keywordCounts
+            .slice()
+            .reverse(),
+
+        textposition: "outside",
+
+        hovertemplate:
+
+            "<b>%{y}</b>" +
+
+            "<br>จำนวน Publications: %{x}" +
+
+            "<extra></extra>"
+
     }],
+
     {
-        margin:{t:20,l:60,r:20,b:70},
-        yaxis:{title:'จำนวนเอกสาร'},
-        xaxis:{title:'Document Type'},
-        paper_bgcolor:'white',
-        plot_bgcolor:'white'
+
+        margin: {
+
+            l: 210,
+
+            r: 55,
+
+            t: 20,
+
+            b: 55
+
+        },
+
+        xaxis: {
+
+            title:
+                "จำนวน Publications",
+
+            gridcolor:
+                "#e8ebf0",
+
+            zeroline:
+                false
+
+        },
+
+        yaxis: {
+
+            automargin:
+                true
+
+        },
+
+        paper_bgcolor:
+            "white",
+
+        plot_bgcolor:
+            "white",
+
+        font: {
+
+            family:
+                "Segoe UI, Arial",
+
+            size:
+                12
+
+        }
+
     },
-    {responsive:true, displaylogo:false}
+
+    {
+
+        responsive:
+            true,
+
+        displaylogo:
+            false
+
+    }
+
 );
 
-// -------------------- Chart 2 --------------------
+
+
+/* =====================================================
+   VISUALIZATION 2
+
+   DOCUMENT TYPE DISTRIBUTION
+
+   ข้อมูลจริงจาก CSV ชุดใหม่
+===================================================== */
+
+
+const documentTypes = [
+
+    "Article",
+    "Conference paper",
+    "Review",
+    "Erratum",
+    "Conference review",
+    "Note",
+    "Short survey"
+
+];
+
+
+const documentCounts = [
+
+    195,
+    91,
+    8,
+    2,
+    2,
+    1,
+    1
+
+];
+
+
+
 Plotly.newPlot(
-    'subjectChart',
+
+    "documentChart",
+
     [{
-        labels:['General Computer Science','Hardware and Architecture'],
-        values:[60,40],
-        type:'pie',
-        hole:0.55,
-        textinfo:'label+percent',
-        marker:{
-            colors:['#2563eb','#60a5fa']
-        }
+
+        labels:
+            documentTypes,
+
+        values:
+            documentCounts,
+
+        type:
+            "pie",
+
+        hole:
+            0.60,
+
+        textinfo:
+            "label+percent",
+
+        textposition:
+            "outside",
+
+        hovertemplate:
+
+            "<b>%{label}</b>" +
+
+            "<br>จำนวน: %{value} Publications" +
+
+            "<br>สัดส่วน: %{percent}" +
+
+            "<extra></extra>"
+
     }],
+
     {
-        margin:{t:20,l:20,r:20,b:20},
-        showlegend:false,
-        paper_bgcolor:'white'
+
+        margin: {
+
+            l: 10,
+
+            r: 10,
+
+            t: 20,
+
+            b: 20
+
+        },
+
+        showlegend:
+            false,
+
+        paper_bgcolor:
+            "white",
+
+        plot_bgcolor:
+            "white",
+
+        font: {
+
+            family:
+                "Segoe UI, Arial",
+
+            size:
+                12
+
+        }
+
     },
-    {responsive:true, displaylogo:false}
+
+    {
+
+        responsive:
+            true,
+
+        displaylogo:
+            false
+
+    }
+
 );
+
 
 </script>
 
+
 </body>
+
 </html>
