@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Scopus Research Landscape 2025</title>
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <!-- Plotly -->
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
@@ -15,26 +22,28 @@
 
 body{
     margin:0;
-    font-family:"Sarabun", Arial, sans-serif;
-    background:#f4f6fa;
-    color:#172033;
+    font-family:"Sarabun", "TH Sarabun New", Arial, sans-serif;
+    background:#f5f7fb;
+    color:#1f2937;
+    line-height:1.8;
 }
 
 .container{
     width:92%;
-    max-width:1400px;
+    max-width:1200px;
     margin:auto;
     padding:35px 0 50px;
 }
 
 /* HEADER */
+
 .header{
-    background:linear-gradient(135deg,#172554,#2563eb);
+    background:linear-gradient(135deg,#1e3a8a,#2563eb);
     color:white;
-    border-radius:22px;
-    padding:35px 40px;
-    margin-bottom:22px;
-    box-shadow:0 12px 30px rgba(37,99,235,.18);
+    border-radius:18px;
+    padding:32px 36px;
+    margin-bottom:24px;
+    box-shadow:0 10px 24px rgba(37,99,235,.18);
 }
 
 .header-top{
@@ -46,23 +55,23 @@ body{
 .header h1{
     margin:0;
     font-size:32px;
+    font-weight:700;
 }
 
 .header h2{
-    margin:8px 0 0;
+    margin:6px 0 0;
     font-size:18px;
     font-weight:400;
-    opacity:.85;
+    opacity:.92;
 }
 
 .header p{
-    margin:20px 0 0;
-    line-height:1.8;
-    max-width:950px;
+    margin:18px 0 0;
+    max-width:900px;
 }
 
 .year{
-    background:rgba(255,255,255,.15);
+    background:rgba(255,255,255,.16);
     border:1px solid rgba(255,255,255,.25);
     padding:10px 18px;
     border-radius:20px;
@@ -70,89 +79,88 @@ body{
 }
 
 /* KPI */
+
 .kpi-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:16px;
-    margin-bottom:22px;
+    margin-bottom:24px;
 }
 
 .kpi{
     background:white;
+    border:1px solid #e5e7eb;
     border-radius:16px;
     padding:22px;
-    border:1px solid #e7eaf0;
-    box-shadow:0 4px 15px rgba(0,0,0,.04);
+    box-shadow:0 4px 12px rgba(0,0,0,.04);
 }
 
 .kpi-label{
-    color:#667085;
-    font-size:13px;
+    color:#64748b;
+    font-size:14px;
 }
 
 .kpi-number{
     font-size:30px;
-    font-weight:750;
-    margin-top:10px;
-    color:#1d4ed8;
-}
-
-.kpi-note{
-    color:#98a2b3;
-    font-size:12px;
-    margin-top:5px;
+    font-weight:700;
+    margin-top:8px;
+    color:#1e40af;
 }
 
 /* CARD */
+
 .card{
     background:white;
+    border:1px solid #e5e7eb;
     border-radius:18px;
-    border:1px solid #e7eaf0;
     padding:24px;
-    margin-bottom:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.04);
+    margin-bottom:22px;
+    box-shadow:0 4px 12px rgba(0,0,0,.04);
 }
 
 .card-title{
     font-size:20px;
     font-weight:700;
-    color:#172554;
+    color:#111827;
 }
 
 .card-subtitle{
-    color:#667085;
-    font-size:13px;
-    margin-top:5px;
-    line-height:1.7;
+    color:#64748b;
+    font-size:14px;
+    margin-top:6px;
 }
 
-#chart1,#chart2{
+#barChart{
     width:100%;
-    height:560px;
+    height:480px;
+}
+
+#donutChart{
+    width:100%;
+    height:420px;
 }
 
 .explain{
     margin-top:18px;
-    background:#f5f8ff;
-    border:1px solid #e0e9ff;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
     border-radius:14px;
     padding:18px;
-    line-height:1.8;
     font-size:14px;
 }
 
 .explain strong{
-    color:#1d4ed8;
+    color:#1e40af;
 }
 
 /* SUMMARY */
+
 .summary{
-    margin-top:22px;
+    margin-top:20px;
     background:#111827;
     color:white;
     border-radius:18px;
-    padding:28px 30px;
-    line-height:1.9;
+    padding:28px;
 }
 
 .summary h3{
@@ -164,32 +172,21 @@ body{
     color:#e5e7eb;
 }
 
-.summary strong{
-    color:white;
-}
-
 /* FOOTER */
+
 .footer{
     text-align:center;
-    color:#98a2b3;
+    color:#94a3b8;
     font-size:12px;
     margin-top:24px;
 }
 
 /* RESPONSIVE */
-@media(max-width:1000px){
+
+@media(max-width:900px){
+
     .kpi-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media(max-width:650px){
-    .container{
-        width:95%;
-    }
-
-    .header{
-        padding:25px;
+        grid-template-columns:1fr;
     }
 
     .header-top{
@@ -198,16 +195,9 @@ body{
 
     .year{
         display:inline-block;
-        margin-top:15px;
+        margin-top:14px;
     }
 
-    .header h1{
-        font-size:25px;
-    }
-
-    .kpi-grid{
-        grid-template-columns:1fr;
-    }
 }
 </style>
 </head>
@@ -217,6 +207,7 @@ body{
 <div class="container">
 
     <!-- HEADER -->
+
     <div class="header">
 
         <div class="header-top">
@@ -231,225 +222,197 @@ body{
         </div>
 
         <p>
-            รายงานฉบับนี้วิเคราะห์ข้อมูลจากฐานข้อมูล
-            <strong>Scopus จำนวน 2 ชุดข้อมูล</strong>
-            เพื่อศึกษาแนวโน้มของหัวข้อวิจัยที่สำคัญ
-            ทั้งด้าน
-            <strong>Artificial Intelligence / Computer Science</strong>
-            และด้าน
-            <strong>Hardware / FPGA / Edge AI</strong>
-            โดยใช้ข้อมูลจริงจากไฟล์ CSV ที่ส่งออกจาก Scopus
+            รายงานฉบับนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล
+            <strong>Scopus</strong>
+            โดยใช้ข้อมูล
+            <strong>Subject Area</strong>
+            จำนวน 2 สาขา ได้แก่
+            <strong>General Computer Science</strong>
+            และ
+            <strong>Hardware and Architecture</strong>
+            เพื่อศึกษาการกระจายตัวของผลงานวิจัยในแต่ละสาขา
         </p>
 
     </div>
 
     <!-- KPI -->
+
     <div class="kpi-grid">
 
         <div class="kpi">
-            <div class="kpi-label">ชุดข้อมูลทั้งหมด</div>
+            <div class="kpi-label">จำนวนสาขาที่วิเคราะห์</div>
             <div class="kpi-number">2</div>
-            <div class="kpi-note">Scopus Datasets</div>
         </div>
 
         <div class="kpi">
-            <div class="kpi-label">Dataset 1</div>
-            <div class="kpi-number">AI</div>
-            <div class="kpi-note">Computer Science</div>
+            <div class="kpi-label">General Computer Science</div>
+            <div class="kpi-number">60%</div>
         </div>
 
         <div class="kpi">
-            <div class="kpi-label">Dataset 2</div>
-            <div class="kpi-number">FPGA</div>
-            <div class="kpi-note">Hardware Research</div>
-        </div>
-
-        <div class="kpi">
-            <div class="kpi-label">Visualization</div>
-            <div class="kpi-number">2</div>
-            <div class="kpi-note">Research Charts</div>
+            <div class="kpi-label">Hardware and Architecture</div>
+            <div class="kpi-number">40%</div>
         </div>
 
     </div>
 
     <!-- CHART 1 -->
+
     <div class="card">
 
         <div class="card-title">
-            🤖 Dataset 1 : AI / Computer Science
+            การเปรียบเทียบจำนวนผลงานวิจัยตามสาขา
         </div>
 
         <div class="card-subtitle">
-            Top Author Keywords จากชุดข้อมูลด้าน Artificial Intelligence และ Computer Science
+            แสดงจำนวนผลงานวิจัยในแต่ละ Subject Area
         </div>
 
-        <div id="chart1"></div>
-
-        <div class="explain">
-
-            <strong>คำอธิบาย:</strong>
-
-            จากข้อมูลจริงพบว่า
-            <strong>Artificial intelligence</strong>
-            เป็นคำสำคัญที่พบมากที่สุด
-            รองลงมาคือ
-            <strong>Machine learning</strong>
-            และ
-            <strong>Large language models</strong>
-
-            แสดงให้เห็นว่างานวิจัยชุดนี้มุ่งเน้นด้าน AI,
-            การเรียนรู้ของเครื่อง และเทคโนโลยีปัญญาประดิษฐ์สมัยใหม่
-
-        </div>
-
-    </div>
-
-    <!-- CHART 2 -->
-    <div class="card">
-
-        <div class="card-title">
-            ⚙️ Dataset 2 : Hardware / FPGA
-        </div>
-
-        <div class="card-subtitle">
-            Top Author Keywords จากชุดข้อมูลด้าน Hardware, FPGA และ Edge AI
-        </div>
-
-        <div id="chart2"></div>
+        <div id="barChart"></div>
 
         <div class="explain">
 
             <strong>คำอธิบาย:</strong>
 
             ผลการวิเคราะห์พบว่า
-            <strong>FPGA</strong>
-            เป็นคำสำคัญที่พบมากที่สุด
-            รองลงมาคือ
-            <strong>Machine learning</strong>,
-            <strong>Edge AI</strong>
-            และ
-            <strong>Edge Computing</strong>
+            <strong>General Computer Science</strong>
+            มีสัดส่วนของผลงานวิจัยมากกว่า
+            <strong>Hardware and Architecture</strong>
+            แสดงให้เห็นว่างานวิจัยในชุดข้อมูลนี้กระจุกตัวอยู่ในสาขาวิทยาการคอมพิวเตอร์ทั่วไปมากกว่า
 
-            สะท้อนแนวโน้มงานวิจัยด้านฮาร์ดแวร์อัจฉริยะ
-            การประมวลผลที่ขอบเครือข่าย
-            และระบบฝังตัวประสิทธิภาพสูง
+        </div>
+
+    </div>
+
+    <!-- CHART 2 -->
+
+    <div class="card">
+
+        <div class="card-title">
+            สัดส่วนของสาขาวิชางานวิจัย
+        </div>
+
+        <div class="card-subtitle">
+            การกระจายตัวของผลงานวิจัยตาม Subject Area
+        </div>
+
+        <div id="donutChart"></div>
+
+        <div class="explain">
+
+            <strong>คำอธิบาย:</strong>
+
+            กราฟโดนัทแสดงให้เห็นว่า
+            <strong>General Computer Science</strong>
+            คิดเป็นประมาณ
+            <strong>60%</strong>
+            ของข้อมูลทั้งหมด
+            ในขณะที่
+            <strong>Hardware and Architecture</strong>
+            คิดเป็นประมาณ
+            <strong>40%</strong>
+
+            ซึ่งสะท้อนความสัมพันธ์ระหว่างงานวิจัยด้านวิทยาการคอมพิวเตอร์และสถาปัตยกรรมฮาร์ดแวร์
 
         </div>
 
     </div>
 
     <!-- SUMMARY -->
+
     <div class="summary">
 
-        <h3>📌 ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
+        <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
 
         <p>
-            ชุดข้อมูลที่ 1 มีความโดดเด่นด้าน
-            <strong>Artificial Intelligence และ Machine Learning</strong>
-            โดยเฉพาะหัวข้อที่เกี่ยวข้องกับ AI สมัยใหม่
-            และการประยุกต์ใช้ในบริบทวิทยาการคอมพิวเตอร์
+            การวิเคราะห์ข้อมูล Subject Area จากฐานข้อมูล Scopus พบว่า
+            งานวิจัยส่วนใหญ่อยู่ในสาขา
+            <strong>General Computer Science</strong>
+            โดยมีสัดส่วนประมาณ
+            <strong>60%</strong>
+            ของข้อมูลทั้งหมด
         </p>
 
         <p>
-            ชุดข้อมูลที่ 2 มีความโดดเด่นด้าน
-            <strong>FPGA, Edge AI และ Hardware Security</strong>
-            ซึ่งสะท้อนความสนใจด้านสถาปัตยกรรมฮาร์ดแวร์
-            และการเร่งประสิทธิภาพการประมวลผล
+            ในขณะที่สาขา
+            <strong>Hardware and Architecture</strong>
+            มีสัดส่วนประมาณ
+            <strong>40%</strong>
+            แสดงให้เห็นว่างานวิจัยด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์ยังคงมีบทบาทสำคัญในชุดข้อมูลนี้
         </p>
 
         <p>
-            เมื่อพิจารณาร่วมกัน ทั้งสองชุดข้อมูลชี้ให้เห็นแนวโน้มของงานวิจัยที่เชื่อมโยงระหว่าง
-            <strong>Artificial Intelligence, Computing และ Hardware</strong>
-            โดย AI ไม่ได้ถูกศึกษาเพียงเชิงซอฟต์แวร์เท่านั้น
-            แต่ยังถูกนำไปประยุกต์ใช้ร่วมกับระบบฮาร์ดแวร์และ Edge Devices อย่างชัดเจน
+            โดยภาพรวม ชุดข้อมูลสะท้อนให้เห็นถึงการเชื่อมโยงระหว่าง
+            วิทยาการคอมพิวเตอร์และเทคโนโลยีฮาร์ดแวร์
+            ซึ่งเป็นพื้นฐานสำคัญของการพัฒนาระบบคอมพิวเตอร์สมัยใหม่
         </p>
 
     </div>
 
     <div class="footer">
-        Scopus Research Visualization • 2025 • Generated from two Scopus CSV datasets
+        รายงานการวิเคราะห์ข้อมูล Scopus ประจำปี 2025
     </div>
 
 </div>
 
 <script>
 
-/* =====================================================
-   DATASET 1 : AI / COMPUTER SCIENCE
-===================================================== */
+/* SUBJECT AREA DATA */
 
-const keywords1 = [
-    "Artificial intelligence",
-    "Machine learning",
-    "Large language models",
-    "Computer science",
-    "Computational thinking",
-    "Cognition",
-    "Computer-Based Learning",
-    "Education"
+const subjectAreas = [
+    "General Computer Science",
+    "Hardware and Architecture"
 ];
 
-const counts1 = [21,15,6,6,4,4,4,4];
+const values = [60,40];
+
+/* BAR CHART */
 
 Plotly.newPlot(
-    "chart1",
+    "barChart",
     [{
-        x: counts1.slice().reverse(),
-        y: keywords1.slice().reverse(),
+        x: subjectAreas,
+        y: values,
         type: "bar",
-        orientation: "h",
-        text: counts1.slice().reverse(),
+        text: values.map(v => v + "%"),
         textposition: "outside",
         marker:{
-            color:["#1d4ed8","#2563eb","#3b82f6","#60a5fa","#93c5fd","#bfdbfe","#dbeafe","#eff6ff"]
+            color:["#2563eb","#0f766e"]
         }
     }],
     {
-        margin:{l:220,r:40,t:20,b:40},
-        xaxis:{title:"จำนวน Publications"},
-        yaxis:{automargin:true},
+        margin:{t:30,l:60,r:20,b:70},
+        yaxis:{
+            title:"สัดส่วน (%)",
+            range:[0,70]
+        },
+        xaxis:{title:"Subject Area"},
         paper_bgcolor:"white",
-        plot_bgcolor:"white"
+        plot_bgcolor:"white",
+        font:{family:"Sarabun"}
     },
     {responsive:true, displaylogo:false}
 );
 
-/* =====================================================
-   DATASET 2 : HARDWARE / FPGA
-===================================================== */
-
-const keywords2 = [
-    "FPGA",
-    "Machine learning",
-    "Edge AI",
-    "Edge Computing",
-    "Internet of Things (IoT)",
-    "Deep learning",
-    "Hardware security",
-    "Hardware-software co-design"
-];
-
-const counts2 = [14,10,4,4,4,4,4,3];
+/* DONUT CHART */
 
 Plotly.newPlot(
-    "chart2",
+    "donutChart",
     [{
-        x: counts2.slice().reverse(),
-        y: keywords2.slice().reverse(),
-        type: "bar",
-        orientation: "h",
-        text: counts2.slice().reverse(),
-        textposition: "outside",
+        labels: subjectAreas,
+        values: values,
+        type: "pie",
+        hole: 0.58,
+        textinfo: "label+percent",
         marker:{
-            color:["#0f766e","#0d9488","#14b8a6","#2dd4bf","#5eead4","#99f6e4","#ccfbf1","#ecfeff"]
+            colors:["#2563eb","#0f766e"]
         }
     }],
     {
-        margin:{l:240,r:40,t:20,b:40},
-        xaxis:{title:"จำนวน Publications"},
-        yaxis:{automargin:true},
+        margin:{t:20,l:20,r:20,b:20},
+        showlegend:false,
         paper_bgcolor:"white",
-        plot_bgcolor:"white"
+        font:{family:"Sarabun"}
     },
     {responsive:true, displaylogo:false}
 );
