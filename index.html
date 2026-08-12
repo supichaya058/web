@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="th">
 <head>
 <meta charset="UTF-8">
@@ -34,8 +33,6 @@ body{
     padding:32px 0 60px;
 }
 
-/* NAV */
-
 .nav{
     display:flex;
     justify-content:center;
@@ -62,8 +59,6 @@ body{
     border-color:#8b5cf6;
 }
 
-/* CARD */
-
 .glass{
     background:rgba(17,24,39,.55);
     backdrop-filter:blur(18px);
@@ -75,15 +70,8 @@ body{
         inset 0 1px 0 rgba(255,255,255,.05);
 }
 
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-/* HERO */
+.page{display:none;}
+.page.active{display:block;}
 
 .hero{
     padding:48px;
@@ -106,8 +94,6 @@ body{
     color:#d1d5db;
     max-width:920px;
 }
-
-/* SECTION */
 
 .section{
     padding:30px;
@@ -133,8 +119,6 @@ body{
 .section p{
     color:#d1d5db;
 }
-
-/* CARDS */
 
 .cards{
     display:grid;
@@ -170,8 +154,6 @@ body{
     font-family:"Sarabun",sans-serif;
 }
 
-/* CHART */
-
 .chart{
     height:620px;
     margin-top:18px;
@@ -190,8 +172,6 @@ body{
     color:#f5d0fe;
 }
 
-/* BACK */
-
 .back{
     margin-top:20px;
 }
@@ -204,8 +184,6 @@ body{
     border-radius:12px;
     cursor:pointer;
 }
-
-/* FOOTER */
 
 .footer{
     text-align:center;
@@ -237,170 +215,155 @@ body{
     }
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-```
-<!-- NAVIGATION -->
-<div class="nav">
-    <button class="active" onclick="showPage('home',this)">หน้าแรก</button>
-    <button onclick="showPage('general',this)">General Computer Science</button>
-    <button onclick="showPage('hardware',this)">Hardware and Architecture</button>
-</div>
+    <!-- NAVIGATION -->
+    <div class="nav">
+        <button class="active" onclick="showPage('home',this)">หน้าแรก</button>
+        <button onclick="showPage('general',this)">General Computer Science</button>
+        <button onclick="showPage('hardware',this)">Hardware and Architecture</button>
+    </div>
 
-<!-- HOME PAGE -->
-<div id="home" class="page active">
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
 
-    <section class="hero glass">
+        <section class="hero glass">
 
-        <h1>การวิเคราะห์หัวข้อวิจัยจากฐานข้อมูล Scopus</h1>
-        <h2>Scopus Research Topic Analysis 2025</h2>
-
-        <p>
-            หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
-            เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
-            <strong>General Computer Science</strong> และ
-            <strong>Hardware and Architecture</strong>
-            โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
-            เพื่อให้เห็นทิศทางของงานวิจัยและประเด็นที่ได้รับความสนใจในแต่ละสาขาอย่างชัดเจน
-        </p>
-
-    </section>
-
-    <section class="section glass">
-
-        <h3>ภาพรวมการวิเคราะห์</h3>
-
-        <p>
-            การวิเคราะห์ครั้งนี้ใช้ข้อมูลจากสองสาขาวิชาที่เป็นอิสระต่อกัน
-            และพิจารณาความถี่ของ Author Keywords เพื่อระบุหัวข้อที่ปรากฏบ่อยที่สุดในงานวิจัยของแต่ละสาขา
-        </p>
-
-        <div class="cards">
-
-            <div class="card">
-                <h4>General Computer Science</h4>
-                <p>
-                    สาขานี้มีความโดดเด่นด้าน Artificial Intelligence,
-                    Machine Learning และ Large Language Models
-                </p>
-                <button onclick="showPage('general')">ดูรายละเอียด</button>
-            </div>
-
-            <div class="card">
-                <h4>Hardware and Architecture</h4>
-                <p>
-                    สาขานี้มีความโดดเด่นด้าน FPGA, Edge AI,
-                    Edge Computing และสถาปัตยกรรมฮาร์ดแวร์สมัยใหม่
-                </p>
-                <button onclick="showPage('hardware')">ดูรายละเอียด</button>
-            </div>
-
-        </div>
-
-    </section>
-
-    <section class="section glass">
-
-        <h3>ข้อค้นพบสำคัญ</h3>
-
-        <p>
-            ผลการวิเคราะห์แสดงให้เห็นว่าทั้งสองสาขาวิชามีความเชื่อมโยงกับเทคโนโลยีปัญญาประดิษฐ์อย่างชัดเจน
-            โดยสาขา General Computer Science เน้นการพัฒนาอัลกอริทึมและโมเดล AI
-            ส่วนสาขา Hardware and Architecture เน้นการพัฒนาโครงสร้างพื้นฐานและฮาร์ดแวร์ที่รองรับการประมวลผล AI
-        </p>
-
-    </section>
-
-</div>
-
-<!-- GENERAL PAGE -->
-<div id="general" class="page">
-
-    <section class="hero glass">
-
-        <h1>General Computer Science</h1>
-        <h2>การวิเคราะห์หัวข้อวิจัย</h2>
-
-        <p>
-            หน้านี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา General Computer Science
-            โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
-        </p>
-
-    </section>
-
-    <section class="section glass">
-
-        <div id="chart1" class="chart"></div>
-
-        <div class="interpret">
-
-            <h4>การตีความผลลัพธ์</h4>
+            <h1>การวิเคราะห์หัวข้อวิจัยจากฐานข้อมูล Scopus</h1>
+            <h2>Scopus Research Topic Analysis 2025</h2>
 
             <p>
-                หัวข้อที่โดดเด่นที่สุดคือ Artificial Intelligence รองลงมาคือ
-                Machine Learning และ Large Language Models สะท้อนให้เห็นว่า
-                งานวิจัยด้านวิทยาการคอมพิวเตอร์ทั่วไปให้ความสำคัญกับเทคโนโลยี AI อย่างชัดเจน
+                หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
+                เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
+                <strong>General Computer Science</strong> และ
+                <strong>Hardware and Architecture</strong>
+                โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
+                เพื่อให้เห็นทิศทางของงานวิจัยและประเด็นที่ได้รับความสนใจในแต่ละสาขาอย่างชัดเจน
             </p>
 
-        </div>
+        </section>
 
-        <div class="back">
-            <button onclick="showPage('home')">← กลับหน้าแรก</button>
-        </div>
+        <section class="section glass">
 
-    </section>
-
-</div>
-
-<!-- HARDWARE PAGE -->
-<div id="hardware" class="page">
-
-    <section class="hero glass">
-
-        <h1>Hardware and Architecture</h1>
-        <h2>การวิเคราะห์หัวข้อวิจัย</h2>
-
-        <p>
-            หน้านี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา Hardware and Architecture
-            ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
-            และระบบประมวลผลสมัยใหม่
-        </p>
-
-    </section>
-
-    <section class="section glass">
-
-        <div id="chart2" class="chart"></div>
-
-        <div class="interpret">
-
-            <h4>การตีความผลลัพธ์</h4>
+            <h3>ภาพรวมการวิเคราะห์</h3>
 
             <p>
-                หัวข้อที่พบมากที่สุดคือ FPGA รองลงมาคือ Machine Learning,
-                Edge AI และ Edge Computing แสดงถึงความสำคัญของฮาร์ดแวร์ประสิทธิภาพสูง
-                ที่รองรับการประมวลผล AI ในอุปกรณ์ปลายทาง
+                การวิเคราะห์ครั้งนี้ใช้ข้อมูลจากสองสาขาวิชาที่เป็นอิสระต่อกัน
+                และพิจารณาความถี่ของ Author Keywords เพื่อระบุหัวข้อที่ปรากฏบ่อยที่สุดในงานวิจัยของแต่ละสาขา
             </p>
 
-        </div>
+            <div class="cards">
 
-        <div class="back">
-            <button onclick="showPage('home')">← กลับหน้าแรก</button>
-        </div>
+                <div class="card">
+                    <h4>General Computer Science</h4>
+                    <p>
+                        สาขานี้มีความโดดเด่นด้าน Artificial Intelligence,
+                        Machine Learning และ Large Language Models
+                    </p>
+                    <button onclick="showPage('general')">ดูรายละเอียด</button>
+                </div>
 
-    </section>
+                <div class="card">
+                    <h4>Hardware and Architecture</h4>
+                    <p>
+                        สาขานี้มีความโดดเด่นด้าน FPGA, Edge AI,
+                        Edge Computing และสถาปัตยกรรมฮาร์ดแวร์สมัยใหม่
+                    </p>
+                    <button onclick="showPage('hardware')">ดูรายละเอียด</button>
+                </div>
 
-</div>
+            </div>
 
-<div class="footer">
-    Scopus Research Topic Analysis 2025
-</div>
-```
+        </section>
+
+    </div>
+
+    <!-- GENERAL PAGE -->
+    <div id="general" class="page">
+
+        <section class="hero glass">
+
+            <h1>General Computer Science</h1>
+            <h2>การวิเคราะห์หัวข้อวิจัย</h2>
+
+            <p>
+                หน้านี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา General Computer Science
+                โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
+            </p>
+
+        </section>
+
+        <section class="section glass">
+
+            <div id="chart1" class="chart"></div>
+
+            <div class="interpret">
+
+                <h4>การตีความผลลัพธ์</h4>
+
+                <p>
+                    หัวข้อที่โดดเด่นที่สุดคือ Artificial Intelligence รองลงมาคือ
+                    Machine Learning และ Large Language Models สะท้อนให้เห็นว่า
+                    งานวิจัยด้านวิทยาการคอมพิวเตอร์ทั่วไปให้ความสำคัญกับเทคโนโลยี AI อย่างชัดเจน
+                </p>
+
+            </div>
+
+            <div class="back">
+                <button onclick="showPage('home')">← กลับหน้าแรก</button>
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- HARDWARE PAGE -->
+    <div id="hardware" class="page">
+
+        <section class="hero glass">
+
+            <h1>Hardware and Architecture</h1>
+            <h2>การวิเคราะห์หัวข้อวิจัย</h2>
+
+            <p>
+                หน้านี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา Hardware and Architecture
+                ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
+                และระบบประมวลผลสมัยใหม่
+            </p>
+
+        </section>
+
+        <section class="section glass">
+
+            <div id="chart2" class="chart"></div>
+
+            <div class="interpret">
+
+                <h4>การตีความผลลัพธ์</h4>
+
+                <p>
+                    หัวข้อที่พบมากที่สุดคือ FPGA รองลงมาคือ Machine Learning,
+                    Edge AI และ Edge Computing แสดงถึงความสำคัญของฮาร์ดแวร์ประสิทธิภาพสูง
+                    ที่รองรับการประมวลผล AI ในอุปกรณ์ปลายทาง
+                </p>
+
+            </div>
+
+            <div class="back">
+                <button onclick="showPage('home')">← กลับหน้าแรก</button>
+            </div>
+
+        </section>
+
+    </div>
+
+    <div class="footer">
+        Scopus Research Topic Analysis 2025
+    </div>
 
 </div>
 
@@ -417,20 +380,16 @@ function showPage(pageId,btn){
     if(btn){
         btn.classList.add('active');
     }else{
-        const map = {
-            home:0,
-            general:1,
-            hardware:2
-        };
+        const map = { home:0, general:1, hardware:2 };
         document.querySelectorAll('.nav button')[map[pageId]].classList.add('active');
     }
 
     window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* ---------- CHART 1 ---------- */
+/* ---------- CHART 1 : BAR CHART ---------- */
 
-const y1 = [
+const labels1 = [
     "Education",
     "Computer-Based Learning",
     "Cognition",
@@ -441,60 +400,41 @@ const y1 = [
     "Artificial intelligence"
 ];
 
-const x1 = [4,4,4,4,6,6,15,21];
+const values1 = [4,4,4,4,6,6,15,21];
 
-const traces1 = [];
-
-for(let i=0;i<x1.length;i++){
-    traces1.push({
-        type:"scatter",
-        mode:"lines",
-        x:[0,x1[i]],
-        y:[y1[i],y1[i]],
-        line:{color:"#64748b",width:3},
-        hoverinfo:"skip",
-        showlegend:false
-    });
-}
-
-traces1.push({
-    type:"scatter",
-    mode:"markers+text",
-    x:x1,
-    y:y1,
+Plotly.newPlot("chart1", [{
+    type:"bar",
+    x:labels1,
+    y:values1,
+    text:values1,
+    textposition:"outside",
     marker:{
-        size:18,
         color:"#8b5cf6",
-        line:{color:"#ffffff",width:2}
+        line:{color:"#ffffff",width:1}
     },
-    text:x1.map(v=>v+" บทความ"),
-    textposition:"top right",
-    textfont:{color:"#f8fafc",size:13},
-    hovertemplate:"<b>%{y}</b><br>จำนวนบทความ: %{x}<extra></extra>",
-    showlegend:false
-});
-
-Plotly.newPlot("chart1", traces1, {
-    margin:{l:240,r:140,t:20,b:50},
+    hovertemplate:"<b>%{x}</b><br>จำนวนบทความ: %{y}<extra></extra>"
+}],{
+    margin:{l:70,r:30,t:30,b:140},
     xaxis:{
-        title:"จำนวนบทความ",
-        range:[0,24],
-        gridcolor:"#2b2b3a",
-        zeroline:false,
-        color:"#f8fafc"
+        title:"หัวข้อวิจัย (Author Keywords)",
+        tickangle:-25,
+        color:"#f8fafc",
+        gridcolor:"#2b2b3a"
     },
     yaxis:{
-        automargin:true,
-        color:"#f8fafc"
+        title:"จำนวนบทความ",
+        color:"#f8fafc",
+        gridcolor:"#2b2b3a",
+        zeroline:false
     },
     paper_bgcolor:"rgba(0,0,0,0)",
     plot_bgcolor:"rgba(0,0,0,0)",
     font:{family:"Sarabun",size:14,color:"#f8fafc"}
 },{responsive:true,displaylogo:false});
 
-/* ---------- CHART 2 ---------- */
+/* ---------- CHART 2 : BAR CHART ---------- */
 
-const y2 = [
+const labels2 = [
     "Hardware-software co-design",
     "Hardware security",
     "Deep learning",
@@ -505,51 +445,32 @@ const y2 = [
     "FPGA"
 ];
 
-const x2 = [3,4,4,4,4,4,10,14];
+const values2 = [3,4,4,4,4,4,10,14];
 
-const traces2 = [];
-
-for(let i=0;i<x2.length;i++){
-    traces2.push({
-        type:"scatter",
-        mode:"lines",
-        x:[0,x2[i]],
-        y:[y2[i],y2[i]],
-        line:{color:"#64748b",width:3},
-        hoverinfo:"skip",
-        showlegend:false
-    });
-}
-
-traces2.push({
-    type:"scatter",
-    mode:"markers+text",
-    x:x2,
-    y:y2,
+Plotly.newPlot("chart2", [{
+    type:"bar",
+    x:labels2,
+    y:values2,
+    text:values2,
+    textposition:"outside",
     marker:{
-        size:18,
         color:"#c084fc",
-        line:{color:"#ffffff",width:2}
+        line:{color:"#ffffff",width:1}
     },
-    text:x2.map(v=>v+" บทความ"),
-    textposition:"top right",
-    textfont:{color:"#f8fafc",size:13},
-    hovertemplate:"<b>%{y}</b><br>จำนวนบทความ: %{x}<extra></extra>",
-    showlegend:false
-});
-
-Plotly.newPlot("chart2", traces2, {
-    margin:{l:260,r:140,t:20,b:50},
+    hovertemplate:"<b>%{x}</b><br>จำนวนบทความ: %{y}<extra></extra>"
+}],{
+    margin:{l:70,r:30,t:30,b:150},
     xaxis:{
-        title:"จำนวนบทความ",
-        range:[0,16],
-        gridcolor:"#2b2b3a",
-        zeroline:false,
-        color:"#f8fafc"
+        title:"หัวข้อวิจัย (Author Keywords)",
+        tickangle:-25,
+        color:"#f8fafc",
+        gridcolor:"#2b2b3a"
     },
     yaxis:{
-        automargin:true,
-        color:"#f8fafc"
+        title:"จำนวนบทความ",
+        color:"#f8fafc",
+        gridcolor:"#2b2b3a",
+        zeroline:false
     },
     paper_bgcolor:"rgba(0,0,0,0)",
     plot_bgcolor:"rgba(0,0,0,0)",
