@@ -57,9 +57,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    NAVIGATION
-========================= */
+===================================================== */
 
 .nav{
     display:flex;
@@ -99,13 +99,15 @@ body{
 .nav button.active{
     background:#8b5cf6;
     border-color:#8b5cf6;
-    box-shadow:0 8px 20px rgba(139,92,246,.25);
+
+    box-shadow:
+        0 8px 20px rgba(139,92,246,.25);
 }
 
 
-/* =========================
+/* =====================================================
    GLASS
-========================= */
+===================================================== */
 
 .glass{
     background:rgba(17,24,39,.55);
@@ -123,9 +125,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    PAGE
-========================= */
+===================================================== */
 
 .page{
     display:none;
@@ -136,9 +138,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
     padding:48px;
@@ -210,9 +212,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    SECTION
-========================= */
+===================================================== */
 
 .section{
     padding:30px;
@@ -251,9 +253,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    CARDS
-========================= */
+===================================================== */
 
 .cards{
     display:grid;
@@ -322,9 +324,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    CHART
-========================= */
+===================================================== */
 
 .chart{
     height:590px;
@@ -333,9 +335,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    CHART HEADER
-========================= */
+===================================================== */
 
 .chart-header{
     display:flex;
@@ -363,9 +365,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    INTERPRET
-========================= */
+===================================================== */
 
 .interpret{
     margin-top:22px;
@@ -396,9 +398,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    BACK
-========================= */
+===================================================== */
 
 .back{
     margin-top:24px;
@@ -427,9 +429,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 .footer{
     text-align:center;
@@ -442,9 +444,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    RESPONSIVE
-========================= */
+===================================================== */
 
 @media(max-width:900px){
 
@@ -941,9 +943,10 @@ function showPage(pageId, btn){
     });
 
 
-    /* สำคัญ:
+    /*
        เมื่อเปลี่ยนหน้า Plotly ต้อง resize
-       เพื่อให้กราฟคำนวณขนาดใหม่ */
+       เพื่อให้กราฟคำนวณขนาดใหม่
+    */
 
     setTimeout(function(){
 
@@ -970,86 +973,141 @@ function showPage(pageId, btn){
 
 /* =====================================================
    GENERAL COMPUTER SCIENCE
-   BAR CHART
+   LOLLIPOP / DOT PLOT
 ===================================================== */
 
 const generalTopics = [
 
-    "Artificial intelligence",
-    "Machine learning",
-    "Large language models",
-    "Computer science",
-    "Computational thinking",
-    "Cognition",
+    "Education",
     "Computer-Based Learning",
-    "Education"
+    "Cognition",
+    "Computational thinking",
+    "Computer science",
+    "Large language models",
+    "Machine learning",
+    "Artificial intelligence"
 
 ];
 
 const generalValues = [
 
-    21,
+    4,
+    4,
+    4,
+    4,
+    6,
+    6,
     15,
-    6,
-    6,
-    4,
-    4,
-    4,
-    4
+    21
 
 ];
+
+
+/*
+   สร้างเส้นแนวนอน
+   จาก 0 ไปยังค่าของแต่ละหัวข้อ
+*/
+
+const generalLines = [];
+
+
+for(
+    let i = 0;
+    i < generalValues.length;
+    i++
+){
+
+    generalLines.push({
+
+        type:"scatter",
+
+        mode:"lines",
+
+        x:[
+            0,
+            generalValues[i]
+        ],
+
+        y:[
+            generalTopics[i],
+            generalTopics[i]
+        ],
+
+        line:{
+            color:"#64748b",
+            width:3
+        },
+
+        hoverinfo:"skip",
+
+        showlegend:false
+
+    });
+
+}
+
+
+/*
+   สร้างจุดวงกลม
+*/
+
+generalLines.push({
+
+    type:"scatter",
+
+    mode:"markers+text",
+
+    x:generalValues,
+
+    y:generalTopics,
+
+    marker:{
+
+        size:16,
+
+        color:"#8b5cf6",
+
+        line:{
+            color:"#ffffff",
+            width:2
+        }
+
+    },
+
+    text:generalValues.map(
+        value => value + " บทความ"
+    ),
+
+    textposition:"middle right",
+
+    textfont:{
+        color:"#f8fafc",
+        size:13
+    },
+
+    cliponaxis:false,
+
+    hovertemplate:
+        "<b>%{y}</b>" +
+        "<br>จำนวนบทความ: %{x}" +
+        "<extra></extra>",
+
+    showlegend:false
+
+});
 
 
 Plotly.newPlot(
 
     "chart1",
 
-    [{
-
-        type:"bar",
-
-        orientation:"h",
-
-        y:generalTopics,
-
-        x:generalValues,
-
-        marker:{
-
-            color:"#8b5cf6",
-
-            line:{
-                color:"#c4b5fd",
-                width:1
-            }
-
-        },
-
-        text:generalValues.map(
-            value => value + " บทความ"
-        ),
-
-        textposition:"outside",
-
-        textfont:{
-            color:"#f8fafc",
-            size:13
-        },
-
-        cliponaxis:false,
-
-        hovertemplate:
-            "<b>%{y}</b>" +
-            "<br>จำนวนบทความ: %{x}" +
-            "<extra></extra>"
-
-    }],
+    generalLines,
 
     {
 
         margin:{
-            l:210,
-            r:110,
+            l:220,
+            r:130,
             t:20,
             b:55
         },
@@ -1098,7 +1156,14 @@ Plotly.newPlot(
             color:"#f8fafc"
         },
 
-        bargap:.28
+        hoverlabel:{
+            bgcolor:"#1e1b4b",
+            bordercolor:"#8b5cf6",
+            font:{
+                family:"Sarabun",
+                color:"#ffffff"
+            }
+        }
 
     },
 
@@ -1115,86 +1180,140 @@ Plotly.newPlot(
 
 /* =====================================================
    HARDWARE AND ARCHITECTURE
-   BAR CHART
+   LOLLIPOP / DOT PLOT
 ===================================================== */
 
 const hardwareTopics = [
 
-    "FPGA",
-    "Machine learning",
-    "Edge AI",
-    "Edge Computing",
-    "Internet of Things (IoT)",
-    "Deep learning",
+    "Hardware-software co-design",
     "Hardware security",
-    "Hardware-software co-design"
+    "Deep learning",
+    "Internet of Things (IoT)",
+    "Edge Computing",
+    "Edge AI",
+    "Machine learning",
+    "FPGA"
 
 ];
 
 const hardwareValues = [
 
-    14,
+    3,
+    4,
+    4,
+    4,
+    4,
+    4,
     10,
-    4,
-    4,
-    4,
-    4,
-    4,
-    3
+    14
 
 ];
+
+
+/*
+   สร้างเส้นแนวนอน
+*/
+
+const hardwareLines = [];
+
+
+for(
+    let i = 0;
+    i < hardwareValues.length;
+    i++
+){
+
+    hardwareLines.push({
+
+        type:"scatter",
+
+        mode:"lines",
+
+        x:[
+            0,
+            hardwareValues[i]
+        ],
+
+        y:[
+            hardwareTopics[i],
+            hardwareTopics[i]
+        ],
+
+        line:{
+            color:"#64748b",
+            width:3
+        },
+
+        hoverinfo:"skip",
+
+        showlegend:false
+
+    });
+
+}
+
+
+/*
+   สร้างจุดวงกลม
+*/
+
+hardwareLines.push({
+
+    type:"scatter",
+
+    mode:"markers+text",
+
+    x:hardwareValues,
+
+    y:hardwareTopics,
+
+    marker:{
+
+        size:16,
+
+        color:"#c084fc",
+
+        line:{
+            color:"#ffffff",
+            width:2
+        }
+
+    },
+
+    text:hardwareValues.map(
+        value => value + " บทความ"
+    ),
+
+    textposition:"middle right",
+
+    textfont:{
+        color:"#f8fafc",
+        size:13
+    },
+
+    cliponaxis:false,
+
+    hovertemplate:
+        "<b>%{y}</b>" +
+        "<br>จำนวนบทความ: %{x}" +
+        "<extra></extra>",
+
+    showlegend:false
+
+});
 
 
 Plotly.newPlot(
 
     "chart2",
 
-    [{
-
-        type:"bar",
-
-        orientation:"h",
-
-        y:hardwareTopics,
-
-        x:hardwareValues,
-
-        marker:{
-
-            color:"#c084fc",
-
-            line:{
-                color:"#e9d5ff",
-                width:1
-            }
-
-        },
-
-        text:hardwareValues.map(
-            value => value + " บทความ"
-        ),
-
-        textposition:"outside",
-
-        textfont:{
-            color:"#f8fafc",
-            size:13
-        },
-
-        cliponaxis:false,
-
-        hovertemplate:
-            "<b>%{y}</b>" +
-            "<br>จำนวนบทความ: %{x}" +
-            "<extra></extra>"
-
-    }],
+    hardwareLines,
 
     {
 
         margin:{
-            l:230,
-            r:110,
+            l:240,
+            r:130,
             t:20,
             b:55
         },
@@ -1243,7 +1362,14 @@ Plotly.newPlot(
             color:"#f8fafc"
         },
 
-        bargap:.28
+        hoverlabel:{
+            bgcolor:"#1e1b4b",
+            bordercolor:"#c084fc",
+            font:{
+                family:"Sarabun",
+                color:"#ffffff"
+            }
+        }
 
     },
 
@@ -1256,6 +1382,7 @@ Plotly.newPlot(
     }
 
 );
+
 
 </script>
 
