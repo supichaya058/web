@@ -139,6 +139,22 @@ body{
     color:#1e40af;
 }
 
+/* TRANSITION */
+
+.transition{
+    background:white;
+    border-radius:18px;
+    padding:20px 24px;
+    margin-bottom:28px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 2px 10px rgba(0,0,0,.03);
+}
+
+.transition p{
+    margin:0;
+    color:#334155;
+}
+
 /* SUMMARY */
 
 .summary{
@@ -189,17 +205,19 @@ body{
 
 <section class="hero">
 
-    <h1>ภาพรวมแนวโน้มงานวิจัยจากฐานข้อมูล Scopus</h1>
-    <h2>Scopus Research Landscape 2025</h2>
+```
+<h1>ภาพรวมแนวโน้มงานวิจัยจากฐานข้อมูล Scopus</h1>
+<h2>Scopus Research Landscape 2025</h2>
 
-    <p>
-        หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
-        เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
-        <strong>General Computer Science</strong> และ
-        <strong>Hardware and Architecture</strong>
-        โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
-        เพื่อให้ผู้อ่านเข้าใจทิศทางของงานวิจัยในแต่ละสาขาได้อย่างรวดเร็ว
-    </p>
+<p>
+    หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
+    เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
+    <strong>General Computer Science</strong> และ
+    <strong>Hardware and Architecture</strong>
+    โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
+    เพื่อให้ผู้อ่านเข้าใจทิศทางของงานวิจัยในแต่ละสาขาได้อย่างรวดเร็ว
+</p>
+```
 
 </section>
 
@@ -207,32 +225,41 @@ body{
 
 <section class="overview">
 
-    <h3>ภาพรวมการวิเคราะห์</h3>
+```
+<h3>ภาพรวมการวิเคราะห์</h3>
 
-    <p>
-        การวิเคราะห์ครั้งนี้แบ่งข้อมูลออกเป็นสองชุดข้อมูลอิสระตามสาขาวิชา
-        และพิจารณาความถี่ของ Author Keywords ที่ปรากฏในงานวิจัย
-        เพื่อระบุหัวข้อที่ได้รับความสนใจมากที่สุดในแต่ละสาขา
-    </p>
+<p>
+    การวิเคราะห์ครั้งนี้ใช้ข้อมูลจากสองสาขาวิชาที่เป็นอิสระต่อกัน
+    และพิจารณาความถี่ของ Author Keywords ที่ปรากฏในงานวิจัย
+    เพื่อระบุหัวข้อที่ได้รับความสนใจมากที่สุดในแต่ละสาขา
+</p>
 
-    <div class="overview-grid">
+<p>
+    ผลลัพธ์ที่นำเสนอช่วยให้เห็นภาพรวมของแนวโน้มงานวิจัยในแต่ละสาขาวิชา
+    ว่ามีประเด็นใดได้รับความสนใจมากเป็นพิเศษในฐานข้อมูล Scopus
+    โดยมุ่งเน้นการทำความเข้าใจลักษณะของงานวิจัยในแต่ละสาขา
+    มากกว่าการเปรียบเทียบว่าสาขาใดมีความสำคัญมากกว่ากัน
+</p>
 
-        <div class="overview-item">
-            <div class="num">2</div>
-            <div class="label">ชุดข้อมูลที่วิเคราะห์</div>
-        </div>
+<div class="overview-grid">
 
-        <div class="overview-item">
-            <div class="num">General Computer Science</div>
-            <div class="label">ชุดข้อมูลที่ 1</div>
-        </div>
-
-        <div class="overview-item">
-            <div class="num">Hardware and Architecture</div>
-            <div class="label">ชุดข้อมูลที่ 2</div>
-        </div>
-
+    <div class="overview-item">
+        <div class="num">2</div>
+        <div class="label">สาขาวิชาที่วิเคราะห์</div>
     </div>
+
+    <div class="overview-item">
+        <div class="num">General Computer Science</div>
+        <div class="label">สาขาวิชาที่ 1</div>
+    </div>
+
+    <div class="overview-item">
+        <div class="num">Hardware and Architecture</div>
+        <div class="label">สาขาวิชาที่ 2</div>
+    </div>
+
+</div>
+```
 
 </section>
 
@@ -240,33 +267,51 @@ body{
 
 <section class="card">
 
-    <h3>ชุดข้อมูลที่ 1 : General Computer Science</h3>
+```
+<h3>สาขาวิชาที่ 1 : General Computer Science</h3>
+
+<p>
+    กราฟต่อไปนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+    <strong>General Computer Science</strong>
+    โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
+</p>
+
+<div id="chart1" class="chart"></div>
+
+<div class="interpret">
+
+    <h4>การตีความผลลัพธ์</h4>
 
     <p>
-        กราฟต่อไปนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
-        <strong>General Computer Science</strong>
-        โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
+        หัวข้อที่โดดเด่นที่สุดคือ
+        <strong>Artificial intelligence</strong>
+        รองลงมาคือ
+        <strong>Machine learning</strong>
+        และ
+        <strong>Large language models</strong>
+        ซึ่งสะท้อนให้เห็นว่าการวิจัยในสาขาวิทยาการคอมพิวเตอร์ทั่วไป
+        มีความสนใจอย่างมากต่อเทคโนโลยีปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง
+        รวมถึงโมเดลภาษาขนาดใหญ่ที่กำลังได้รับความนิยมในปัจจุบัน
     </p>
 
-    <div id="chart1" class="chart"></div>
+</div>
+```
 
-    <div class="interpret">
+</section>
 
-        <h4>การตีความผลลัพธ์</h4>
+<!-- TRANSITION -->
 
-        <p>
-            หัวข้อที่โดดเด่นที่สุดคือ
-            <strong>Artificial intelligence</strong>
-            รองลงมาคือ
-            <strong>Machine learning</strong>
-            และ
-            <strong>Large language models</strong>
-            ซึ่งสะท้อนให้เห็นว่าการวิจัยในสาขาวิทยาการคอมพิวเตอร์ทั่วไป
-            มีความสนใจอย่างมากต่อเทคโนโลยีปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง
-            รวมถึงโมเดลภาษาขนาดใหญ่ที่กำลังได้รับความนิยมในปัจจุบัน
-        </p>
+<section class="transition">
 
-    </div>
+```
+<p>
+    จากกราฟแรกจะเห็นว่า งานวิจัยในสาขา
+    <strong>General Computer Science</strong>
+    มีความสนใจด้านปัญญาประดิษฐ์และการเรียนรู้ของเครื่องอย่างชัดเจน
+    ส่วนกราฟถัดไปจะแสดงภาพของงานวิจัยด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
+    ซึ่งมีลักษณะของหัวข้อวิจัยแตกต่างออกไป
+</p>
+```
 
 </section>
 
@@ -274,34 +319,36 @@ body{
 
 <section class="card">
 
-    <h3>ชุดข้อมูลที่ 2 : Hardware and Architecture</h3>
+```
+<h3>สาขาวิชาที่ 2 : Hardware and Architecture</h3>
+
+<p>
+    กราฟนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+    <strong>Hardware and Architecture</strong>
+    ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
+    และระบบประมวลผลสมัยใหม่
+</p>
+
+<div id="chart2" class="chart"></div>
+
+<div class="interpret">
+
+    <h4>การตีความผลลัพธ์</h4>
 
     <p>
-        กราฟนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
-        <strong>Hardware and Architecture</strong>
-        ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
-        และระบบประมวลผลสมัยใหม่
+        หัวข้อที่พบมากที่สุดคือ
+        <strong>FPGA</strong>
+        รองลงมาคือ
+        <strong>Machine learning</strong>,
+        <strong>Edge AI</strong>
+        และ
+        <strong>Edge Computing</strong>
+        แสดงให้เห็นว่างานวิจัยในสาขานี้มุ่งเน้นการออกแบบฮาร์ดแวร์ที่สามารถรองรับงาน AI
+        และการประมวลผลที่ต้องการประสิทธิภาพสูงในอุปกรณ์ปลายทาง
     </p>
 
-    <div id="chart2" class="chart"></div>
-
-    <div class="interpret">
-
-        <h4>การตีความผลลัพธ์</h4>
-
-        <p>
-            หัวข้อที่พบมากที่สุดคือ
-            <strong>FPGA</strong>
-            รองลงมาคือ
-            <strong>Machine learning</strong>,
-            <strong>Edge AI</strong>
-            และ
-            <strong>Edge Computing</strong>
-            แสดงให้เห็นว่างานวิจัยในสาขานี้มุ่งเน้นการออกแบบฮาร์ดแวร์ที่สามารถรองรับงาน AI
-            และการประมวลผลที่ต้องการประสิทธิภาพสูงในอุปกรณ์ปลายทาง
-        </p>
-
-    </div>
+</div>
+```
 
 </section>
 
@@ -309,31 +356,34 @@ body{
 
 <section class="summary">
 
-    <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
+```
+<h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
 
-    <p>
-        การวิเคราะห์ข้อมูล Scopus ทั้งสองชุดแสดงให้เห็นว่า
-        งานวิจัยในสาขา <strong>General Computer Science</strong>
-        มีความโดดเด่นด้านปัญญาประดิษฐ์ การเรียนรู้ของเครื่อง
-        และเทคโนโลยีดิจิทัลสมัยใหม่
-        ขณะที่สาขา <strong>Hardware and Architecture</strong>
-        มีความโดดเด่นด้าน FPGA, Edge AI และสถาปัตยกรรมฮาร์ดแวร์ประสิทธิภาพสูง
-    </p>
+<p>
+    การวิเคราะห์ข้อมูล Scopus ทั้งสองสาขาวิชาแสดงให้เห็นว่า
+    งานวิจัยในสาขา <strong>General Computer Science</strong>
+    มีความโดดเด่นด้านปัญญาประดิษฐ์ การเรียนรู้ของเครื่อง
+    และเทคโนโลยีดิจิทัลสมัยใหม่
+</p>
 
-    <p>
-        แม้ทั้งสองชุดข้อมูลจะเป็นคนละสาขา
-        แต่ผลการวิเคราะห์สะท้อนแนวโน้มร่วมกันคือ
-        การบูรณาการระหว่าง <strong>Artificial Intelligence</strong>
-        และ <strong>Computer Hardware</strong>
-        ซึ่งเป็นทิศทางสำคัญของงานวิจัยด้านคอมพิวเตอร์ในปัจจุบัน
-    </p>
+<p>
+    ขณะที่สาขา <strong>Hardware and Architecture</strong>
+    มีความโดดเด่นด้าน FPGA, Edge AI และสถาปัตยกรรมฮาร์ดแวร์ประสิทธิภาพสูง
+    ซึ่งสะท้อนการพัฒนาโครงสร้างพื้นฐานสำหรับระบบคอมพิวเตอร์และระบบอัจฉริยะสมัยใหม่
+</p>
+
+<p>
+    แม้ทั้งสองสาขาจะมีลักษณะของหัวข้อวิจัยแตกต่างกัน
+    แต่ผลการวิเคราะห์ชี้ให้เห็นว่าการพัฒนาปัญญาประดิษฐ์และการพัฒนาฮาร์ดแวร์
+    มีความเชื่อมโยงกันอย่างใกล้ชิด และเป็นทิศทางสำคัญของงานวิจัยด้านคอมพิวเตอร์ในปัจจุบัน
+</p>
+```
 
 </section>
 
 <div class="footer">
     Scopus Research Landscape 2025
 </div>
-
 
 </div>
 
@@ -469,4 +519,3 @@ Plotly.newPlot(
 
 </body>
 </html>
-
