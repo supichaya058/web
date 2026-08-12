@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scopus Research Overview</title>
+<title>Scopus Research Landscape 2025</title>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
+*{box-sizing:border-box;}
+
 body{
     margin:0;
     font-family:"Sarabun", Arial, sans-serif;
@@ -17,22 +19,29 @@ body{
 
 .container{
     width:92%;
-    max-width:1200px;
+    max-width:1300px;
     margin:auto;
-    padding:30px 0;
+    padding:30px 0 50px;
 }
 
 .header{
     background:linear-gradient(135deg,#172554,#2563eb);
     color:white;
-    padding:30px;
-    border-radius:20px;
-    margin-bottom:20px;
+    border-radius:22px;
+    padding:35px 40px;
+    margin-bottom:24px;
+    box-shadow:0 10px 25px rgba(37,99,235,.18);
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .header h1{
     margin:0;
-    font-size:30px;
+    font-size:34px;
 }
 
 .header h2{
@@ -42,38 +51,53 @@ body{
 }
 
 .header p{
-    margin-top:16px;
-    line-height:1.8;
+    margin-top:18px;
+    line-height:1.9;
+    max-width:980px;
+}
+
+.year{
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
+    padding:10px 18px;
+    border-radius:20px;
+    font-size:14px;
 }
 
 .kpi-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    grid-template-columns:repeat(4,1fr);
     gap:16px;
-    margin-bottom:20px;
+    margin-bottom:24px;
 }
 
 .kpi{
     background:white;
-    padding:20px;
     border-radius:16px;
-    box-shadow:0 4px 12px rgba(0,0,0,.05);
-    text-align:center;
+    padding:22px;
+    border:1px solid #e7eaf0;
+    box-shadow:0 4px 14px rgba(0,0,0,.04);
 }
 
-.kpi .label{
+.kpi-label{
     color:#667085;
-    font-size:14px;
+    font-size:13px;
 }
 
-.kpi .number{
-    font-size:32px;
-    font-weight:700;
-    color:#1d4ed8;
+.kpi-number{
+    font-size:30px;
+    font-weight:750;
     margin-top:10px;
+    color:#1d4ed8;
 }
 
-.grid{
+.kpi-note{
+    color:#98a2b3;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.visual-grid{
     display:grid;
     grid-template-columns:2fr 1fr;
     gap:20px;
@@ -82,38 +106,121 @@ body{
 .card{
     background:white;
     border-radius:18px;
+    border:1px solid #e7eaf0;
     padding:24px;
-    box-shadow:0 4px 12px rgba(0,0,0,.05);
+    box-shadow:0 4px 15px rgba(0,0,0,.04);
 }
 
-.card h3{
-    margin-top:0;
+.card-title{
+    font-size:20px;
+    font-weight:700;
     color:#172554;
 }
 
-#docChart{height:450px;}
-#subjectChart{height:380px;}
+.card-subtitle{
+    color:#667085;
+    font-size:13px;
+    margin-top:6px;
+    line-height:1.7;
+}
+
+#docChart{height:520px;}
+#subjectChart{height:360px;}
+
+.explain{
+    margin-top:16px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    padding:16px;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.explain strong{
+    color:#1d4ed8;
+}
+
+.section-title{
+    margin-top:24px;
+    margin-bottom:12px;
+    font-size:22px;
+    font-weight:700;
+    color:#172554;
+}
+
+.theme-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.theme{
+    background:white;
+    border:1px solid #e7eaf0;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,.03);
+}
+
+.theme-number{
+    font-size:26px;
+    font-weight:750;
+    color:#2563eb;
+}
+
+.theme-title{
+    font-weight:700;
+    margin:8px 0;
+}
+
+.theme-text{
+    color:#667085;
+    font-size:14px;
+    line-height:1.7;
+}
 
 .summary{
-    margin-top:20px;
+    margin-top:24px;
     background:#111827;
     color:white;
-    padding:24px;
     border-radius:18px;
-    line-height:1.8;
+    padding:28px 30px;
+    line-height:1.9;
+}
+
+.summary h3{
+    margin-top:0;
+    font-size:22px;
+}
+
+.summary p{
+    color:#e5e7eb;
+    font-size:15px;
+}
+
+.summary strong{
+    color:white;
 }
 
 .footer{
     text-align:center;
-    margin-top:20px;
     color:#98a2b3;
-    font-size:13px;
+    font-size:12px;
+    margin-top:24px;
 }
 
-@media(max-width:900px){
-    .grid{
-        grid-template-columns:1fr;
-    }
+@media(max-width:1000px){
+    .kpi-grid{grid-template-columns:repeat(2,1fr);}
+    .visual-grid{grid-template-columns:1fr;}
+    .theme-grid{grid-template-columns:1fr;}
+}
+
+@media(max-width:650px){
+    .kpi-grid{grid-template-columns:1fr;}
+    .header-top{display:block;}
+    .year{display:inline-block;margin-top:15px;}
+    .header h1{font-size:28px;}
 }
 </style>
 </head>
@@ -124,12 +231,20 @@ body{
 
     <!-- HEADER -->
     <div class="header">
-        <h1>ภาพรวมงานวิจัยจาก Scopus</h1>
-        <h2>Scopus Research Overview 2025</h2>
+        <div class="header-top">
+            <div>
+                <h1>ภาพรวมแนวโน้มงานวิจัยจาก Scopus</h1>
+                <h2>Scopus Research Landscape</h2>
+            </div>
+            <div class="year">2025</div>
+        </div>
 
         <p>
-            รายงานนี้วิเคราะห์ข้อมูลบทความจากฐานข้อมูล <strong>Scopus</strong>
-            เพื่อศึกษาประเภทเอกสารและสาขาวิชาที่มีความโดดเด่นในชุดข้อมูล
+            รายงานฉบับนี้นำเสนอการวิเคราะห์ข้อมูลบทความจากฐานข้อมูล
+            <strong>Scopus</strong> เพื่อศึกษาลักษณะของผลงานวิจัยในปี 2025
+            โดยมุ่งเน้นการวิเคราะห์ <strong>Document Types</strong>
+            และ <strong>Subject Areas</strong>
+            เพื่อให้เห็นภาพรวมของรูปแบบการเผยแพร่ผลงานและสาขาวิชาที่มีบทบาทสำคัญในชุดข้อมูล
         </p>
     </div>
 
@@ -137,47 +252,110 @@ body{
     <div class="kpi-grid">
 
         <div class="kpi">
-            <div class="label">จำนวนเอกสารทั้งหมด</div>
-            <div class="number">300</div>
+            <div class="kpi-label">จำนวนเอกสารทั้งหมด</div>
+            <div class="kpi-number">300</div>
+            <div class="kpi-note">Total Publications</div>
         </div>
 
         <div class="kpi">
-            <div class="label">Article</div>
-            <div class="number">207</div>
+            <div class="kpi-label">Article</div>
+            <div class="kpi-number">207</div>
+            <div class="kpi-note">Document Type</div>
         </div>
 
         <div class="kpi">
-            <div class="label">Conference paper</div>
-            <div class="number">47</div>
+            <div class="kpi-label">Conference paper</div>
+            <div class="kpi-number">47</div>
+            <div class="kpi-note">Conference Publications</div>
         </div>
 
         <div class="kpi">
-            <div class="label">Review</div>
-            <div class="number">37</div>
+            <div class="kpi-label">Review</div>
+            <div class="kpi-number">37</div>
+            <div class="kpi-note">Review Articles</div>
         </div>
 
     </div>
 
     <!-- VISUALIZATION -->
-    <div class="grid">
+    <div class="visual-grid">
 
         <!-- Chart 1 -->
         <div class="card">
-            <h3>📄 ประเภทเอกสารในฐานข้อมูล Scopus</h3>
-            <p>แสดงจำนวนเอกสารแต่ละประเภทในชุดข้อมูล</p>
+
+            <div class="card-title">📄 ประเภทเอกสารที่พบในชุดข้อมูล</div>
+
+            <div class="card-subtitle">
+                กราฟนี้แสดงจำนวนเอกสารแต่ละประเภทที่พบในฐานข้อมูล Scopus
+                เพื่อเปรียบเทียบสัดส่วนของรูปแบบการเผยแพร่ผลงานวิจัย
+            </div>
+
             <div id="docChart"></div>
+
+            <div class="explain">
+                ผลการวิเคราะห์พบว่า <strong>Article</strong> เป็นประเภทเอกสารที่พบมากที่สุด
+                จำนวน <strong>207 รายการ</strong> คิดเป็นสัดส่วนหลักของข้อมูลทั้งหมด
+                รองลงมาคือ <strong>Conference paper</strong> และ <strong>Review</strong>
+                ซึ่งสะท้อนให้เห็นว่าการเผยแพร่ผลงานวิจัยในชุดข้อมูลนี้
+                มีลักษณะเน้นการตีพิมพ์ในวารสารวิชาการเป็นสำคัญ
+            </div>
+
         </div>
 
         <!-- Chart 2 -->
         <div class="card">
-            <h3>📚 สาขาวิชาของงานวิจัย</h3>
-            <p>แสดงสัดส่วน Subject Area</p>
+
+            <div class="card-title">📚 สาขาวิชาของงานวิจัย</div>
+
+            <div class="card-subtitle">
+                แสดงสัดส่วนของ Subject Area ที่ปรากฏในชุดข้อมูล
+                เพื่อให้เห็นการกระจายตัวของสาขาวิชาที่เกี่ยวข้องกับงานวิจัย
+            </div>
+
             <div id="subjectChart"></div>
 
-            <ul>
-                <li><strong>General Computer Science</strong> : 60%</li>
-                <li><strong>Hardware and Architecture</strong> : 40%</li>
-            </ul>
+            <div class="explain">
+                งานวิจัยส่วนใหญ่อยู่ในกลุ่ม
+                <strong>General Computer Science</strong> และ
+                <strong>Hardware and Architecture</strong>
+                แสดงให้เห็นว่าชุดข้อมูลนี้มีความเชื่อมโยงระหว่าง
+                วิทยาการคอมพิวเตอร์ การประมวลผล และเทคโนโลยีด้านฮาร์ดแวร์
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- THEMES -->
+    <div class="section-title">🔬 ประเด็นสำคัญจากการวิเคราะห์ข้อมูล</div>
+
+    <div class="theme-grid">
+
+        <div class="theme">
+            <div class="theme-number">01</div>
+            <div class="theme-title">รูปแบบการเผยแพร่</div>
+            <div class="theme-text">
+                บทความวิชาการ (Article) เป็นรูปแบบการเผยแพร่หลักของชุดข้อมูล
+                สะท้อนการมุ่งเน้นงานวิจัยเชิงวารสาร
+            </div>
+        </div>
+
+        <div class="theme">
+            <div class="theme-number">02</div>
+            <div class="theme-title">สาขาวิชาหลัก</div>
+            <div class="theme-text">
+                งานวิจัยกระจุกตัวในสาขา General Computer Science
+                และ Hardware and Architecture เป็นส่วนใหญ่
+            </div>
+        </div>
+
+        <div class="theme">
+            <div class="theme-number">03</div>
+            <div class="theme-title">แนวโน้มด้านเทคโนโลยี</div>
+            <div class="theme-text">
+                ข้อมูลสะท้อนความเชื่อมโยงระหว่าง AI, Computing และ Hardware
+                ซึ่งเป็นแนวโน้มสำคัญของงานวิจัยปัจจุบัน
+            </div>
         </div>
 
     </div>
@@ -185,20 +363,28 @@ body{
     <!-- SUMMARY -->
     <div class="summary">
 
-        <h3>🎤 สรุปสำหรับการนำเสนอ</h3>
+        <h3>📌 ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
 
         <p>
-            จากข้อมูล Scopus จำนวน <strong>300 รายการ</strong>
-            พบว่าเอกสารส่วนใหญ่เป็น <strong>Article</strong>
-            จำนวน <strong>207 รายการ</strong> รองลงมาคือ
-            <strong>Conference paper</strong> และ <strong>Review</strong>
+            การวิเคราะห์ข้อมูลจากฐานข้อมูล Scopus จำนวน
+            <strong>300 รายการ</strong>
+            แสดงให้เห็นว่าผลงานวิจัยส่วนใหญ่ถูกเผยแพร่ในรูปแบบ
+            <strong>Article</strong> ซึ่งเป็นประเภทเอกสารหลักของชุดข้อมูล
+            รองลงมาคือ <strong>Conference paper</strong> และ <strong>Review</strong>
         </p>
 
         <p>
-            เมื่อพิจารณาสาขาวิชา พบว่างานวิจัยส่วนใหญ่อยู่ในกลุ่ม
-            <strong>General Computer Science</strong> และ
-            <strong>Hardware and Architecture</strong>
-            สะท้อนแนวโน้มงานวิจัยด้านคอมพิวเตอร์และฮาร์ดแวร์ที่มีบทบาทสำคัญในปี 2025
+            เมื่อพิจารณาด้านสาขาวิชา พบว่างานวิจัยมีการกระจุกตัวอยู่ใน
+            <strong>General Computer Science</strong>
+            และ <strong>Hardware and Architecture</strong>
+            สะท้อนให้เห็นถึงบทบาทสำคัญของวิทยาการคอมพิวเตอร์และเทคโนโลยีฮาร์ดแวร์
+            ในการพัฒนางานวิจัยร่วมสมัย
+        </p>
+
+        <p>
+            โดยภาพรวม ชุดข้อมูลนี้ชี้ให้เห็นแนวโน้มของงานวิจัยที่ผสมผสานองค์ความรู้ด้าน
+            <strong>Computing, Artificial Intelligence และ Hardware Technology</strong>
+            ซึ่งเป็นทิศทางสำคัญของการวิจัยทางคอมพิวเตอร์ในปัจจุบัน
         </p>
 
     </div>
@@ -211,9 +397,7 @@ body{
 
 <script>
 
-/* -------------------------------
-   Visualization 1 : Document Type
---------------------------------*/
+// -------------------- Chart 1 --------------------
 Plotly.newPlot(
     'docChart',
     [{
@@ -227,7 +411,7 @@ Plotly.newPlot(
         }
     }],
     {
-        margin:{t:20,l:60,r:20,b:60},
+        margin:{t:20,l:60,r:20,b:70},
         yaxis:{title:'จำนวนเอกสาร'},
         xaxis:{title:'Document Type'},
         paper_bgcolor:'white',
@@ -236,9 +420,7 @@ Plotly.newPlot(
     {responsive:true, displaylogo:false}
 );
 
-/* -------------------------------
-   Visualization 2 : Subject Area
---------------------------------*/
+// -------------------- Chart 2 --------------------
 Plotly.newPlot(
     'subjectChart',
     [{
