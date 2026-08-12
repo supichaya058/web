@@ -20,7 +20,7 @@ body{
     font-family:"Sarabun",sans-serif;
     background:#f4f7fb;
     color:#1f2937;
-    line-height:1.85;
+    line-height:1.9;
 }
 
 .container{
@@ -36,26 +36,26 @@ body{
     background:linear-gradient(135deg,#1e3a8a,#2563eb);
     color:white;
     border-radius:22px;
-    padding:40px;
+    padding:42px;
     margin-bottom:28px;
     box-shadow:0 12px 28px rgba(37,99,235,.18);
 }
 
 .hero h1{
     margin:0;
-    font-size:36px;
+    font-size:38px;
     font-weight:700;
 }
 
 .hero h2{
-    margin:8px 0 18px;
+    margin:8px 0 20px;
     font-size:18px;
     font-weight:400;
-    opacity:.9;
+    opacity:.92;
 }
 
 .hero p{
-    max-width:900px;
+    max-width:920px;
     margin:0;
 }
 
@@ -64,14 +64,15 @@ body{
 .overview{
     background:white;
     border-radius:20px;
-    padding:28px;
+    padding:30px;
     margin-bottom:28px;
-    box-shadow:0 4px 16px rgba(0,0,0,.05);
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
 }
 
 .overview h3{
     margin-top:0;
-    font-size:24px;
+    font-size:26px;
+    color:#111827;
 }
 
 .overview-grid{
@@ -84,7 +85,7 @@ body{
 .overview-item{
     border:1px solid #e5e7eb;
     border-radius:16px;
-    padding:20px;
+    padding:22px;
     text-align:center;
     background:#fafbff;
 }
@@ -93,12 +94,34 @@ body{
     font-size:34px;
     font-weight:700;
     color:#1e40af;
+    line-height:1.2;
 }
 
 .overview-item .label{
     color:#64748b;
-    margin-top:6px;
+    margin-top:8px;
     font-size:14px;
+}
+
+/* INFO BOX */
+
+.info-box{
+    background:#eef4ff;
+    border:1px solid #dbeafe;
+    border-radius:18px;
+    padding:24px;
+    margin-bottom:28px;
+}
+
+.info-box h3{
+    margin-top:0;
+    color:#1e3a8a;
+    font-size:24px;
+}
+
+.info-box p{
+    margin-bottom:0;
+    color:#334155;
 }
 
 /* CARD */
@@ -106,14 +129,14 @@ body{
 .card{
     background:white;
     border-radius:20px;
-    padding:28px;
+    padding:30px;
     margin-bottom:28px;
     box-shadow:0 4px 18px rgba(0,0,0,.05);
 }
 
 .card h3{
     margin-top:0;
-    font-size:24px;
+    font-size:26px;
     color:#111827;
 }
 
@@ -122,21 +145,38 @@ body{
 }
 
 .chart{
-    height:520px;
+    height:540px;
 }
 
 .interpret{
-    margin-top:22px;
+    margin-top:24px;
     background:#f8fafc;
     border-left:5px solid #2563eb;
     border-radius:12px;
-    padding:18px;
+    padding:20px;
 }
 
 .interpret h4{
     margin-top:0;
     margin-bottom:10px;
     color:#1e40af;
+    font-size:18px;
+}
+
+/* TRANSITION */
+
+.transition{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:22px 24px;
+    margin-bottom:28px;
+    box-shadow:0 2px 10px rgba(0,0,0,.03);
+}
+
+.transition p{
+    margin:0;
+    color:#334155;
 }
 
 /* SUMMARY */
@@ -144,13 +184,13 @@ body{
 .summary{
     background:#111827;
     color:white;
-    border-radius:20px;
-    padding:32px;
+    border-radius:22px;
+    padding:34px;
 }
 
 .summary h3{
     margin-top:0;
-    font-size:24px;
+    font-size:26px;
 }
 
 .summary p{
@@ -161,10 +201,11 @@ body{
     text-align:center;
     color:#94a3b8;
     font-size:13px;
-    margin-top:22px;
+    margin-top:24px;
 }
 
 @media(max-width:800px){
+
     .overview-grid{
         grid-template-columns:1fr;
     }
@@ -174,7 +215,14 @@ body{
     }
 
     .hero h1{
-        font-size:28px;
+        font-size:30px;
+    }
+
+    .card,
+    .overview,
+    .info-box,
+    .summary{
+        padding:24px;
     }
 }
 </style>
@@ -185,22 +233,23 @@ body{
 
 <div class="container">
 
-```
 <!-- HERO -->
 
 <section class="hero">
 
-    <h1>ภาพรวมแนวโน้มงานวิจัยจากฐานข้อมูล Scopus</h1>
-    <h2>Scopus Research Landscape 2025</h2>
 
-    <p>
-        หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
-        เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
-        <strong>General Computer Science</strong> และ
-        <strong>Hardware and Architecture</strong>
-        โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
-        เพื่อให้ผู้อ่านเข้าใจทิศทางของงานวิจัยในแต่ละสาขาได้อย่างรวดเร็ว
-    </p>
+<h1>ภาพรวมแนวโน้มงานวิจัยจากฐานข้อมูล Scopus</h1>
+<h2>Scopus Research Landscape 2025</h2>
+
+<p>
+    หน้าเว็บนี้นำเสนอผลการวิเคราะห์ข้อมูลจากฐานข้อมูล <strong>Scopus</strong>
+    เพื่อสำรวจแนวโน้มของหัวข้อวิจัยในสองสาขาวิชาหลัก ได้แก่
+    <strong>General Computer Science</strong> และ
+    <strong>Hardware and Architecture</strong>
+    โดยใช้ข้อมูล Author Keywords จากบทความวิจัยที่ปรากฏในฐานข้อมูล Scopus
+    เพื่อให้ผู้อ่านเข้าใจทิศทางของงานวิจัยในแต่ละสาขาได้อย่างรวดเร็ว
+</p>
+
 
 </section>
 
@@ -208,32 +257,50 @@ body{
 
 <section class="overview">
 
-    <h3>ภาพรวมการวิเคราะห์</h3>
 
-    <p>
-        การวิเคราะห์ครั้งนี้แบ่งข้อมูลออกเป็นสองชุดข้อมูลอิสระตามสาขาวิชา
-        และพิจารณาความถี่ของ Author Keywords ที่ปรากฏในงานวิจัย
-        เพื่อระบุหัวข้อที่ได้รับความสนใจมากที่สุดในแต่ละสาขา
-    </p>
+<h3>ภาพรวมการวิเคราะห์</h3>
 
-    <div class="overview-grid">
+<p>
+    การวิเคราะห์ครั้งนี้ใช้ข้อมูลจากสองสาขาวิชาที่เป็นอิสระต่อกัน
+    และศึกษาความถี่ของ Author Keywords ที่ปรากฏในบทความวิจัย
+    เพื่อระบุหัวข้อที่ได้รับความสนใจมากที่สุดในแต่ละสาขา
+</p>
 
-        <div class="overview-item">
-            <div class="num">2</div>
-            <div class="label">ชุดข้อมูลที่วิเคราะห์</div>
-        </div>
+<div class="overview-grid">
 
-        <div class="overview-item">
-            <div class="num">General Computer Science</div>
-            <div class="label">ชุดข้อมูลที่ 1</div>
-        </div>
-
-        <div class="overview-item">
-            <div class="num">Hardware and Architecture</div>
-            <div class="label">ชุดข้อมูลที่ 2</div>
-        </div>
-
+    <div class="overview-item">
+        <div class="num">2</div>
+        <div class="label">จำนวนสาขาวิชาที่วิเคราะห์</div>
     </div>
+
+    <div class="overview-item">
+        <div class="num">General Computer Science</div>
+        <div class="label">สาขาวิชาที่ 1</div>
+    </div>
+
+    <div class="overview-item">
+        <div class="num">Hardware and Architecture</div>
+        <div class="label">สาขาวิชาที่ 2</div>
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- INFO BOX -->
+
+<section class="info-box">
+
+
+<h3>ก่อนดูกราฟ</h3>
+
+<p>
+    กราฟแต่ละรูปแสดง <strong>หัวข้อวิจัย (Author Keywords)</strong>
+    ที่พบในสาขาวิชานั้น ๆ โดยจำนวนที่มากกว่าจะหมายถึงหัวข้อดังกล่าวปรากฏในบทความวิจัยบ่อยกว่า
+    และสะท้อนประเด็นที่ได้รับความสนใจมากกว่าในสาขาวิชานั้น
+</p>
+
 
 </section>
 
@@ -241,33 +308,51 @@ body{
 
 <section class="card">
 
-    <h3>ชุดข้อมูลที่ 1 : General Computer Science</h3>
+
+<h3>สาขาวิชาที่ 1 : General Computer Science</h3>
+
+<p>
+    กราฟต่อไปนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+    <strong>General Computer Science</strong>
+    โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
+</p>
+
+<div id="chart1" class="chart"></div>
+
+<div class="interpret">
+
+    <h4>การตีความผลลัพธ์</h4>
 
     <p>
-        กราฟต่อไปนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
-        <strong>General Computer Science</strong>
-        โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
+        หัวข้อที่โดดเด่นที่สุดคือ
+        <strong>Artificial intelligence</strong>
+        รองลงมาคือ
+        <strong>Machine learning</strong>
+        และ
+        <strong>Large language models</strong>
+        ซึ่งสะท้อนให้เห็นว่าการวิจัยในสาขาวิทยาการคอมพิวเตอร์ทั่วไป
+        มีความสนใจอย่างมากต่อเทคโนโลยีปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง
+        รวมถึงโมเดลภาษาขนาดใหญ่ที่กำลังได้รับความนิยมในปัจจุบัน
     </p>
 
-    <div id="chart1" class="chart"></div>
+</div>
 
-    <div class="interpret">
 
-        <h4>การตีความผลลัพธ์</h4>
+</section>
 
-        <p>
-            หัวข้อที่โดดเด่นที่สุดคือ
-            <strong>Artificial intelligence</strong>
-            รองลงมาคือ
-            <strong>Machine learning</strong>
-            และ
-            <strong>Large language models</strong>
-            ซึ่งสะท้อนให้เห็นว่าการวิจัยในสาขาวิทยาการคอมพิวเตอร์ทั่วไป
-            มีความสนใจอย่างมากต่อเทคโนโลยีปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง
-            รวมถึงโมเดลภาษาขนาดใหญ่ที่กำลังได้รับความนิยมในปัจจุบัน
-        </p>
+<!-- TRANSITION -->
 
-    </div>
+<section class="transition">
+
+
+<p>
+    จากกราฟแรกจะเห็นว่า งานวิจัยในสาขา
+    <strong>General Computer Science</strong>
+    มีความสนใจด้านปัญญาประดิษฐ์และการเรียนรู้ของเครื่องอย่างชัดเจน
+    ส่วนกราฟถัดไปจะแสดงภาพของงานวิจัยด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
+    ซึ่งมีลักษณะของหัวข้อวิจัยแตกต่างออกไป
+</p>
+
 
 </section>
 
@@ -275,34 +360,36 @@ body{
 
 <section class="card">
 
-    <h3>ชุดข้อมูลที่ 2 : Hardware and Architecture</h3>
+
+<h3>สาขาวิชาที่ 2 : Hardware and Architecture</h3>
+
+<p>
+    กราฟนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+    <strong>Hardware and Architecture</strong>
+    ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
+    และระบบประมวลผลสมัยใหม่
+</p>
+
+<div id="chart2" class="chart"></div>
+
+<div class="interpret">
+
+    <h4>การตีความผลลัพธ์</h4>
 
     <p>
-        กราฟนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
-        <strong>Hardware and Architecture</strong>
-        ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
-        และระบบประมวลผลสมัยใหม่
+        หัวข้อที่พบมากที่สุดคือ
+        <strong>FPGA</strong>
+        รองลงมาคือ
+        <strong>Machine learning</strong>,
+        <strong>Edge AI</strong>
+        และ
+        <strong>Edge Computing</strong>
+        แสดงให้เห็นว่างานวิจัยในสาขานี้มุ่งเน้นการออกแบบฮาร์ดแวร์ที่สามารถรองรับงาน AI
+        และการประมวลผลที่ต้องการประสิทธิภาพสูงในอุปกรณ์ปลายทาง
     </p>
 
-    <div id="chart2" class="chart"></div>
+</div>
 
-    <div class="interpret">
-
-        <h4>การตีความผลลัพธ์</h4>
-
-        <p>
-            หัวข้อที่พบมากที่สุดคือ
-            <strong>FPGA</strong>
-            รองลงมาคือ
-            <strong>Machine learning</strong>,
-            <strong>Edge AI</strong>
-            และ
-            <strong>Edge Computing</strong>
-            แสดงให้เห็นว่างานวิจัยในสาขานี้มุ่งเน้นการออกแบบฮาร์ดแวร์ที่สามารถรองรับงาน AI
-            และการประมวลผลที่ต้องการประสิทธิภาพสูงในอุปกรณ์ปลายทาง
-        </p>
-
-    </div>
 
 </section>
 
@@ -310,31 +397,34 @@ body{
 
 <section class="summary">
 
-    <h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
 
-    <p>
-        การวิเคราะห์ข้อมูล Scopus ทั้งสองชุดแสดงให้เห็นว่า
-        งานวิจัยในสาขา <strong>General Computer Science</strong>
-        มีความโดดเด่นด้านปัญญาประดิษฐ์ การเรียนรู้ของเครื่อง
-        และเทคโนโลยีดิจิทัลสมัยใหม่
-        ขณะที่สาขา <strong>Hardware and Architecture</strong>
-        มีความโดดเด่นด้าน FPGA, Edge AI และสถาปัตยกรรมฮาร์ดแวร์ประสิทธิภาพสูง
-    </p>
+<h3>ข้อค้นพบสำคัญจากการวิเคราะห์</h3>
 
-    <p>
-        แม้ทั้งสองชุดข้อมูลจะเป็นคนละสาขา
-        แต่ผลการวิเคราะห์สะท้อนแนวโน้มร่วมกันคือ
-        การบูรณาการระหว่าง <strong>Artificial Intelligence</strong>
-        และ <strong>Computer Hardware</strong>
-        ซึ่งเป็นทิศทางสำคัญของงานวิจัยด้านคอมพิวเตอร์ในปัจจุบัน
-    </p>
+<p>
+    การวิเคราะห์ข้อมูล Scopus ทั้งสองสาขาวิชาแสดงให้เห็นว่า
+    งานวิจัยในสาขา <strong>General Computer Science</strong>
+    มีความโดดเด่นด้านปัญญาประดิษฐ์ การเรียนรู้ของเครื่อง
+    และเทคโนโลยีดิจิทัลสมัยใหม่
+</p>
+
+<p>
+    ขณะที่สาขา <strong>Hardware and Architecture</strong>
+    มีความโดดเด่นด้าน FPGA, Edge AI และสถาปัตยกรรมฮาร์ดแวร์ประสิทธิภาพสูง
+    ซึ่งสะท้อนการพัฒนาโครงสร้างพื้นฐานสำหรับระบบคอมพิวเตอร์และระบบอัจฉริยะสมัยใหม่
+</p>
+
+<p>
+    แม้ทั้งสองสาขาจะมีลักษณะของหัวข้อวิจัยแตกต่างกัน
+    แต่ผลการวิเคราะห์ชี้ให้เห็นว่าการพัฒนาปัญญาประดิษฐ์และการพัฒนาฮาร์ดแวร์
+    มีความเชื่อมโยงกันอย่างใกล้ชิด และเป็นทิศทางสำคัญของงานวิจัยด้านคอมพิวเตอร์ในปัจจุบัน
+</p>
+
 
 </section>
 
 <div class="footer">
     Scopus Research Landscape 2025
 </div>
-```
 
 </div>
 
