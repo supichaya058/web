@@ -1,426 +1,1809 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Scopus Research Visualization</title>
+<meta charset="UTF-8">
 
-    <!-- Plotly -->
-    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<title>Scopus Research Dashboard 2025</title>
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fb;
-            color: #1f2937;
-        }
+<!-- Plotly -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
-        .container {
-            max-width: 1150px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+<style>
 
-        .header {
-            background: white;
-            padding: 30px;
-            border-radius: 18px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
-        }
+/* =========================================================
+   GLOBAL
+========================================================= */
 
-        .header h1 {
-            margin: 0 0 10px;
-            font-size: 32px;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        .header p {
-            margin: 0;
-            color: #64748b;
-            line-height: 1.6;
-        }
+body {
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-bottom: 20px;
-        }
+    margin: 0;
 
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-        }
+    font-family:
+        "Segoe UI",
+        "Noto Sans Thai",
+        Arial,
+        sans-serif;
 
-        .stat-card .label {
-            color: #64748b;
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
+    background: #f4f6fa;
 
-        .stat-card .value {
-            font-size: 30px;
-            font-weight: bold;
-        }
+    color: #172033;
 
-        .chart-card {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-        }
+}
 
-        .chart-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
 
-        .chart-description {
-            color: #64748b;
-            margin-bottom: 10px;
-        }
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
-        #chart {
-            width: 100%;
-            height: 650px;
-        }
+.sidebar {
 
-        .insight {
-            margin-top: 20px;
-            padding: 22px;
-            background: #f8fafc;
-            border-radius: 12px;
-            line-height: 1.7;
-        }
+    position: fixed;
 
-        .insight h2 {
-            margin-top: 0;
-        }
+    left: 0;
+    top: 0;
 
-        .insight li {
-            margin-bottom: 8px;
-        }
+    width: 250px;
+    height: 100vh;
 
-        .footer {
-            text-align: center;
-            color: #64748b;
-            padding: 25px;
-            font-size: 14px;
-        }
+    background: #111827;
 
-        @media (max-width: 700px) {
-            .stats {
-                grid-template-columns: 1fr;
-            }
+    color: white;
 
-            .header h1 {
-                font-size: 25px;
-            }
+    padding: 30px 20px;
 
-            #chart {
-                height: 550px;
-            }
-        }
-    </style>
+}
+
+
+.logo {
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+.logo-sub {
+
+    font-size: 12px;
+
+    color: #9ca3af;
+
+    margin-bottom: 40px;
+
+}
+
+
+.menu-title {
+
+    font-size: 11px;
+
+    color: #6b7280;
+
+    text-transform: uppercase;
+
+    margin: 20px 10px 10px;
+
+}
+
+
+.menu-item {
+
+    padding: 12px 14px;
+
+    margin-bottom: 6px;
+
+    border-radius: 9px;
+
+    color: #d1d5db;
+
+    font-size: 14px;
+
+}
+
+
+.menu-item.active {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+.menu-item:hover {
+
+    background: #1f2937;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+
+    margin-left: 250px;
+
+    padding: 30px 40px 50px;
+
+    max-width: 1600px;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.header-title h1 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+}
+
+
+.header-title p {
+
+    margin-top: 8px;
+
+    color: #667085;
+
+}
+
+
+.badge {
+
+    background: #e8f0ff;
+
+    color: #2563eb;
+
+    padding: 10px 16px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   KPI CARDS
+========================================================= */
+
+.kpi-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.kpi {
+
+    background: white;
+
+    border: 1px solid #e7eaf0;
+
+    border-radius: 15px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(16,24,40,.04);
+
+}
+
+
+.kpi-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.kpi-label {
+
+    color: #667085;
+
+    font-size: 13px;
+
+}
+
+
+.kpi-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 10px;
+
+    background: #eff6ff;
+
+    font-size: 18px;
+
+}
+
+
+.kpi-number {
+
+    font-size: 30px;
+
+    font-weight: 750;
+
+    margin-top: 13px;
+
+}
+
+
+.kpi-note {
+
+    color: #98a2b3;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+
+    margin-top: 25px;
+
+}
+
+
+.section-header {
+
+    margin-bottom: 15px;
+
+}
+
+
+.section-title {
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    margin: 0;
+
+}
+
+
+.section-sub {
+
+    color: #667085;
+
+    font-size: 13px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+
+    background: white;
+
+    border: 1px solid #e7eaf0;
+
+    border-radius: 15px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(16,24,40,.04);
+
+}
+
+
+.card-title {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+}
+
+
+.card-subtitle {
+
+    font-size: 13px;
+
+    color: #667085;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.grid-2 {
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr;
+
+    gap: 20px;
+
+}
+
+
+.grid-3 {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+#keywordChart {
+
+    width: 100%;
+
+    height: 650px;
+
+}
+
+
+#documentChart {
+
+    width: 100%;
+
+    height: 390px;
+
+}
+
+
+#citationChart {
+
+    width: 100%;
+
+    height: 390px;
+
+}
+
+
+/* =========================================================
+   TOP KEYWORD LIST
+========================================================= */
+
+.keyword-list {
+
+    margin-top: 18px;
+
+}
+
+
+.keyword-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 0;
+
+    border-bottom:
+        1px solid #edf0f4;
+
+}
+
+
+.keyword-row:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.rank {
+
+    width: 28px;
+
+    color: #98a2b3;
+
+    font-weight: 600;
+
+}
+
+
+.keyword-name {
+
+    flex: 1;
+
+    font-size: 14px;
+
+}
+
+
+.keyword-count {
+
+    font-weight: 700;
+
+}
+
+
+.keyword-bar {
+
+    width: 80px;
+
+    height: 6px;
+
+    background: #edf2f7;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+
+.keyword-bar-fill {
+
+    height: 100%;
+
+    background: #2563eb;
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================================
+   INSIGHT
+========================================================= */
+
+.insight {
+
+    background: #f7f9fc;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    margin-top: 15px;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+}
+
+
+.insight strong {
+
+    color: #1d4ed8;
+
+}
+
+
+/* =========================================================
+   RESEARCH THEMES
+========================================================= */
+
+.theme {
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #edf0f4;
+
+}
+
+
+.theme-number {
+
+    font-size: 26px;
+
+    font-weight: 750;
+
+    color: #2563eb;
+
+}
+
+
+.theme-title {
+
+    font-weight: 700;
+
+    margin-top: 5px;
+
+}
+
+
+.theme-text {
+
+    color: #667085;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin-top: 7px;
+
+}
+
+
+/* =========================================================
+   PRESENTATION
+========================================================= */
+
+.presentation {
+
+    background: #111827;
+
+    color: white;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    line-height: 1.8;
+
+}
+
+
+.presentation-title {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    margin-bottom: 12px;
+
+}
+
+
+.presentation p {
+
+    color: #d1d5db;
+
+}
+
+
+.presentation strong {
+
+    color: white;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    text-align: center;
+
+    color: #98a2b3;
+
+    font-size: 12px;
+
+    margin-top: 40px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px) {
+
+    .sidebar {
+
+        display: none;
+
+    }
+
+    .main {
+
+        margin-left: 0;
+
+    }
+
+    .kpi-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+    .grid-2 {
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+@media(max-width:700px) {
+
+    .main {
+
+        padding: 20px;
+
+    }
+
+    .kpi-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+    .grid-3 {
+
+        grid-template-columns:1fr;
+
+    }
+
+    .header {
+
+        display:block;
+
+    }
+
+    .badge {
+
+        display:inline-block;
+
+        margin-top:15px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<div class="container">
 
-    <!-- HEADER -->
-    <div class="header">
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        SCOPUS
+    </div>
+
+    <div class="logo-sub">
+        Research Visualization
+    </div>
+
+
+    <div class="menu-title">
+        Dashboard
+    </div>
+
+    <div class="menu-item active">
+        Overview
+    </div>
+
+    <div class="menu-item">
+        Research Topics
+    </div>
+
+    <div class="menu-item">
+        Publications
+    </div>
+
+    <div class="menu-title">
+        Analysis
+    </div>
+
+    <div class="menu-item">
+        Keywords
+    </div>
+
+    <div class="menu-item">
+        Citations
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+    <div class="header-title">
 
         <h1>
-            Scopus Research Landscape — 2025
+            ภาพรวมงานวิจัยจาก Scopus
         </h1>
 
         <p>
-            Visualization and analysis of research topics based on
-            Author Keywords from the Scopus dataset.
+            Scopus Research Landscape
+            <span>•</span>
+            Publication Year 2025
         </p>
 
     </div>
 
 
-    <!-- STATISTICS -->
-    <div class="stats">
+    <div class="badge">
 
-        <div class="stat-card">
+        599 Publications
 
-            <div class="label">
-                Total Publications
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     KPI
+========================================================= -->
+
+<section class="kpi-grid">
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+
+            <div class="kpi-label">
+                Publications
             </div>
 
-            <div class="value">
-                599
+            <div class="kpi-icon">
+                📄
             </div>
 
         </div>
 
+        <div class="kpi-number">
+            599
+        </div>
 
-        <div class="stat-card">
+        <div class="kpi-note">
+            Unique records
+        </div>
 
-            <div class="label">
+    </div>
+
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+
+            <div class="kpi-label">
                 Total Citations
             </div>
 
-            <div class="value">
-                1,991
+            <div class="kpi-icon">
+                📚
             </div>
 
         </div>
 
+        <div class="kpi-number">
+            1,991
+        </div>
 
-        <div class="stat-card">
+        <div class="kpi-note">
+            Citations across records
+        </div>
 
-            <div class="label">
-                Average Citations
+    </div>
+
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+
+            <div class="kpi-label">
+                Average Citation
             </div>
 
-            <div class="value">
-                3.32
+            <div class="kpi-icon">
+                📈
+            </div>
+
+        </div>
+
+        <div class="kpi-number">
+            3.32
+        </div>
+
+        <div class="kpi-note">
+            Citations / publication
+        </div>
+
+    </div>
+
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+
+            <div class="kpi-label">
+                Article
+            </div>
+
+            <div class="kpi-icon">
+                📝
+            </div>
+
+        </div>
+
+        <div class="kpi-number">
+            402
+        </div>
+
+        <div class="kpi-note">
+            Document Type
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     KEYWORD ANALYSIS
+========================================================= -->
+
+<section class="section">
+
+
+    <div class="section-header">
+
+        <div class="section-title">
+            🔎 Research Topics
+        </div>
+
+        <div class="section-sub">
+            หัวข้อวิจัยที่ปรากฏบ่อยที่สุดจาก Author Keywords
+        </div>
+
+    </div>
+
+
+    <div class="grid-2">
+
+
+        <!-- CHART -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Top 20 Research Keywords
+            </div>
+
+            <div class="card-subtitle">
+
+                จำนวน publications ที่มี keyword
+                แต่ละคำ
+
+            </div>
+
+
+            <div id="keywordChart"></div>
+
+        </div>
+
+
+
+        <!-- LIST -->
+
+        <div class="card">
+
+            <div class="card-title">
+                🏆 Top Keywords
+            </div>
+
+            <div class="card-subtitle">
+
+                10 อันดับแรก
+
+            </div>
+
+
+            <div class="keyword-list">
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">01</span>
+
+                    <span class="keyword-name">
+                        Machine Learning
+                    </span>
+
+                    <span class="keyword-count">
+                        29
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">02</span>
+
+                    <span class="keyword-name">
+                        Artificial Intelligence
+                    </span>
+
+                    <span class="keyword-count">
+                        26
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">03</span>
+
+                    <span class="keyword-name">
+                        Deep Learning
+                    </span>
+
+                    <span class="keyword-count">
+                        15
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">04</span>
+
+                    <span class="keyword-name">
+                        FPGA
+                    </span>
+
+                    <span class="keyword-count">
+                        14
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">05</span>
+
+                    <span class="keyword-name">
+                        Computer Science
+                    </span>
+
+                    <span class="keyword-count">
+                        11
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">06</span>
+
+                    <span class="keyword-name">
+                        Large Language Models
+                    </span>
+
+                    <span class="keyword-count">
+                        9
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">07</span>
+
+                    <span class="keyword-name">
+                        Neural Networks
+                    </span>
+
+                    <span class="keyword-count">
+                        9
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">08</span>
+
+                    <span class="keyword-name">
+                        Edge Computing
+                    </span>
+
+                    <span class="keyword-count">
+                        7
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">09</span>
+
+                    <span class="keyword-name">
+                        Hardware Security
+                    </span>
+
+                    <span class="keyword-count">
+                        7
+                    </span>
+
+                </div>
+
+
+
+                <div class="keyword-row">
+
+                    <span class="rank">10</span>
+
+                    <span class="keyword-name">
+                        Edge AI
+                    </span>
+
+                    <span class="keyword-count">
+                        6
+                    </span>
+
+                </div>
+
+
             </div>
 
         </div>
 
     </div>
 
+</section>
 
-    <!-- CHART -->
-    <div class="chart-card">
 
-        <div class="chart-title">
-            Top 15 Research Keywords
+
+<!-- =========================================================
+     INSIGHT
+========================================================= -->
+
+<section class="section">
+
+
+    <div class="card">
+
+        <div class="card-title">
+            💡 Research Insight
         </div>
 
-        <div class="chart-description">
-            Number of publications containing each author keyword.
+        <div class="card-subtitle">
+            วิเคราะห์สิ่งที่เห็นจาก Visualization
         </div>
 
-        <div id="chart"></div>
-
-    </div>
-
-
-    <!-- INSIGHTS -->
-    <div class="chart-card" style="margin-top: 20px;">
 
         <div class="insight">
 
-            <h2>
-                Key Findings
-            </h2>
+            <strong>1. AI และ Machine Learning เป็นกลุ่มหลัก</strong>
 
-            <ul>
+            <br>
 
-                <li>
-                    <strong>Machine Learning</strong>
-                    is the most frequent keyword,
-                    appearing in 29 publications.
-                </li>
+            Machine Learning มีจำนวนสูงที่สุดที่
+            <strong>29 publications</strong>
+            ตามด้วย Artificial Intelligence
+            <strong>26 publications</strong>
+            และ Deep Learning
+            <strong>15 publications</strong>
 
-                <li>
-                    <strong>Artificial Intelligence</strong>
-                    is the second most frequent keyword,
-                    appearing in 26 publications.
-                </li>
+            <br><br>
 
-                <li>
-                    <strong>Deep Learning</strong>
-                    appears in 15 publications.
-                </li>
 
-                <li>
-                    <strong>FPGA</strong> appears in
-                    14 publications, showing an important
-                    hardware-related research direction.
-                </li>
+            <strong>2. งานวิจัยไม่ได้มีเฉพาะ Software</strong>
 
-                <li>
-                    Other notable topics include
-                    <strong>Edge Computing</strong>,
-                    <strong>Hardware Security</strong>,
-                    <strong>Edge AI</strong>,
-                    and <strong>Large Language Models</strong>.
-                </li>
+            <br>
 
-            </ul>
+            การพบ keyword อย่าง
+            <strong>FPGA</strong>,
+            <strong>Hardware Security</strong>
+            และ <strong>Hardware accelerator</strong>
+            แสดงให้เห็นว่างานวิจัยมีส่วนที่เกี่ยวข้องกับ
+            Hardware และ Computer Architecture ด้วย
+
+            <br><br>
+
+
+            <strong>3. AI กำลังขยายไปสู่ Edge Computing</strong>
+
+            <br>
+
+            การพบ
+            <strong>Edge Computing</strong>
+            และ <strong>Edge AI</strong>
+            แสดงให้เห็นแนวทางการนำ AI
+            ไปประมวลผลใกล้กับแหล่งกำเนิดข้อมูล
+            แทนที่จะพึ่งพา Cloud เพียงอย่างเดียว
 
         </div>
 
     </div>
 
+</section>
 
-    <!-- FOOTER -->
-    <div class="footer">
 
-        Scopus Research Visualization • 2025
+
+<!-- =========================================================
+     DOCUMENT TYPE
+========================================================= -->
+
+<section class="section">
+
+
+    <div class="section-header">
+
+        <div class="section-title">
+            📑 Publication Overview
+        </div>
+
+        <div class="section-sub">
+            ประเภทเอกสารที่ปรากฏใน Dataset
+        </div>
 
     </div>
 
-</div>
 
+    <div class="grid-2">
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Document Types
+            </div>
+
+            <div class="card-subtitle">
+                จำนวนเอกสารตามประเภท
+            </div>
+
+            <div id="documentChart"></div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Research Profile
+            </div>
+
+            <div class="card-subtitle">
+                ภาพรวมลักษณะของ Dataset
+            </div>
+
+
+            <div class="insight">
+
+                <strong>Article</strong>
+
+                <br>
+
+                402 publications
+
+                <br><br>
+
+
+                <strong>Conference Paper</strong>
+
+                <br>
+
+                137 publications
+
+                <br><br>
+
+
+                <strong>Review</strong>
+
+                <br>
+
+                45 publications
+
+                <br><br>
+
+                งานส่วนใหญ่ใน Dataset
+                เป็น <strong>Article</strong>
+                รองลงมาคือ
+                <strong>Conference Paper</strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     RESEARCH THEMES
+========================================================= -->
+
+<section class="section">
+
+
+    <div class="section-header">
+
+        <div class="section-title">
+            🧩 Research Themes
+        </div>
+
+        <div class="section-sub">
+            จัดกลุ่มประเด็นที่เห็นได้จาก Keyword
+        </div>
+
+    </div>
+
+
+    <div class="grid-3">
+
+
+        <div class="theme">
+
+            <div class="theme-number">
+                01
+            </div>
+
+            <div class="theme-title">
+                Artificial Intelligence
+            </div>
+
+            <div class="theme-text">
+
+                Machine Learning,
+                Artificial Intelligence,
+                Deep Learning,
+                Neural Networks
+
+            </div>
+
+        </div>
+
+
+
+        <div class="theme">
+
+            <div class="theme-number">
+                02
+            </div>
+
+            <div class="theme-title">
+                Edge & Computing
+            </div>
+
+            <div class="theme-text">
+
+                Edge Computing,
+                Edge AI,
+                Hardware accelerator,
+                FPGA
+
+            </div>
+
+        </div>
+
+
+
+        <div class="theme">
+
+            <div class="theme-number">
+                03
+            </div>
+
+            <div class="theme-title">
+                Emerging Technology
+            </div>
+
+            <div class="theme-text">
+
+                Large Language Models,
+                Blockchain,
+                Internet of Things (IoT),
+                Quantum Computing
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PRESENTATION
+========================================================= -->
+
+<section class="section">
+
+
+    <div class="presentation">
+
+        <div class="presentation-title">
+
+            🎤 สรุปสำหรับการนำเสนอ
+
+        </div>
+
+
+        <p>
+
+            จากข้อมูล Scopus ที่รวบรวมมา
+            หลังจากตัดรายการบทความที่ซ้ำกันแล้ว
+            มีทั้งหมด <strong>599 publications</strong>
+
+        </p>
+
+
+        <p>
+
+            เราเลือกใช้ <strong>Author Keywords</strong>
+            ในการวิเคราะห์เพื่อดูว่า
+            หัวข้อวิจัยใดปรากฏบ่อยที่สุด
+
+        </p>
+
+
+        <p>
+
+            จากกราฟพบว่า
+            <strong>Machine Learning</strong>
+            เป็น keyword ที่พบมากที่สุด
+            จำนวน <strong>29 publications</strong>
+            รองลงมาคือ
+            <strong>Artificial Intelligence</strong>
+            จำนวน <strong>26 publications</strong>
+            และ <strong>Deep Learning</strong>
+            จำนวน <strong>15 publications</strong>
+
+        </p>
+
+
+        <p>
+
+            เมื่อมองภาพรวมจะเห็นว่า
+            งานวิจัยมี AI และ Machine Learning
+            เป็นกลุ่มหลัก แต่ไม่ได้จำกัดอยู่เฉพาะ
+            Software เท่านั้น เพราะยังมี
+            FPGA, Hardware Security,
+            Edge Computing และ Edge AI
+
+        </p>
+
+
+        <p>
+
+            ดังนั้นภาพรวมของ Dataset นี้สามารถตีความได้ว่า
+            งานวิจัยกำลังมุ่งไปทาง
+            <strong>AI + Computing + Hardware + Edge Technology</strong>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    Scopus Research Visualization Dashboard
+
+    <br>
+
+    Data source: Scopus Export • 2025
+
+</footer>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT / CHARTS
+========================================================= -->
 
 <script>
 
-    /*
-    ==========================================
-    SCOPUS KEYWORD DATA
-    ==========================================
-    */
 
-    const keywords = [
+/* =========================================================
+   TOP 20 KEYWORDS
+========================================================= */
 
-        "Machine Learning",
-        "Artificial Intelligence",
-        "Deep Learning",
-        "FPGA",
-        "Computer Science",
-        "Large Language Models",
-        "Neural Networks",
-        "Edge Computing",
-        "Hardware Security",
-        "Edge AI",
-        "Computational Thinking",
-        "Cognition",
-        "Computer Science Education",
-        "Education",
-        "Virtual Reality"
+const keywords = [
 
-    ];
+    "Machine Learning",
+    "Artificial Intelligence",
+    "Deep Learning",
+    "FPGA",
+    "Computer Science",
+    "Large Language Models",
+    "Neural Networks",
+    "Edge Computing",
+    "Hardware Security",
+    "Edge AI",
+    "Computational Thinking",
+    "Cognition",
+    "Computer Science Education",
+    "Education",
+    "Virtual Reality",
+    "Healthcare",
+    "Blockchain",
+    "Internet of Things (IoT)",
+    "Hardware accelerator",
+    "Computer-Based Learning"
 
-
-    const publicationCounts = [
-
-        29,
-        26,
-        15,
-        14,
-        11,
-        9,
-        9,
-        7,
-        7,
-        6,
-        5,
-        5,
-        5,
-        5,
-        5
-
-    ];
+];
 
 
-    /*
-    ==========================================
-    CREATE BAR CHART
-    ==========================================
-    */
+const keywordCounts = [
 
-    const chartData = [
+    29,
+    26,
+    15,
+    14,
+    11,
+    9,
+    9,
+    7,
+    7,
+    6,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    4
 
-        {
-            x: publicationCounts.slice().reverse(),
-
-            y: keywords.slice().reverse(),
-
-            type: "bar",
-
-            orientation: "h",
-
-            hovertemplate:
-                "<b>%{y}</b>" +
-                "<br>Publications: %{x}" +
-                "<extra></extra>"
-        }
-
-    ];
+];
 
 
-    /*
-    ==========================================
-    CHART LAYOUT
-    ==========================================
-    */
 
-    const layout = {
+/* =========================================================
+   KEYWORD BAR CHART
+========================================================= */
+
+Plotly.newPlot(
+
+    "keywordChart",
+
+    [{
+
+        x:
+            keywordCounts
+            .slice()
+            .reverse(),
+
+        y:
+            keywords
+            .slice()
+            .reverse(),
+
+        type: "bar",
+
+        orientation: "h",
+
+        text:
+            keywordCounts
+            .slice()
+            .reverse(),
+
+        textposition: "outside",
+
+        hovertemplate:
+
+            "<b>%{y}</b>" +
+
+            "<br>Publications: %{x}" +
+
+            "<extra></extra>"
+
+    }],
+
+    {
 
         margin: {
 
-            l: 180,
+            l: 190,
 
-            r: 40,
+            r: 55,
 
-            t: 30,
+            t: 20,
 
-            b: 60
+            b: 55
 
         },
 
         xaxis: {
 
-            title: "Number of Publications",
+            title:
+                "จำนวนบทความ / Publications",
 
-            dtick: 5
+            gridcolor:
+                "#edf0f4",
+
+            zeroline:
+                false
 
         },
 
         yaxis: {
 
-            title: ""
+            automargin:
+                true
 
         },
 
-        paper_bgcolor: "white",
+        paper_bgcolor:
+            "white",
 
-        plot_bgcolor: "white",
+        plot_bgcolor:
+            "white",
 
         font: {
 
-            family: "Arial",
+            family:
+                "Segoe UI, Arial",
 
-            size: 14
-
-        }
-
-    };
-
-
-    /*
-    ==========================================
-    RENDER CHART
-    ==========================================
-    */
-
-    Plotly.newPlot(
-
-        "chart",
-
-        chartData,
-
-        layout,
-
-        {
-
-            responsive: true,
-
-            displaylogo: false
+            size:
+                13
 
         }
 
-    );
+    },
+
+    {
+
+        responsive:
+            true,
+
+        displaylogo:
+            false
+
+    }
+
+);
+
+
+
+/* =========================================================
+   DOCUMENT TYPE CHART
+========================================================= */
+
+Plotly.newPlot(
+
+    "documentChart",
+
+    [{
+
+        labels: [
+
+            "Article",
+            "Conference paper",
+            "Review",
+            "Note",
+            "Editorial",
+            "Erratum",
+            "Conference review",
+            "Short survey"
+
+        ],
+
+        values: [
+
+            402,
+            137,
+            45,
+            6,
+            4,
+            2,
+            2,
+            1
+
+        ],
+
+        type:
+            "pie",
+
+        hole:
+            0.55,
+
+        textinfo:
+            "percent",
+
+        hovertemplate:
+
+            "<b>%{label}</b>" +
+
+            "<br>จำนวน: %{value}" +
+
+            "<br>สัดส่วน: %{percent}" +
+
+            "<extra></extra>"
+
+    }],
+
+    {
+
+        margin: {
+
+            t: 20,
+
+            b: 20,
+
+            l: 20,
+
+            r: 20
+
+        },
+
+        showlegend:
+            true,
+
+        legend: {
+
+            orientation:
+                "h",
+
+            y:
+                -0.1
+
+        },
+
+        paper_bgcolor:
+            "white",
+
+        font: {
+
+            family:
+                "Segoe UI, Arial"
+
+        }
+
+    },
+
+    {
+
+        responsive:
+            true,
+
+        displaylogo:
+            false
+
+    }
+
+);
+
 
 </script>
 
+
 </body>
+
 </html>
