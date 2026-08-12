@@ -18,26 +18,14 @@
 body{
     margin:0;
     font-family:"Sarabun",sans-serif;
-    background:#0a0a0f;
-    color:#e5e7eb;
+    background:#121212;
+    color:#f5f5f5;
     line-height:1.9;
-}
-
-/* พื้นหลังเรืองแสง */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-      radial-gradient(circle at top left, rgba(168,85,247,.20), transparent 35%),
-      radial-gradient(circle at bottom right, rgba(236,72,153,.12), transparent 35%);
-    z-index:-1;
 }
 
 .container{
     width:92%;
-    max-width:1200px;
+    max-width:1280px;
     margin:auto;
     padding:36px 0 52px;
 }
@@ -45,146 +33,172 @@ body::before{
 /* HERO */
 
 .hero{
-    background:linear-gradient(135deg,#111827,#1f2937);
-    border:1px solid #7e22ce;
-    border-radius:26px;
-    padding:44px;
-    margin-bottom:30px;
-    box-shadow:0 0 35px rgba(168,85,247,.22);
+    background:#1b1b1b;
+    border:1px solid #2f2f2f;
+    border-radius:22px;
+    padding:40px;
+    margin-bottom:28px;
+    box-shadow:0 4px 16px rgba(0,0,0,.35);
 }
 
 .hero h1{
     margin:0;
-    font-size:40px;
+    font-size:36px;
     font-weight:700;
     color:#ffffff;
-    text-shadow:0 0 10px rgba(168,85,247,.45);
 }
 
 .hero h2{
-    margin:10px 0 22px;
+    margin:8px 0 18px;
     font-size:18px;
     font-weight:400;
-    color:#cbd5e1;
+    color:#d4d4d4;
 }
 
 .hero p{
-    max-width:920px;
-    color:#d1d5db;
+    max-width:900px;
+    margin:0;
+    color:#d4d4d4;
 }
 
-/* SECTION CARD */
+/* OVERVIEW */
 
-.card,
-.overview,
-.summary,
-.transition{
-    background:#111827;
-    border:1px solid #27272a;
-    border-radius:22px;
-    padding:30px;
-    margin-bottom:30px;
-    box-shadow:0 0 18px rgba(0,0,0,.45);
+.overview{
+    background:#1e1e1e;
+    border:1px solid #2c2c2c;
+    border-radius:20px;
+    padding:28px;
+    margin-bottom:28px;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
 
-.card h3,
-.overview h3,
-.summary h3{
+.overview h3{
     margin-top:0;
-    font-size:26px;
-    color:#f8fafc;
-    border-left:4px solid #a855f7;
+    font-size:24px;
+    color:#ffffff;
+    border-left:4px solid #7f1d1d;
     padding-left:12px;
 }
 
-.card p,
-.overview p,
-.transition p{
-    color:#cbd5e1;
+.overview p{
+    color:#d4d4d4;
 }
-
-/* OVERVIEW GRID */
 
 .overview-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
-    margin-top:22px;
+    margin-top:20px;
 }
 
 .overview-item{
-    background:#18181b;
-    border:1px solid #3f3f46;
-    border-radius:18px;
-    padding:22px;
+    background:#181818;
+    border:1px solid #2f2f2f;
+    border-radius:16px;
+    padding:20px;
     text-align:center;
 }
 
 .overview-item .num{
     font-size:34px;
     font-weight:700;
-    color:#c084fc;
+    color:#d6b3b3;
     line-height:1.3;
 }
 
 .overview-item .label{
-    color:#a1a1aa;
-    margin-top:8px;
+    color:#b5b5b5;
+    margin-top:6px;
     font-size:14px;
 }
 
-/* CHART */
+/* CHART GRID */
 
-.chart{
-    height:540px;
+.chart-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-bottom:28px;
 }
 
-/* INTERPRETATION */
+.chart-card{
+    background:#1e1e1e;
+    border:1px solid #2c2c2c;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
+}
+
+.chart-card h3{
+    margin-top:0;
+    font-size:22px;
+    color:#ffffff;
+    border-left:4px solid #7f1d1d;
+    padding-left:12px;
+}
+
+.chart-card p{
+    color:#d4d4d4;
+}
+
+.chart{
+    height:500px;
+}
+
+/* INTERPRET */
 
 .interpret{
-    margin-top:24px;
-    background:#18181b;
-    border-left:5px solid #a855f7;
-    border-radius:14px;
-    padding:20px;
+    margin-top:22px;
+    background:#181818;
+    border-left:5px solid #7f1d1d;
+    border-radius:12px;
+    padding:18px;
 }
 
 .interpret h4{
     margin-top:0;
-    color:#d8b4fe;
-    font-size:18px;
+    margin-bottom:10px;
+    color:#e7c4c4;
 }
 
-/* TRANSITION */
-
-.transition{
-    border-color:#3f3f46;
+.interpret p{
+    color:#d4d4d4;
 }
 
 /* SUMMARY */
 
 .summary{
-    background:linear-gradient(135deg,#0f172a,#111827);
-    border:1px solid #7e22ce;
+    background:#171717;
+    border:1px solid #2c2c2c;
+    border-radius:20px;
+    padding:32px;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
+}
+
+.summary h3{
+    margin-top:0;
+    font-size:24px;
+    color:#ffffff;
+    border-left:4px solid #7f1d1d;
+    padding-left:12px;
 }
 
 .summary p{
-    color:#e5e7eb;
+    color:#e5e5e5;
 }
-
-/* FOOTER */
 
 .footer{
     text-align:center;
-    color:#71717a;
+    color:#8a8a8a;
     font-size:13px;
-    margin-top:20px;
-    letter-spacing:1px;
+    margin-top:22px;
 }
 
-/* RESPONSIVE */
+@media(max-width:900px){
 
-@media(max-width:820px){
+    .chart-grid{
+        grid-template-columns:1fr;
+    }
 
     .overview-grid{
         grid-template-columns:1fr;
@@ -195,14 +209,7 @@ body::before{
     }
 
     .hero h1{
-        font-size:30px;
-    }
-
-    .card,
-    .overview,
-    .summary,
-    .transition{
-        padding:24px;
+        font-size:28px;
     }
 }
 </style>
@@ -236,7 +243,6 @@ body::before{
 <!-- OVERVIEW -->
 
 <section class="overview">
-
 
 <h3>ภาพรวมการวิเคราะห์</h3>
 
@@ -275,88 +281,76 @@ body::before{
 
 </section>
 
-<!-- DATASET 1 -->
+<!-- CHARTS SIDE BY SIDE -->
 
-<section class="card">
+<section class="chart-grid">
 
 
-<h3>สาขาวิชาที่ 1 : General Computer Science</h3>
+<!-- LEFT -->
 
-<p>
-    กราฟต่อไปนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
-    <strong>General Computer Science</strong>
-    โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
-</p>
+<div class="chart-card">
 
-<div id="chart1" class="chart"></div>
-
-<div class="interpret">
-
-    <h4>การตีความผลลัพธ์</h4>
+    <h3>สาขาวิชาที่ 1 : General Computer Science</h3>
 
     <p>
-        หัวข้อที่โดดเด่นที่สุดคือ
-        <strong>Artificial intelligence</strong>
-        รองลงมาคือ
-        <strong>Machine learning</strong>
-        และ
-        <strong>Large language models</strong>
-        ซึ่งสะท้อนให้เห็นว่าการวิจัยในสาขาวิทยาการคอมพิวเตอร์ทั่วไป
-        มีความสนใจอย่างมากต่อเทคโนโลยีปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง
-        รวมถึงโมเดลภาษาขนาดใหญ่ที่กำลังได้รับความนิยมในปัจจุบัน
+        แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+        <strong>General Computer Science</strong>
+        โดยเรียงลำดับตามจำนวนบทความที่ปรากฏคำสำคัญนั้นในฐานข้อมูล Scopus
     </p>
+
+    <div id="chart1" class="chart"></div>
+
+    <div class="interpret">
+
+        <h4>การตีความผลลัพธ์</h4>
+
+        <p>
+            หัวข้อที่โดดเด่นที่สุดคือ
+            <strong>Artificial intelligence</strong>
+            รองลงมาคือ
+            <strong>Machine learning</strong>
+            และ
+            <strong>Large language models</strong>
+            ซึ่งสะท้อนให้เห็นว่าการวิจัยในสาขาวิทยาการคอมพิวเตอร์ทั่วไป
+            มีความสนใจอย่างมากต่อเทคโนโลยีปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง
+        </p>
+
+    </div>
 
 </div>
 
+<!-- RIGHT -->
 
-</section>
+<div class="chart-card">
 
-<!-- TRANSITION -->
-
-<section class="transition">
-
-<p>
-    จากกราฟแรกจะเห็นว่า งานวิจัยในสาขา
-    <strong>General Computer Science</strong>
-    มีความสนใจด้านปัญญาประดิษฐ์และการเรียนรู้ของเครื่องอย่างชัดเจน
-    ส่วนกราฟถัดไปจะแสดงภาพของงานวิจัยด้านฮาร์ดแวร์และสถาปัตยกรรมคอมพิวเตอร์
-    ซึ่งมีลักษณะของหัวข้อวิจัยแตกต่างออกไป
-</p>
-
-
-</section>
-
-<!-- DATASET 2 -->
-
-<section class="card">
-
-
-<h3>สาขาวิชาที่ 2 : Hardware and Architecture</h3>
-
-<p>
-    กราฟนี้แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
-    <strong>Hardware and Architecture</strong>
-    ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
-    และระบบประมวลผลสมัยใหม่
-</p>
-
-<div id="chart2" class="chart"></div>
-
-<div class="interpret">
-
-    <h4>การตีความผลลัพธ์</h4>
+    <h3>สาขาวิชาที่ 2 : Hardware and Architecture</h3>
 
     <p>
-        หัวข้อที่พบมากที่สุดคือ
-        <strong>FPGA</strong>
-        รองลงมาคือ
-        <strong>Machine learning</strong>,
-        <strong>Edge AI</strong>
-        และ
-        <strong>Edge Computing</strong>
-        แสดงให้เห็นว่างานวิจัยในสาขานี้มุ่งเน้นการออกแบบฮาร์ดแวร์ที่สามารถรองรับงาน AI
-        และการประมวลผลที่ต้องการประสิทธิภาพสูงในอุปกรณ์ปลายทาง
+        แสดงหัวข้อวิจัยที่พบมากที่สุดในสาขา
+        <strong>Hardware and Architecture</strong>
+        ซึ่งครอบคลุมงานวิจัยด้านฮาร์ดแวร์ สถาปัตยกรรมคอมพิวเตอร์
+        และระบบประมวลผลสมัยใหม่
     </p>
+
+    <div id="chart2" class="chart"></div>
+
+    <div class="interpret">
+
+        <h4>การตีความผลลัพธ์</h4>
+
+        <p>
+            หัวข้อที่พบมากที่สุดคือ
+            <strong>FPGA</strong>
+            รองลงมาคือ
+            <strong>Machine learning</strong>,
+            <strong>Edge AI</strong>
+            และ
+            <strong>Edge Computing</strong>
+            แสดงให้เห็นว่างานวิจัยในสาขานี้มุ่งเน้นการออกแบบฮาร์ดแวร์ที่รองรับงาน AI
+            และการประมวลผลประสิทธิภาพสูง
+        </p>
+
+    </div>
 
 </div>
 
@@ -393,7 +387,7 @@ body::before{
 </section>
 
 <div class="footer">
-    SCOPUS RESEARCH LANDSCAPE 2025
+    Scopus Research Landscape 2025
 </div>
 
 </div>
@@ -422,7 +416,7 @@ for(let i=0;i<x1.length;i++){
         mode:"lines",
         x:[0,x1[i]],
         y:[y1[i],y1[i]],
-        line:{color:"#7c3aed",width:3},
+        line:{color:"#6b7280",width:3},
         hoverinfo:"skip",
         showlegend:false
     });
@@ -435,12 +429,12 @@ line1.push({
     y:y1,
     marker:{
         size:16,
-        color:"#a855f7",
+        color:"#7f1d1d",
         line:{color:"#ffffff",width:2}
     },
     text:x1.map(v=>v+" บทความ"),
     textposition:"right",
-    textfont:{color:"#f8fafc"},
+    textfont:{color:"#f5f5f5"},
     hovertemplate:"<b>%{y}</b><br>จำนวนบทความ: %{x}<extra></extra>",
     showlegend:false
 });
@@ -449,21 +443,21 @@ Plotly.newPlot(
     "chart1",
     line1,
     {
-        margin:{l:240,r:120,t:10,b:40},
+        margin:{l:220,r:100,t:10,b:40},
         xaxis:{
             title:"จำนวนบทความ",
             range:[0,24],
-            gridcolor:"#27272a",
+            gridcolor:"#2c2c2c",
             zeroline:false,
-            color:"#e5e7eb"
+            color:"#f5f5f5"
         },
         yaxis:{
             automargin:true,
-            color:"#e5e7eb"
+            color:"#f5f5f5"
         },
-        paper_bgcolor:"#111827",
-        plot_bgcolor:"#111827",
-        font:{family:"Sarabun",size:14,color:"#e5e7eb"}
+        paper_bgcolor:"#1e1e1e",
+        plot_bgcolor:"#1e1e1e",
+        font:{family:"Sarabun",size:14,color:"#f5f5f5"}
     },
     {responsive:true,displaylogo:false}
 );
@@ -490,7 +484,7 @@ for(let i=0;i<x2.length;i++){
         mode:"lines",
         x:[0,x2[i]],
         y:[y2[i],y2[i]],
-        line:{color:"#ec4899",width:3},
+        line:{color:"#6b7280",width:3},
         hoverinfo:"skip",
         showlegend:false
     });
@@ -503,12 +497,12 @@ line2.push({
     y:y2,
     marker:{
         size:16,
-        color:"#f472b6",
+        color:"#991b1b",
         line:{color:"#ffffff",width:2}
     },
     text:x2.map(v=>v+" บทความ"),
     textposition:"right",
-    textfont:{color:"#f8fafc"},
+    textfont:{color:"#f5f5f5"},
     hovertemplate:"<b>%{y}</b><br>จำนวนบทความ: %{x}<extra></extra>",
     showlegend:false
 });
@@ -517,21 +511,21 @@ Plotly.newPlot(
     "chart2",
     line2,
     {
-        margin:{l:260,r:120,t:10,b:40},
+        margin:{l:240,r:100,t:10,b:40},
         xaxis:{
             title:"จำนวนบทความ",
             range:[0,16],
-            gridcolor:"#27272a",
+            gridcolor:"#2c2c2c",
             zeroline:false,
-            color:"#e5e7eb"
+            color:"#f5f5f5"
         },
         yaxis:{
             automargin:true,
-            color:"#e5e7eb"
+            color:"#f5f5f5"
         },
-        paper_bgcolor:"#111827",
-        plot_bgcolor:"#111827",
-        font:{family:"Sarabun",size:14,color:"#e5e7eb"}
+        paper_bgcolor:"#1e1e1e",
+        plot_bgcolor:"#1e1e1e",
+        font:{family:"Sarabun",size:14,color:"#f5f5f5"}
     },
     {responsive:true,displaylogo:false}
 );
