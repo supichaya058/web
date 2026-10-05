@@ -1,0 +1,3055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOF Final Network Behavior Monitor</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:#e8edf1;
+  color:#1b2733;
+}
+
+.app{
+  display:grid;
+  grid-template-columns:235px 1fr;
+  min-height:100vh;
+}
+
+.sidebar{
+  background:#202a33;
+  color:#e8eef2;
+  padding:14px 11px;
+  border-right:1px solid #12191f;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:8px 7px 15px;
+  border-bottom:1px solid #394651;
+}
+
+.brand-icon{
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  background:#0f8a70;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:#fff;
+}
+
+.brand-title{
+  font-size:13px;
+  font-weight:800;
+}
+
+.brand-sub{
+  font-size:10px;
+  color:#9aabb8;
+}
+
+.section-label{
+  margin:15px 0 5px;
+  padding:0 7px;
+  color:#8ea0af;
+  font-size:9px;
+  text-transform:uppercase;
+}
+
+.nav{
+  padding:8px;
+  margin:2px 0;
+  border-radius:6px;
+  font-size:12px;
+}
+
+.nav.active{
+  background:#0d8068;
+  color:#fff;
+}
+
+.tree-item{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  padding:6px 7px;
+  border-bottom:1px solid #2e3942;
+  font-size:10px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  background:#59d6bd;
+  border-radius:50%;
+}
+
+.tree-name{
+  flex:1;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.main{
+  padding:11px;
+}
+
+.box{
+  background:#fff;
+  border:1px solid #d5dde4;
+  border-radius:7px;
+}
+
+.topbar{
+  padding:5px 8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.menu{
+  padding:6px 8px;
+  font-size:11px;
+  color:#5b6875;
+  border-radius:5px;
+  display:inline-block;
+}
+
+.menu.active{
+  background:#edf1f5;
+  color:#17222c;
+  font-weight:700;
+}
+
+.status{
+  font-size:11px;
+  color:#277f5c;
+  font-weight:800;
+}
+
+.live{
+  display:inline-block;
+  width:8px;
+  height:8px;
+  background:#21c56a;
+  border-radius:50%;
+  margin-right:6px;
+}
+
+.title{
+  padding:9px 11px;
+  margin-bottom:8px;
+}
+
+.title h1{
+  margin:0;
+  font-size:17px;
+}
+
+.title p{
+  margin:3px 0 0;
+  color:#7c8996;
+  font-size:10px;
+}
+
+/* KPI */
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:7px;
+  margin-bottom:8px;
+}
+
+.kpi{
+  padding:9px;
+}
+
+.label{
+  color:#7b8793;
+  font-size:9px;
+  text-transform:uppercase;
+}
+
+.value{
+  font-size:21px;
+  font-weight:900;
+  margin-top:3px;
+}
+
+.sub{
+  font-size:9px;
+  color:#9aa5af;
+}
+
+/* Network */
+.network-board{
+  display:grid;
+  grid-template-columns:minmax(0,1.9fr) minmax(280px,.75fr);
+  gap:7px;
+  margin-bottom:7px;
+}
+
+.topology-panel{
+  min-height:560px;
+}
+
+.panel-head{
+  padding:8px 9px;
+  border-bottom:1px solid #e3e8ec;
+  font-size:11px;
+  font-weight:800;
+  display:flex;
+  justify-content:space-between;
+}
+
+.panel-body{
+  padding:7px;
+}
+
+.topology-wrap{
+  position:relative;
+  height:520px;
+  overflow:hidden;
+  background:
+    linear-gradient(#dfe7eb 1px,transparent 1px),
+    linear-gradient(90deg,#dfe7eb 1px,transparent 1px);
+  background-size:24px 24px;
+}
+
+.topology-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255,255,255,.82),
+      rgba(255,255,255,.18)
+    );
+  pointer-events:none;
+}
+
+.topology-svg{
+  width:100%;
+  height:100%;
+  position:relative;
+  z-index:2;
+}
+
+.net-line{
+  stroke:#8799a5;
+  stroke-width:2.3;
+  fill:none;
+  stroke-dasharray:7 5;
+}
+
+.net-line.alert{
+  stroke:#d9534f;
+}
+
+.net-node.hot{
+  filter:drop-shadow(0 0 8px rgba(217,83,79,.48));
+}
+
+.net-body{
+  fill:#fff;
+  stroke:#bcc8cf;
+  stroke-width:2;
+}
+
+.net-title{
+  font-size:12px;
+  font-weight:900;
+  fill:#27343d;
+}
+
+.net-sub{
+  font-size:9px;
+  fill:#73818b;
+}
+
+.net-pill{
+  fill:#eef4f2;
+  stroke:#cad9d4;
+}
+
+.net-pill-text{
+  font-size:9px;
+  font-weight:900;
+  fill:#3e554e;
+}
+
+.net-badge{
+  fill:#fff;
+  stroke:#c2ccd2;
+}
+
+.net-badge-text{
+  font-size:9px;
+  font-weight:900;
+  fill:#29353f;
+}
+
+.map-callout{
+  fill:#fff;
+  stroke:#c8d2d8;
+  stroke-width:1.4;
+}
+
+.map-callout-title{
+  font-size:10px;
+  font-weight:900;
+  fill:#394750;
+}
+
+.map-callout-value{
+  font-size:18px;
+  font-weight:900;
+}
+
+.map-callout-sub{
+  font-size:9px;
+  fill:#77858f;
+}
+
+/* Right monitor */
+.monitor-right{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.monitor-card{
+  background:#fff;
+  border:1px solid #cfd8de;
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.monitor-head{
+  padding:7px 9px;
+  border-bottom:1px solid #e0e6ea;
+  font-size:10px;
+  font-weight:900;
+  display:flex;
+  justify-content:space-between;
+}
+
+.monitor-body{
+  padding:7px;
+}
+
+.mini-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+}
+
+.mini-card{
+  min-height:86px;
+  border:1px solid #d3dce1;
+  border-radius:6px;
+  padding:7px;
+  position:relative;
+  background:#fff;
+}
+
+.mini-emoji{
+  position:absolute;
+  right:7px;
+  top:6px;
+  font-size:21px;
+}
+
+.mini-label{
+  color:#73818c;
+  font-size:8px;
+}
+
+.mini-value{
+  font-weight:900;
+  font-size:14px;
+  margin-top:4px;
+}
+
+.mini-sub{
+  color:#909ca5;
+  font-size:8px;
+  margin-top:2px;
+}
+
+.net-event{
+  display:grid;
+  grid-template-columns:62px 1fr 64px;
+  gap:5px;
+  padding:6px 7px;
+  border-bottom:1px solid #edf0f2;
+  font-size:8px;
+}
+
+.net-event:last-child{
+  border-bottom:0;
+}
+
+.net-event .who{
+  font-weight:900;
+  color:#3b4a54;
+}
+
+.net-event .what{
+  color:#6e7d87;
+}
+
+.net-event .state{
+  text-align:right;
+  font-weight:900;
+}
+
+.network-footer-note{
+  margin-top:6px;
+  color:#7d8992;
+  font-size:8px;
+}
+
+/* Lower cards */
+.section-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-bottom:7px;
+}
+
+.panel{
+  overflow:hidden;
+}
+
+.head{
+  padding:8px 9px;
+  border-bottom:1px solid #e3e8ec;
+  font-size:11px;
+  font-weight:800;
+  display:flex;
+  justify-content:space-between;
+}
+
+.body{
+  padding:7px;
+}
+
+.current{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+}
+
+.cell{
+  background:#f7f9fb;
+  border:1px solid #dfe5ea;
+  border-radius:6px;
+  padding:7px;
+}
+
+.clabel{
+  font-size:9px;
+  color:#7e8994;
+}
+
+.cvalue{
+  font-size:13px;
+  font-weight:800;
+  margin-top:3px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.risk{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:99px;
+  font-size:10px;
+  font-weight:900;
+}
+
+.r1{
+  background:#daf3e3;
+  color:#29704a;
+}
+
+.r2{
+  background:#deeffa;
+  color:#2d6b91;
+}
+
+.r3{
+  background:#fff0c7;
+  color:#8b6716;
+}
+
+.r4{
+  background:#ffe0bb;
+  color:#99500d;
+}
+
+.r5{
+  background:#ffd5d5;
+  color:#a52e2e;
+}
+
+.thresholds{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+}
+
+.th{
+  background:#f7f9fb;
+  border:1px solid #e0e5e9;
+  border-radius:6px;
+  padding:7px;
+}
+
+.th small{
+  color:#7e8994;
+}
+
+.th strong{
+  display:block;
+  font:800 11px Consolas,monospace;
+  margin-top:2px;
+}
+
+.data-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:9px;
+}
+
+.data-table th{
+  position:sticky;
+  top:0;
+  background:#edf1f4;
+  padding:7px;
+  text-align:left;
+  color:#62717d;
+}
+
+.data-table td{
+  padding:6px 7px;
+  border-bottom:1px solid #edf0f3;
+}
+
+.table-wrap{
+  max-height:280px;
+  overflow:auto;
+}
+
+@media(max-width:1100px){
+  .kpis{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .network-board{
+    grid-template-columns:1fr;
+  }
+
+  .section-row{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:760px){
+  .app{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    display:none;
+  }
+
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .current{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .thresholds{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+<aside class="sidebar">
+
+  <div class="brand">
+    <div class="brand-icon">N</div>
+
+    <div>
+      <div class="brand-title">LOF NETWORK</div>
+      <div class="brand-sub">Behavior Risk Monitor</div>
+    </div>
+  </div>
+
+  <div class="section-label">📡 Monitoring</div>
+
+  <div class="nav active">🏠 Overview</div>
+  <div class="nav">🖥️ Behavior Windows</div>
+  <div class="nav">🎯 Risk Levels</div>
+  <div class="nav">🚨 Attack Types</div>
+  <div class="nav">📋 Event Logs</div>
+
+  <div class="section-label">🗂️ LOF Scored Dataset</div>
+
+  <div class="tree-item">
+    <span class="dot"></span>
+    <span class="tree-name">Normal</span>
+    <span id="normalCount">0</span>
+  </div>
+
+  <div class="tree-item">
+    <span class="dot"></span>
+    <span class="tree-name">HTTP_Flood</span>
+    <span id="httpFloodCount">0</span>
+  </div>
+
+  <div class="tree-item">
+    <span class="dot"></span>
+    <span class="tree-name">Scraping</span>
+    <span id="scrapingCount">0</span>
+  </div>
+
+  <div class="tree-item">
+    <span class="dot"></span>
+    <span class="tree-name">Scanning</span>
+    <span id="scanningCount">0</span>
+  </div>
+
+  <div class="tree-item">
+    <span class="dot"></span>
+    <span class="tree-name">SlowHTTP</span>
+    <span id="slowHttpCount">0</span>
+  </div>
+
+  <div class="tree-item">
+    <span class="dot"></span>
+    <span class="tree-name">Flash_Crowd</span>
+    <span id="flashCrowdCount">0</span>
+  </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+<main class="main">
+
+  <!-- Top bar -->
+  <div class="topbar box">
+
+    <div>
+      <span class="menu active">Home</span>
+      <span class="menu">Checks</span>
+      <span class="menu">Monitoring</span>
+      <span class="menu">Graphs</span>
+      <span class="menu">Reports</span>
+      <span class="menu">View</span>
+    </div>
+
+    <div class="status">
+      <span class="live"></span>
+      <span id="statusText">● STATIC DATASET VIEW</span>
+    </div>
+
+  </div>
+
+
+  <!-- Title -->
+  <div class="title box">
+    <h1>LOF Final Network Behavior Monitoring</h1>
+    <p>
+      Local Outlier Factor · 10-second behavior windows · scored test dataset
+    </p>
+  </div>
+
+
+  <!-- =======================================================
+       KPI
+  ======================================================== -->
+  <div class="kpis">
+
+    <div class="kpi box">
+      <div class="label">Total Windows</div>
+      <div class="value" id="totalWindows">0</div>
+      <div class="sub">LOF scored dataset</div>
+    </div>
+
+    <div class="kpi box">
+      <div class="label">Attack Windows</div>
+      <div class="value" id="attackWindows">0</div>
+      <div class="sub">Ground-truth Attack</div>
+    </div>
+
+    <div class="kpi box">
+      <div class="label">Risk 5 Windows</div>
+      <div class="value" id="risk5Windows">0</div>
+      <div class="sub">😡 Angry</div>
+    </div>
+
+    <div class="kpi box">
+      <div class="label">Attack Rate</div>
+      <div class="value" id="attackRate">0%</div>
+      <div class="sub">of all windows</div>
+    </div>
+
+    <div class="kpi box">
+      <div class="label">Median Score</div>
+      <div class="value" id="medianScore">0</div>
+      <div class="sub">LOF anomaly score</div>
+    </div>
+
+    <div class="kpi box">
+      <div class="label">F1 / ROC-AUC</div>
+      <div class="value" style="font-size:18px">
+        <span id="f1Value">0.000</span> /
+        <span id="aucValue">0.000</span>
+      </div>
+      <div class="sub">Prediction vs label</div>
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       NETWORK MAP
+  ======================================================== -->
+  <div class="network-board">
+
+    <section class="topology-panel box">
+
+      <div class="panel-head">
+        <span>🗺️ Network Behavior Map</span>
+        <span id="mapState">Static snapshot</span>
+      </div>
+
+      <div class="panel-body">
+
+        <div class="topology-wrap">
+
+          <svg
+            class="topology-svg"
+            viewBox="0 0 1000 520"
+          >
+
+            <!-- Network Links -->
+            <path id="line1" class="net-line"
+                  d="M150 120 L300 205"/>
+
+            <path id="line2" class="net-line"
+                  d="M300 205 L455 145"/>
+
+            <path id="line3" class="net-line"
+                  d="M455 145 L610 225"/>
+
+            <path id="line4" class="net-line"
+                  d="M610 225 L800 115"/>
+
+            <path id="line5" class="net-line"
+                  d="M610 225 L755 330"/>
+
+            <path id="line6" class="net-line"
+                  d="M755 330 L900 400"/>
+
+            <path id="line7" class="net-line"
+                  d="M455 145 L385 330"/>
+
+            <path id="line8" class="net-line"
+                  d="M455 145 L525 350"/>
+
+
+            <!-- Client -->
+            <g
+              id="nodeClient"
+              class="net-node"
+              transform="translate(70 70)"
+            >
+              <rect
+                class="net-body"
+                width="160"
+                height="98"
+                rx="10"
+              />
+
+              <text
+                x="12"
+                y="29"
+                style="font-size:27px"
+              >💻</text>
+
+              <text
+                x="48"
+                y="24"
+                class="net-title"
+              >Client</text>
+
+              <text
+                x="48"
+                y="40"
+                class="net-sub"
+              >Source behavior</text>
+
+              <rect
+                x="12"
+                y="52"
+                width="136"
+                height="22"
+                rx="11"
+                class="net-pill"
+              />
+
+              <text
+                x="80"
+                y="67"
+                text-anchor="middle"
+                id="clientMood"
+                class="net-pill-text"
+              >😊 Happy</text>
+
+              <text
+                x="12"
+                y="89"
+                id="clientTarget"
+                class="net-sub"
+              >Target: BENIGN</text>
+            </g>
+
+
+            <!-- Router -->
+            <g
+              id="nodeRouter"
+              class="net-node"
+              transform="translate(220 165)"
+            >
+              <rect
+                class="net-body"
+                width="160"
+                height="100"
+                rx="10"
+              />
+
+              <text
+                x="12"
+                y="30"
+                style="font-size:28px"
+              >📡</text>
+
+              <text
+                x="48"
+                y="24"
+                class="net-title"
+              >Router</text>
+
+              <text
+                x="48"
+                y="40"
+                class="net-sub"
+              >Traffic path</text>
+
+              <rect
+                x="12"
+                y="53"
+                width="136"
+                height="22"
+                rx="11"
+                class="net-pill"
+              />
+
+              <text
+                x="80"
+                y="68"
+                text-anchor="middle"
+                id="routerMood"
+                class="net-pill-text"
+              >😊 Happy</text>
+
+              <text
+                x="12"
+                y="91"
+                id="routerState"
+                class="net-sub"
+              >BENIGN</text>
+            </g>
+
+
+            <!-- Core Switch -->
+            <g
+              id="nodeSwitch"
+              class="net-node"
+              transform="translate(375 95)"
+            >
+              <rect
+                class="net-body"
+                width="170"
+                height="100"
+                rx="10"
+              />
+
+              <text
+                x="12"
+                y="30"
+                style="font-size:28px"
+              >🔀</text>
+
+              <text
+                x="48"
+                y="24"
+                class="net-title"
+              >Core Switch</text>
+
+              <text
+                x="48"
+                y="40"
+                class="net-sub"
+              >Behavior aggregation</text>
+
+              <rect
+                x="12"
+                y="53"
+                width="145"
+                height="22"
+                rx="11"
+                class="net-pill"
+              />
+
+              <text
+                x="84"
+                y="68"
+                text-anchor="middle"
+                id="switchMood"
+                class="net-pill-text"
+              >😊 Happy</text>
+
+              <text
+                x="12"
+                y="91"
+                id="switchScore"
+                class="net-sub"
+              >Score 0</text>
+            </g>
+
+
+            <!-- Firewall -->
+            <g
+              id="nodeFirewall"
+              class="net-node"
+              transform="translate(535 180)"
+            >
+              <rect
+                class="net-body"
+                width="170"
+                height="105"
+                rx="10"
+              />
+
+              <text
+                x="12"
+                y="31"
+                style="font-size:28px"
+              >🛡️</text>
+
+              <text
+                x="48"
+                y="24"
+                class="net-title"
+              >Firewall</text>
+
+              <text
+                x="48"
+                y="40"
+                class="net-sub"
+              >Risk inspection</text>
+
+              <rect
+                x="12"
+                y="54"
+                width="146"
+                height="22"
+                rx="11"
+                class="net-pill"
+              />
+
+              <text
+                x="85"
+                y="69"
+                text-anchor="middle"
+                id="firewallMood"
+                class="net-pill-text"
+              >😊 Happy</text>
+
+              <rect
+                x="12"
+                y="84"
+                width="64"
+                height="13"
+                rx="6.5"
+                class="net-badge"
+              />
+
+              <text
+                x="44"
+                y="94"
+                text-anchor="middle"
+                id="firewallRisk"
+                class="net-badge-text"
+              >Risk 1</text>
+
+              <rect
+                x="83"
+                y="84"
+                width="75"
+                height="13"
+                rx="6.5"
+                class="net-badge"
+              />
+
+              <text
+                x="120"
+                y="94"
+                text-anchor="middle"
+                id="firewallTarget"
+                class="net-badge-text"
+              >BENIGN</text>
+            </g>
+
+
+            <!-- Server -->
+            <g
+              id="nodeServer"
+              class="net-node"
+              transform="translate(770 65)"
+            >
+              <rect
+                class="net-body"
+                width="175"
+                height="105"
+                rx="10"
+              />
+
+              <text
+                x="12"
+                y="31"
+                style="font-size:28px"
+              >🖥️</text>
+
+              <text
+                x="48"
+                y="24"
+                class="net-title"
+              >Server</text>
+
+              <text
+                x="48"
+                y="40"
+                class="net-sub"
+              >Behavior endpoint</text>
+
+              <rect
+                x="12"
+                y="54"
+                width="150"
+                height="22"
+                rx="11"
+                class="net-pill"
+              />
+
+              <text
+                x="87"
+                y="69"
+                text-anchor="middle"
+                id="serverMood"
+                class="net-pill-text"
+              >😊 Happy</text>
+
+              <text
+                x="12"
+                y="92"
+                id="serverStatus"
+                class="net-sub"
+              >Normal behavior</text>
+            </g>
+
+
+            <!-- WiFi -->
+            <g
+              id="nodeWifi"
+              class="net-node"
+              transform="translate(690 305)"
+            >
+              <rect
+                class="net-body"
+                width="165"
+                height="100"
+                rx="10"
+              />
+
+              <text
+                x="12"
+                y="30"
+                style="font-size:28px"
+              >📶</text>
+
+              <text
+                x="48"
+                y="24"
+                class="net-title"
+              >Wi-Fi Router</text>
+
+              <text
+                x="48"
+                y="40"
+                class="net-sub"
+              >Client traffic</text>
+
+              <rect
+                x="12"
+                y="53"
+                width="140"
+                height="22"
+                rx="11"
+                class="net-pill"
+              />
+
+              <text
+                x="82"
+                y="68"
+                text-anchor="middle"
+                id="wifiMood"
+                class="net-pill-text"
+              >😊 Happy</text>
+
+              <text
+                x="12"
+                y="91"
+                id="wifiScore"
+                class="net-sub"
+              >Score 0</text>
+            </g>
+
+
+            <!-- Workstation -->
+            <g
+              id="nodeLaptop"
+              class="net-node"
+              transform="translate(315 315)"
+            >
+              <rect
+                class="net-body"
+                width="150"
+                height="95"
+                rx="10"
+              />
+
+              <text
+                x="12"
+                y="29"
+                style="font-size:27px"
+              >💻</text>
+
+              <text
+                x="48"
+                y="24"
+                class="net-title"
+              >Workstation</text>
+
+              <text
+                x="48"
+                y="40"
+                class="net-sub"
+              >Observed host</text>
+
+              <rect
+                x="12"
+                y="53"
+                width="126"
+                height="22"
+                rx="11"
+                class="net-pill"
+              />
+
+              <text
+                x="75"
+                y="68"
+                text-anchor="middle"
+                id="laptopMood"
+                class="net-pill-text"
+              >😊 Happy</text>
+
+              <text
+                x="12"
+                y="87"
+                id="laptopTarget"
+                class="net-sub"
+              >BENIGN</text>
+            </g>
+
+
+            <!-- Data Store -->
+            <g
+              id="nodeData"
+              class="net-node"
+              transform="translate(485 325)"
+            >
+              <rect
+                class="net-body"
+                width="160"
+                height="95"
+                rx="10"
+              />
+
+              <text
+                x="12"
+                y="29"
+                style="font-size:27px"
+              >🗄️</text>
+
+              <text
+                x="48"
+                y="24"
+                class="net-title"
+              >Data Store</text>
+
+              <text
+                x="48"
+                y="40"
+                class="net-sub"
+              >Behavior records</text>
+
+              <rect
+                x="12"
+                y="53"
+                width="136"
+                height="22"
+                rx="11"
+                class="net-pill"
+              />
+
+              <text
+                x="80"
+                y="68"
+                text-anchor="middle"
+                id="dataMood"
+                class="net-pill-text"
+              >😊 Happy</text>
+
+              <text
+                x="12"
+                y="87"
+                id="dataWindow"
+                class="net-sub"
+              >W-1</text>
+            </g>
+
+
+            <!-- Left Callout -->
+            <g>
+              <rect
+                class="map-callout"
+                x="45"
+                y="390"
+                width="215"
+                height="82"
+                rx="8"
+              />
+
+              <text
+                x="58"
+                y="412"
+                class="map-callout-title"
+              >🙂 Representative Window</text>
+
+              <text
+                x="58"
+                y="441"
+                id="mapWindow"
+                class="map-callout-value"
+                style="fill:#2d7fd3"
+              >W-1</text>
+
+              <text
+                x="128"
+                y="441"
+                id="mapTarget"
+                class="map-callout-value"
+                style="font-size:14px;fill:#2d7b5d"
+              >BENIGN</text>
+
+              <text
+                x="58"
+                y="459"
+                id="mapAttack"
+                class="map-callout-sub"
+              >Normal</text>
+            </g>
+
+
+            <!-- Risk -->
+            <g>
+              <rect
+                class="map-callout"
+                x="785"
+                y="200"
+                width="155"
+                height="90"
+                rx="8"
+              />
+
+              <text
+                x="800"
+                y="221"
+                class="map-callout-title"
+              >🎯 Risk Level</text>
+
+              <text
+                x="800"
+                y="252"
+                id="mapRisk"
+                class="map-callout-value"
+                style="fill:#59a96a"
+              >Risk 1</text>
+
+              <text
+                x="800"
+                y="274"
+                id="mapEmotion"
+                class="map-callout-title"
+              >😊 Happy</text>
+            </g>
+
+
+            <!-- Score -->
+            <g>
+              <rect
+                class="map-callout"
+                x="690"
+                y="430"
+                width="250"
+                height="62"
+                rx="8"
+              />
+
+              <text
+                x="704"
+                y="451"
+                class="map-callout-title"
+              >📈 LOF Anomaly Score</text>
+
+              <text
+                x="704"
+                y="478"
+                id="mapScore"
+                class="map-callout-value"
+                style="fill:#2d7fd3"
+              >0</text>
+
+              <text
+                x="798"
+                y="478"
+                id="mapMetric"
+                class="map-callout-sub"
+              >static snapshot</text>
+            </g>
+
+          </svg>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         RIGHT PANEL
+    ====================================================== -->
+    <aside class="monitor-right">
+
+      <section class="monitor-card">
+
+        <div class="monitor-head">
+          <span>😢 System Mood</span>
+          <span id="sideMood">Happy</span>
+        </div>
+
+        <div class="monitor-body">
+
+          <div class="mini-grid">
+
+            <div class="mini-card">
+              <span
+                class="mini-emoji"
+                id="moodEmoji"
+              >😊</span>
+
+              <div class="mini-label">
+                Network Emotion
+              </div>
+
+              <div
+                class="mini-value"
+                id="sideEmotion"
+              >Happy</div>
+
+              <div class="mini-sub">
+                representative window
+              </div>
+            </div>
+
+
+            <div class="mini-card">
+
+              <span
+                class="mini-emoji"
+                id="riskEmoji"
+              >😊</span>
+
+              <div class="mini-label">
+                Risk Level
+              </div>
+
+              <div
+                class="mini-value"
+                id="sideRisk"
+              >Risk 1</div>
+
+              <div
+                class="mini-sub"
+                id="sideRiskSub"
+              >Low anomaly</div>
+
+            </div>
+
+
+            <div class="mini-card">
+
+              <span class="mini-emoji">📊</span>
+
+              <div class="mini-label">
+                Anomaly Score
+              </div>
+
+              <div
+                class="mini-value"
+                id="sideScore"
+              >0</div>
+
+              <div class="mini-sub">
+                LOF
+              </div>
+
+            </div>
+
+
+            <div class="mini-card">
+
+              <span class="mini-emoji">🚨</span>
+
+              <div class="mini-label">
+                Detection
+              </div>
+
+              <div
+                class="mini-value"
+                id="sideTarget"
+              >BENIGN</div>
+
+              <div
+                class="mini-sub"
+                id="sideAttack"
+              >Normal</div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Event log -->
+      <section class="monitor-card">
+
+        <div class="monitor-head">
+          <span>📋 Highest Risk Windows</span>
+          <span id="netEventCount">0</span>
+        </div>
+
+        <div id="netEventLog"></div>
+
+      </section>
+
+
+      <!-- Model -->
+      <section class="monitor-card">
+
+        <div class="monitor-head">
+          <span>📊 Final Model</span>
+          <span>LOF</span>
+        </div>
+
+        <div class="monitor-body">
+
+          <div class="mini-grid">
+
+            <div class="mini-card">
+              <div class="mini-label">Accuracy</div>
+              <div class="mini-value" id="accuracyValue">
+                0.000
+              </div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Precision</div>
+              <div class="mini-value" id="precisionValue">
+                0.000
+              </div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Recall</div>
+              <div class="mini-value" id="recallValue">
+                0.000
+              </div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">F1</div>
+              <div class="mini-value" id="f1CardValue">
+                0.000
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Current dataset -->
+      <section class="monitor-card">
+
+        <div class="monitor-head">
+          <span>📌 Dataset</span>
+          <span id="datasetCount">0 rows</span>
+        </div>
+
+        <div class="monitor-body">
+
+          <div class="network-footer-note">
+            LOF scored behavior dataset.
+            Each behavior window represents a 10-second interval.
+          </div>
+
+        </div>
+
+      </section>
+
+    </aside>
+
+  </div>
+
+
+  <!-- =======================================================
+       CURRENT WINDOW
+  ======================================================== -->
+  <div class="section-row">
+
+    <section class="panel box">
+
+      <div class="head">
+        <span>🎯 Representative Risk Classification</span>
+
+        <span
+          id="riskPill"
+          class="risk r1"
+        >Risk —</span>
+      </div>
+
+      <div class="body">
+
+        <div class="current">
+
+          <div class="cell">
+            <div class="clabel">
+              Behavior Window
+            </div>
+
+            <div
+              class="cvalue"
+              id="window"
+            >—</div>
+          </div>
+
+
+          <div class="cell">
+            <div class="clabel">
+              Traffic Type
+            </div>
+
+            <div
+              class="cvalue"
+              id="attack"
+            >—</div>
+          </div>
+
+
+          <div class="cell">
+            <div class="clabel">
+              Network Emotion
+            </div>
+
+            <div
+              class="cvalue"
+              id="curEmotion"
+            >—</div>
+          </div>
+
+
+          <div class="cell">
+            <div class="clabel">
+              Prediction
+            </div>
+
+            <div
+              class="cvalue"
+              id="target"
+            >—</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Score summary -->
+    <section class="panel box">
+
+      <div class="head">
+        <span>📈 LOF Score Summary</span>
+        <span>Static dataset</span>
+      </div>
+
+      <div class="body">
+
+        <div class="current">
+
+          <div class="cell">
+            <div class="clabel">
+              Minimum
+            </div>
+
+            <div
+              class="cvalue"
+              id="minScore"
+            >0</div>
+          </div>
+
+          <div class="cell">
+            <div class="clabel">
+              Median
+            </div>
+
+            <div
+              class="cvalue"
+              id="summaryMedian"
+            >0</div>
+          </div>
+
+          <div class="cell">
+            <div class="clabel">
+              Maximum
+            </div>
+
+            <div
+              class="cvalue"
+              id="maxScore"
+            >0</div>
+          </div>
+
+          <div class="cell">
+            <div class="clabel">
+              Risk 5
+            </div>
+
+            <div
+              class="cvalue"
+              id="risk5Summary"
+            >0</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- =======================================================
+       THRESHOLD
+  ======================================================== -->
+  <section class="panel box" style="margin-bottom:7px">
+
+    <div class="head">
+      <span>📊 Risk Level Distribution</span>
+      <span>LOF scored dataset</span>
+    </div>
+
+    <div class="body">
+
+      <div class="thresholds">
+
+        <div class="th">
+          <small>Risk 1 · 😊 Happy</small>
+          <strong id="risk1Count">0</strong>
+        </div>
+
+        <div class="th">
+          <small>Risk 2 · 🔔 Alert</small>
+          <strong id="risk2Count">0</strong>
+        </div>
+
+        <div class="th">
+          <small>Risk 3 · 😰 Anxious</small>
+          <strong id="risk3Count">0</strong>
+        </div>
+
+        <div class="th">
+          <small>Risk 4 · 😣 Stressed</small>
+          <strong id="risk4Count">0</strong>
+        </div>
+
+        <div class="th">
+          <small>Risk 5 · 😡 Angry</small>
+          <strong id="risk5Count">0</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       DATA TABLE
+  ======================================================== -->
+  <section class="panel box">
+
+    <div class="head">
+      <span>🖥️ LOF Behavior Windows</span>
+      <span>Highest anomaly scores</span>
+    </div>
+
+    <div class="table-wrap">
+
+      <table class="data-table">
+
+        <thead>
+          <tr>
+            <th>Window</th>
+            <th>Run</th>
+            <th>Traffic Type</th>
+            <th>Label</th>
+            <th>LOF Score</th>
+            <th>Prediction</th>
+            <th>Risk</th>
+            <th>Emotion</th>
+          </tr>
+        </thead>
+
+        <tbody id="dataTableBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</main>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   CONFIG
+============================================================ */
+
+const CSV_FILE = "lof_test_scored_risk_emotion (1).csv";
+
+
+/* ============================================================
+   EMOTION
+============================================================ */
+
+const EMOJI = {
+  Happy:"😊",
+  Alert:"🔔",
+  Anxious:"😰",
+  Stressed:"😣",
+  Angry:"😡"
+};
+
+
+const RISK_CLASS = {
+  1:"r1",
+  2:"r2",
+  3:"r3",
+  4:"r4",
+  5:"r5"
+};
+
+
+/* ============================================================
+   CSV PARSER
+============================================================ */
+
+function parseCSV(text){
+
+  const rows = [];
+  let row = [];
+  let value = "";
+  let insideQuotes = false;
+
+  for(let i=0;i<text.length;i++){
+
+    const c = text[i];
+    const n = text[i+1];
+
+    if(c === '"'){
+
+      if(insideQuotes && n === '"'){
+        value += '"';
+        i++;
+      }else{
+        insideQuotes = !insideQuotes;
+      }
+
+    }else if(c === ',' && !insideQuotes){
+
+      row.push(value);
+      value = "";
+
+    }else if((c === '\n' || c === '\r') && !insideQuotes){
+
+      if(c === '\r' && n === '\n') i++;
+
+      row.push(value);
+      value = "";
+
+      if(row.some(v => v !== "")){
+        rows.push(row);
+      }
+
+      row = [];
+
+    }else{
+
+      value += c;
+
+    }
+  }
+
+  if(value !== "" || row.length > 0){
+    row.push(value);
+    rows.push(row);
+  }
+
+  if(rows.length < 2){
+    return [];
+  }
+
+  const headers = rows[0].map(h => h.trim());
+
+  return rows
+    .slice(1)
+    .map(r => {
+
+      const obj = {};
+
+      headers.forEach((h,i) => {
+        obj[h] = (r[i] ?? "").trim();
+      });
+
+      return normalizeRow(obj);
+
+    })
+    .filter(Boolean);
+}
+
+
+/* ============================================================
+   NORMALIZE CSV DATA
+============================================================ */
+
+function normalizeRow(r){
+
+  return {
+
+    run_id: r.run_id,
+
+    experiment: r.experiment,
+
+    capture_file: r.capture_file,
+
+    window_start_s: Number(r.window_start_s),
+
+    window_end_s: Number(r.window_end_s),
+
+    traffic_type: r.traffic_type,
+
+    label_binary: r.label_binary,
+
+    anomaly_score: Number(r.anomaly_score),
+
+    prediction: r.prediction,
+
+    risk_level: Number(r.risk_level),
+
+    system_emotion: r.system_emotion,
+
+    dominant_feature: r.dominant_feature,
+
+    dominant_category: r.dominant_category
+
+  };
+}
+
+
+/* ============================================================
+   HELPERS
+============================================================ */
+
+function formatNumber(v,digits=4){
+
+  const n = Number(v);
+
+  if(!Number.isFinite(n)){
+    return "0";
+  }
+
+  return n.toLocaleString(
+    undefined,
+    {
+      maximumFractionDigits:digits
+    }
+  );
+}
+
+
+function median(values){
+
+  if(!values.length){
+    return 0;
+  }
+
+  const a = values
+    .slice()
+    .sort((x,y)=>x-y);
+
+  const mid = Math.floor(a.length/2);
+
+  if(a.length % 2 === 0){
+    return (a[mid-1] + a[mid]) / 2;
+  }
+
+  return a[mid];
+}
+
+
+function setText(id,value){
+
+  const el = document.getElementById(id);
+
+  if(el){
+    el.textContent = value;
+  }
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ============================================================
+   BINARY CLASSIFICATION
+============================================================ */
+
+function isAttackLabel(value){
+
+  const s = String(value ?? "")
+    .trim()
+    .toLowerCase();
+
+  return (
+    s === "attack" ||
+    s === "1" ||
+    s === "true"
+  );
+
+}
+
+
+function isAttackPrediction(value){
+
+  const s = String(value ?? "")
+    .trim()
+    .toLowerCase();
+
+  return (
+    s === "attack" ||
+    s === "1" ||
+    s === "true"
+  );
+
+}
+
+
+/* ============================================================
+   METRICS
+============================================================ */
+
+function calculateMetrics(data){
+
+  let TP = 0;
+  let TN = 0;
+  let FP = 0;
+  let FN = 0;
+
+  data.forEach(r => {
+
+    const actual = isAttackLabel(r.label_binary);
+    const pred = isAttackPrediction(r.prediction);
+
+    if(actual && pred) TP++;
+    else if(!actual && !pred) TN++;
+    else if(!actual && pred) FP++;
+    else if(actual && !pred) FN++;
+
+  });
+
+
+  const total = TP + TN + FP + FN;
+
+  const accuracy =
+    total
+      ? (TP + TN) / total
+      : 0;
+
+  const precision =
+    (TP + FP)
+      ? TP / (TP + FP)
+      : 0;
+
+  const recall =
+    (TP + FN)
+      ? TP / (TP + FN)
+      : 0;
+
+  const f1 =
+    (precision + recall)
+      ? (2 * precision * recall) /
+        (precision + recall)
+      : 0;
+
+
+  return {
+    TP,
+    TN,
+    FP,
+    FN,
+    accuracy,
+    precision,
+    recall,
+    f1
+  };
+
+}
+
+
+/* ============================================================
+   ROC-AUC
+============================================================ */
+
+function calculateAUC(data){
+
+  const items = data
+    .map(r => ({
+      score:Number(r.anomaly_score),
+      label:isAttackLabel(r.label_binary) ? 1 : 0
+    }))
+    .filter(x => Number.isFinite(x.score));
+
+  const positives =
+    items.filter(x=>x.label===1).length;
+
+  const negatives =
+    items.filter(x=>x.label===0).length;
+
+  if(!positives || !negatives){
+    return 0;
+  }
+
+  items.sort((a,b)=>a.score-b.score);
+
+  let rankSum = 0;
+
+  items.forEach((x,i)=>{
+    if(x.label===1){
+      rankSum += i+1;
+    }
+  });
+
+  return (
+    rankSum -
+    positives * (positives + 1) / 2
+  ) / (
+    positives * negatives
+  );
+
+}
+
+
+/* ============================================================
+   SIDEBAR COUNTS
+============================================================ */
+
+function renderSidebar(data){
+
+  const counts = {};
+
+  data.forEach(r => {
+
+    const type = String(r.traffic_type || "")
+      .trim();
+
+    counts[type] =
+      (counts[type] || 0) + 1;
+
+  });
+
+
+  setText(
+    "normalCount",
+    counts["Normal"] || 0
+  );
+
+  setText(
+    "httpFloodCount",
+    counts["HTTP_Flood"] || 0
+  );
+
+  setText(
+    "scrapingCount",
+    counts["Scraping"] || 0
+  );
+
+  setText(
+    "scanningCount",
+    counts["Scanning"] || 0
+  );
+
+  setText(
+    "slowHttpCount",
+    counts["SlowHTTP"] || 0
+  );
+
+  setText(
+    "flashCrowdCount",
+    counts["Flash_Crowd"] || 0
+  );
+
+}
+
+
+/* ============================================================
+   KPI
+============================================================ */
+
+function renderKPI(data){
+
+  const total = data.length;
+
+  const attacks =
+    data.filter(r =>
+      isAttackLabel(r.label_binary)
+    ).length;
+
+  const risk5 =
+    data.filter(r =>
+      Number(r.risk_level) === 5
+    ).length;
+
+  const scores =
+    data
+      .map(r=>Number(r.anomaly_score))
+      .filter(Number.isFinite);
+
+  const med = median(scores);
+
+  const metrics =
+    calculateMetrics(data);
+
+  const auc =
+    calculateAUC(data);
+
+
+  setText(
+    "totalWindows",
+    total.toLocaleString()
+  );
+
+  setText(
+    "attackWindows",
+    attacks.toLocaleString()
+  );
+
+  setText(
+    "risk5Windows",
+    risk5.toLocaleString()
+  );
+
+  setText(
+    "attackRate",
+    total
+      ? ((attacks / total) * 100).toFixed(1) + "%"
+      : "0%"
+  );
+
+  setText(
+    "medianScore",
+    formatNumber(med,4)
+  );
+
+  setText(
+    "f1Value",
+    metrics.f1.toFixed(3)
+  );
+
+  setText(
+    "aucValue",
+    auc.toFixed(3)
+  );
+
+  setText(
+    "accuracyValue",
+    metrics.accuracy.toFixed(3)
+  );
+
+  setText(
+    "precisionValue",
+    metrics.precision.toFixed(3)
+  );
+
+  setText(
+    "recallValue",
+    metrics.recall.toFixed(3)
+  );
+
+  setText(
+    "f1CardValue",
+    metrics.f1.toFixed(3)
+  );
+
+  setText(
+    "datasetCount",
+    total.toLocaleString() + " rows"
+  );
+
+}
+
+
+/* ============================================================
+   RISK DISTRIBUTION
+============================================================ */
+
+function renderRiskDistribution(data){
+
+  const count = {
+    1:0,
+    2:0,
+    3:0,
+    4:0,
+    5:0
+  };
+
+  data.forEach(r => {
+
+    const risk =
+      Number(r.risk_level);
+
+    if(count[risk] !== undefined){
+      count[risk]++;
+    }
+
+  });
+
+
+  setText("risk1Count",count[1].toLocaleString());
+  setText("risk2Count",count[2].toLocaleString());
+  setText("risk3Count",count[3].toLocaleString());
+  setText("risk4Count",count[4].toLocaleString());
+  setText("risk5Count",count[5].toLocaleString());
+
+  setText("risk5Summary",count[5].toLocaleString());
+
+}
+
+
+/* ============================================================
+   REPRESENTATIVE WINDOW
+============================================================ */
+
+function getRepresentativeWindow(data){
+
+  if(!data.length){
+    return null;
+  }
+
+  return data.reduce(
+    (best,current) => {
+
+      return Number(current.anomaly_score) >
+             Number(best.anomaly_score)
+        ? current
+        : best;
+
+    },
+    data[0]
+  );
+
+}
+
+
+/* ============================================================
+   NETWORK MAP
+============================================================ */
+
+function updateNetworkMap(r){
+
+  if(!r){
+    return;
+  }
+
+  const emotion =
+    r.system_emotion || "Happy";
+
+  const emoji =
+    EMOJI[emotion] || "😊";
+
+  const target =
+    isAttackLabel(r.label_binary)
+      ? "ATTACK"
+      : "BENIGN";
+
+  const risk =
+    Number(r.risk_level) || 1;
+
+  const score =
+    formatNumber(r.anomaly_score,4);
+
+  const riskDescription = {
+
+    1:"Low anomaly",
+    2:"Watch condition",
+    3:"Elevated anomaly",
+    4:"High anomaly",
+    5:"Critical anomaly"
+
+  }[risk] || "Anomaly";
+
+
+  const ids = [
+
+    "clientMood",
+    "routerMood",
+    "switchMood",
+    "firewallMood",
+    "serverMood",
+    "wifiMood",
+    "laptopMood",
+    "dataMood"
+
+  ];
+
+  ids.forEach(id => {
+
+    setText(
+      id,
+      emoji + " " + emotion
+    );
+
+  });
+
+
+  setText(
+    "clientTarget",
+    "Target: " + target
+  );
+
+  setText(
+    "routerState",
+    target
+  );
+
+  setText(
+    "switchScore",
+    "Score " + score
+  );
+
+  setText(
+    "firewallRisk",
+    "Risk " + risk
+  );
+
+  setText(
+    "firewallTarget",
+    target
+  );
+
+  setText(
+    "serverStatus",
+    target === "ATTACK"
+      ? r.traffic_type
+      : "Normal behavior"
+  );
+
+  setText(
+    "wifiScore",
+    "Score " + score
+  );
+
+  setText(
+    "laptopTarget",
+    target
+  );
+
+  setText(
+    "dataWindow",
+    "W-" + r.window_start_s
+  );
+
+
+  setText(
+    "mapWindow",
+    "W-" + r.window_start_s
+  );
+
+  setText(
+    "mapTarget",
+    target
+  );
+
+  setText(
+    "mapAttack",
+    r.traffic_type
+  );
+
+  setText(
+    "mapRisk",
+    "Risk " + risk
+  );
+
+  setText(
+    "mapEmotion",
+    emoji + " " + emotion
+  );
+
+  setText(
+    "mapScore",
+    score
+  );
+
+  setText(
+    "mapMetric",
+    r.run_id +
+    " · " +
+    r.window_start_s.toFixed(0) +
+    "–" +
+    r.window_end_s.toFixed(0) +
+    " s"
+  );
+
+
+  setText(
+    "sideMood",
+    emotion
+  );
+
+  setText(
+    "sideEmotion",
+    emotion
+  );
+
+  setText(
+    "sideRisk",
+    "Risk " + risk
+  );
+
+  setText(
+    "sideRiskSub",
+    riskDescription
+  );
+
+  setText(
+    "sideScore",
+    score
+  );
+
+  setText(
+    "sideTarget",
+    target
+  );
+
+  setText(
+    "sideAttack",
+    target === "ATTACK"
+      ? r.traffic_type
+      : "Normal"
+  );
+
+
+  setText(
+    "window",
+    "W-" + r.window_start_s
+  );
+
+  setText(
+    "attack",
+    r.traffic_type
+  );
+
+  setText(
+    "curEmotion",
+    emoji + " " + emotion
+  );
+
+  setText(
+    "target",
+    r.prediction
+  );
+
+
+  setText(
+    "riskPill",
+    "Risk " + risk
+  );
+
+
+  const riskPill =
+    document.getElementById("riskPill");
+
+  if(riskPill){
+
+    riskPill.className =
+      "risk " +
+      (RISK_CLASS[risk] || "r1");
+
+  }
+
+
+  setText(
+    "statusText",
+    "● STATIC DATASET VIEW"
+  );
+
+  setText(
+    "mapState",
+    target + " · " + r.traffic_type
+  );
+
+
+  setText(
+    "moodEmoji",
+    emoji
+  );
+
+  setText(
+    "riskEmoji",
+    emoji
+  );
+
+
+  const hot =
+    risk >= 4 ||
+    target === "ATTACK";
+
+
+  const nodeIds = [
+
+    "nodeClient",
+    "nodeRouter",
+    "nodeSwitch",
+    "nodeFirewall",
+    "nodeServer",
+    "nodeWifi",
+    "nodeLaptop",
+    "nodeData"
+
+  ];
+
+  nodeIds.forEach(id => {
+
+    const el =
+      document.getElementById(id);
+
+    if(el){
+      el.classList.toggle(
+        "hot",
+        hot
+      );
+    }
+
+  });
+
+
+  const lineIds = [
+    "line1",
+    "line2",
+    "line3",
+    "line4",
+    "line5",
+    "line6",
+    "line7",
+    "line8"
+  ];
+
+  lineIds.forEach(id => {
+
+    const el =
+      document.getElementById(id);
+
+    if(el){
+      el.classList.toggle(
+        "alert",
+        hot
+      );
+    }
+
+  });
+
+}
+
+
+/* ============================================================
+   EVENT LOG
+============================================================ */
+
+function renderEventLog(data){
+
+  const log =
+    document.getElementById(
+      "netEventLog"
+    );
+
+  if(!log){
+    return;
+  }
+
+  log.innerHTML = "";
+
+
+  const rows =
+    data
+      .slice()
+      .sort(
+        (a,b) =>
+          Number(b.anomaly_score) -
+          Number(a.anomaly_score)
+      )
+      .slice(0,7);
+
+
+  rows.forEach(r => {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "net-event";
+
+
+    const emoji =
+      EMOJI[r.system_emotion] || "😊";
+
+    const attack =
+      isAttackLabel(r.label_binary);
+
+
+    row.innerHTML =
+
+      "<div class='who'>" +
+        "W-" +
+        escapeHTML(
+          r.window_start_s
+        ) +
+      "</div>" +
+
+      "<div class='what'>" +
+        emoji + " " +
+        escapeHTML(
+          r.system_emotion
+        ) +
+        " · " +
+        escapeHTML(
+          r.traffic_type
+        ) +
+      "</div>" +
+
+      "<div class='state' style='color:" +
+        (
+          attack
+            ? "#b52f2f"
+            : "#2d7b5d"
+        ) +
+      "'>" +
+        (
+          attack
+            ? "ATTACK"
+            : "BENIGN"
+        ) +
+      "</div>";
+
+
+    log.appendChild(row);
+
+  });
+
+
+  setText(
+    "netEventCount",
+    rows.length
+  );
+
+}
+
+
+/* ============================================================
+   DATA TABLE
+============================================================ */
+
+function renderTable(data){
+
+  const body =
+    document.getElementById(
+      "dataTableBody"
+    );
+
+  if(!body){
+    return;
+  }
+
+  body.innerHTML = "";
+
+
+  const rows =
+    data
+      .slice()
+      .sort(
+        (a,b) =>
+          Number(b.anomaly_score) -
+          Number(a.anomaly_score)
+      )
+      .slice(0,50);
+
+
+  rows.forEach(r => {
+
+    const tr =
+      document.createElement("tr");
+
+
+    const risk =
+      Number(r.risk_level);
+
+    const emoji =
+      EMOJI[r.system_emotion] || "😊";
+
+
+    tr.innerHTML =
+
+      "<td>W-" +
+        escapeHTML(
+          r.window_start_s
+        ) +
+      "</td>" +
+
+      "<td>" +
+        escapeHTML(
+          r.run_id
+        ) +
+      "</td>" +
+
+      "<td>" +
+        escapeHTML(
+          r.traffic_type
+        ) +
+      "</td>" +
+
+      "<td>" +
+        escapeHTML(
+          r.label_binary
+        ) +
+      "</td>" +
+
+      "<td>" +
+        escapeHTML(
+          formatNumber(
+            r.anomaly_score,
+            4
+          )
+        ) +
+      "</td>" +
+
+      "<td>" +
+        escapeHTML(
+          r.prediction
+        ) +
+      "</td>" +
+
+      "<td>" +
+        "<span class='risk " +
+        (RISK_CLASS[risk] || "r1") +
+        "'>" +
+        "Risk " +
+        risk +
+        "</span>" +
+      "</td>" +
+
+      "<td>" +
+        emoji +
+        " " +
+        escapeHTML(
+          r.system_emotion
+        ) +
+      "</td>";
+
+
+    body.appendChild(tr);
+
+  });
+
+}
+
+
+/* ============================================================
+   SCORE SUMMARY
+============================================================ */
+
+function renderScoreSummary(data){
+
+  const scores =
+    data
+      .map(r=>Number(r.anomaly_score))
+      .filter(Number.isFinite);
+
+
+  if(!scores.length){
+    return;
+  }
+
+
+  setText(
+    "minScore",
+    formatNumber(
+      Math.min(...scores),
+      4
+    )
+  );
+
+
+  setText(
+    "summaryMedian",
+    formatNumber(
+      median(scores),
+      4
+    )
+  );
+
+
+  setText(
+    "maxScore",
+    formatNumber(
+      Math.max(...scores),
+      4
+    )
+  );
+
+}
+
+
+/* ============================================================
+   MAIN DASHBOARD
+============================================================ */
+
+async function loadDashboard(){
+
+  try{
+
+    const response =
+      await fetch(CSV_FILE);
+
+    if(!response.ok){
+
+      throw new Error(
+        "Cannot load CSV: " +
+        response.status
+      );
+
+    }
+
+
+    const text =
+      await response.text();
+
+
+    const data =
+      parseCSV(text);
+
+
+    if(!data.length){
+
+      throw new Error(
+        "CSV contains no usable rows."
+      );
+
+    }
+
+
+    window.LOF_DATA = data;
+
+
+    renderSidebar(data);
+
+    renderKPI(data);
+
+    renderRiskDistribution(data);
+
+    renderScoreSummary(data);
+
+    renderEventLog(data);
+
+    renderTable(data);
+
+
+    const representative =
+      getRepresentativeWindow(data);
+
+
+    updateNetworkMap(
+      representative
+    );
+
+
+    setText(
+      "sideNote",
+      ""
+    );
+
+
+    console.log(
+      "LOF Dashboard loaded:",
+      data.length,
+      "rows"
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    document.body.innerHTML =
+
+      "<div style='padding:40px;font-family:Segoe UI,Arial'>" +
+
+      "<h2>ไม่สามารถโหลดข้อมูล LOF ได้</h2>" +
+
+      "<p>" +
+      "ตรวจสอบว่าไฟล์ " +
+      "<b>" +
+      escapeHTML(CSV_FILE) +
+      "</b>" +
+      " อยู่โฟลเดอร์เดียวกับไฟล์ HTML</p>" +
+
+      "<p>แนะนำให้เปิดผ่าน VS Code Live Server</p>" +
+
+      "<pre style='background:#f3f3f3;padding:15px'>" +
+      escapeHTML(error.message) +
+      "</pre>" +
+
+      "</div>";
+
+  }
+
+}
+
+
+/* ============================================================
+   START
+============================================================ */
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    loadDashboard,
+    {once:true}
+  );
+
+}else{
+
+  loadDashboard();
+
+}
+
+</script>
+
+</body>
+</html>
