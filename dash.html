@@ -15,6 +15,10 @@ body{
   color:#1b2733;
 }
 
+/* =========================
+   Dashboard Layout
+========================= */
+
 .app{
   display:grid;
   grid-template-columns:235px 1fr;
@@ -77,37 +81,14 @@ body{
   color:#fff;
 }
 
-.tree-item{
-  display:flex;
-  gap:6px;
-  align-items:center;
-  padding:6px 7px;
-  border-bottom:1px solid #2e3942;
-  font-size:10px;
-}
-
-.dot{
-  width:7px;
-  height:7px;
-  background:#59d6bd;
-  border-radius:50%;
-}
-
-.tree-name{
-  flex:1;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.main{
-  padding:11px;
-}
-
 .box{
   background:#fff;
   border:1px solid #d5dde4;
   border-radius:7px;
+}
+
+.main{
+  padding:11px;
 }
 
 .topbar{
@@ -147,23 +128,10 @@ body{
   margin-right:6px;
 }
 
-.title{
-  padding:9px 11px;
-  margin-bottom:8px;
-}
+/* =========================
+   KPI
+========================= */
 
-.title h1{
-  margin:0;
-  font-size:17px;
-}
-
-.title p{
-  margin:3px 0 0;
-  color:#7c8996;
-  font-size:10px;
-}
-
-/* KPI */
 .kpis{
   display:grid;
   grid-template-columns:repeat(6,1fr);
@@ -192,7 +160,10 @@ body{
   color:#9aa5af;
 }
 
-/* Network */
+/* =========================
+   Network Map
+========================= */
+
 .network-board{
   display:grid;
   grid-template-columns:minmax(0,1.9fr) minmax(280px,.75fr);
@@ -225,19 +196,6 @@ body{
     linear-gradient(#dfe7eb 1px,transparent 1px),
     linear-gradient(90deg,#dfe7eb 1px,transparent 1px);
   background-size:24px 24px;
-}
-
-.topology-wrap::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(255,255,255,.82),
-      rgba(255,255,255,.18)
-    );
-  pointer-events:none;
 }
 
 .topology-svg{
@@ -290,17 +248,6 @@ body{
   fill:#3e554e;
 }
 
-.net-badge{
-  fill:#fff;
-  stroke:#c2ccd2;
-}
-
-.net-badge-text{
-  font-size:9px;
-  font-weight:900;
-  fill:#29353f;
-}
-
 .map-callout{
   fill:#fff;
   stroke:#c8d2d8;
@@ -323,7 +270,10 @@ body{
   fill:#77858f;
 }
 
-/* Right monitor */
+/* =========================
+   Right Monitor
+========================= */
+
 .monitor-right{
   display:flex;
   flex-direction:column;
@@ -389,90 +339,9 @@ body{
   margin-top:2px;
 }
 
-.net-event{
-  display:grid;
-  grid-template-columns:62px 1fr 64px;
-  gap:5px;
-  padding:6px 7px;
-  border-bottom:1px solid #edf0f2;
-  font-size:8px;
-}
-
-.net-event:last-child{
-  border-bottom:0;
-}
-
-.net-event .who{
-  font-weight:900;
-  color:#3b4a54;
-}
-
-.net-event .what{
-  color:#6e7d87;
-}
-
-.net-event .state{
-  text-align:right;
-  font-weight:900;
-}
-
-.network-footer-note{
-  margin-top:6px;
-  color:#7d8992;
-  font-size:8px;
-}
-
-/* Lower cards */
-.section-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-  margin-bottom:7px;
-}
-
-.panel{
-  overflow:hidden;
-}
-
-.head{
-  padding:8px 9px;
-  border-bottom:1px solid #e3e8ec;
-  font-size:11px;
-  font-weight:800;
-  display:flex;
-  justify-content:space-between;
-}
-
-.body{
-  padding:7px;
-}
-
-.current{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:6px;
-}
-
-.cell{
-  background:#f7f9fb;
-  border:1px solid #dfe5ea;
-  border-radius:6px;
-  padding:7px;
-}
-
-.clabel{
-  font-size:9px;
-  color:#7e8994;
-}
-
-.cvalue{
-  font-size:13px;
-  font-weight:800;
-  margin-top:3px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+/* =========================
+   Risk
+========================= */
 
 .risk{
   display:inline-block;
@@ -507,28 +376,9 @@ body{
   color:#a52e2e;
 }
 
-.thresholds{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:6px;
-}
-
-.th{
-  background:#f7f9fb;
-  border:1px solid #e0e5e9;
-  border-radius:6px;
-  padding:7px;
-}
-
-.th small{
-  color:#7e8994;
-}
-
-.th strong{
-  display:block;
-  font:800 11px Consolas,monospace;
-  margin-top:2px;
-}
+/* =========================
+   Table
+========================= */
 
 .data-table{
   width:100%;
@@ -556,6 +406,7 @@ body{
 }
 
 @media(max-width:1100px){
+
   .kpis{
     grid-template-columns:repeat(3,1fr);
   }
@@ -564,12 +415,10 @@ body{
     grid-template-columns:1fr;
   }
 
-  .section-row{
-    grid-template-columns:1fr;
-  }
 }
 
 @media(max-width:760px){
+
   .app{
     grid-template-columns:1fr;
   }
@@ -582,13 +431,6 @@ body{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .current{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .thresholds{
-    grid-template-columns:repeat(2,1fr);
-  }
 }
 </style>
 </head>
@@ -597,13 +439,10 @@ body{
 
 <div class="app">
 
-<!-- =========================================================
-     SIDEBAR
-========================================================= -->
 <aside class="sidebar">
 
   <div class="brand">
-    <div class="brand-icon">N</div>
+    <div class="brand-icon">L</div>
 
     <div>
       <div class="brand-title">LOF NETWORK</div>
@@ -619,7 +458,7 @@ body{
   <div class="nav">🚨 Attack Types</div>
   <div class="nav">📋 Event Logs</div>
 
-  <div class="section-label">🗂️ LOF Scored Dataset</div>
+  <div class="section-label">🗂️ LOF Dataset</div>
 
   <div class="tree-item">
     <span class="dot"></span>
@@ -659,13 +498,8 @@ body{
 
 </aside>
 
-
-<!-- =========================================================
-     MAIN
-========================================================= -->
 <main class="main">
 
-  <!-- Top bar -->
   <div class="topbar box">
 
     <div>
@@ -679,13 +513,11 @@ body{
 
     <div class="status">
       <span class="live"></span>
-      <span id="statusText">● STATIC DATASET VIEW</span>
+      <span>● STATIC DATASET VIEW</span>
     </div>
 
   </div>
 
-
-  <!-- Title -->
   <div class="title box">
     <h1>LOF Final Network Behavior Monitoring</h1>
     <p>
@@ -693,10 +525,6 @@ body{
     </p>
   </div>
 
-
-  <!-- =======================================================
-       KPI
-  ======================================================== -->
   <div class="kpis">
 
     <div class="kpi box">
@@ -731,7 +559,7 @@ body{
 
     <div class="kpi box">
       <div class="label">F1 / ROC-AUC</div>
-      <div class="value" style="font-size:18px">
+      <div class="value">
         <span id="f1Value">0.000</span> /
         <span id="aucValue">0.000</span>
       </div>
@@ -740,10 +568,6 @@ body{
 
   </div>
 
-
-  <!-- =======================================================
-       NETWORK MAP
-  ======================================================== -->
   <div class="network-board">
 
     <section class="topology-panel box">
@@ -762,38 +586,19 @@ body{
             viewBox="0 0 1000 520"
           >
 
-            <!-- Network Links -->
-            <path id="line1" class="net-line"
-                  d="M150 120 L300 205"/>
+            <path class="net-line" d="M150 120 L300 205"/>
+            <path class="net-line" d="M300 205 L455 145"/>
+            <path class="net-line" d="M455 145 L610 225"/>
+            <path class="net-line" d="M610 225 L800 115"/>
+            <path class="net-line" d="M610 225 L755 330"/>
+            <path class="net-line" d="M755 330 L900 400"/>
+            <path class="net-line" d="M455 145 L385 330"/>
+            <path class="net-line" d="M455 145 L525 350"/>
 
-            <path id="line2" class="net-line"
-                  d="M300 205 L455 145"/>
+            <g id="nodeClient"
+               class="net-node"
+               transform="translate(70 70)">
 
-            <path id="line3" class="net-line"
-                  d="M455 145 L610 225"/>
-
-            <path id="line4" class="net-line"
-                  d="M610 225 L800 115"/>
-
-            <path id="line5" class="net-line"
-                  d="M610 225 L755 330"/>
-
-            <path id="line6" class="net-line"
-                  d="M755 330 L900 400"/>
-
-            <path id="line7" class="net-line"
-                  d="M455 145 L385 330"/>
-
-            <path id="line8" class="net-line"
-                  d="M455 145 L525 350"/>
-
-
-            <!-- Client -->
-            <g
-              id="nodeClient"
-              class="net-node"
-              transform="translate(70 70)"
-            >
               <rect
                 class="net-body"
                 width="160"
@@ -801,56 +606,36 @@ body{
                 rx="10"
               />
 
-              <text
-                x="12"
-                y="29"
-                style="font-size:27px"
-              >💻</text>
+              <text x="12" y="29"
+                    style="font-size:27px">💻</text>
 
-              <text
-                x="48"
-                y="24"
-                class="net-title"
-              >Client</text>
+              <text x="48" y="24"
+                    class="net-title">Client</text>
 
-              <text
-                x="48"
-                y="40"
-                class="net-sub"
-              >Source behavior</text>
+              <text x="48" y="40"
+                    class="net-sub">Source behavior</text>
 
-              <rect
-                x="12"
-                y="52"
-                width="136"
-                height="22"
-                rx="11"
-                class="net-pill"
-              />
+              <rect x="12" y="52"
+                    width="136"
+                    height="22"
+                    rx="11"
+                    class="net-pill"/>
 
-              <text
-                x="80"
-                y="67"
-                text-anchor="middle"
-                id="clientMood"
-                class="net-pill-text"
-              >😊 Happy</text>
+              <text x="80" y="67"
+                    text-anchor="middle"
+                    id="clientMood"
+                    class="net-pill-text">😊 Happy</text>
 
-              <text
-                x="12"
-                y="89"
-                id="clientTarget"
-                class="net-sub"
-              >Target: BENIGN</text>
+              <text x="12" y="89"
+                    id="clientTarget"
+                    class="net-sub">Target: BENIGN</text>
+
             </g>
 
+            <g id="nodeRouter"
+               class="net-node"
+               transform="translate(220 165)">
 
-            <!-- Router -->
-            <g
-              id="nodeRouter"
-              class="net-node"
-              transform="translate(220 165)"
-            >
               <rect
                 class="net-body"
                 width="160"
@@ -858,56 +643,36 @@ body{
                 rx="10"
               />
 
-              <text
-                x="12"
-                y="30"
-                style="font-size:28px"
-              >📡</text>
+              <text x="12" y="30"
+                    style="font-size:28px">📡</text>
 
-              <text
-                x="48"
-                y="24"
-                class="net-title"
-              >Router</text>
+              <text x="48" y="24"
+                    class="net-title">Router</text>
 
-              <text
-                x="48"
-                y="40"
-                class="net-sub"
-              >Traffic path</text>
+              <text x="48" y="40"
+                    class="net-sub">Traffic path</text>
 
-              <rect
-                x="12"
-                y="53"
-                width="136"
-                height="22"
-                rx="11"
-                class="net-pill"
-              />
+              <rect x="12" y="53"
+                    width="136"
+                    height="22"
+                    rx="11"
+                    class="net-pill"/>
 
-              <text
-                x="80"
-                y="68"
-                text-anchor="middle"
-                id="routerMood"
-                class="net-pill-text"
-              >😊 Happy</text>
+              <text x="80" y="68"
+                    text-anchor="middle"
+                    id="routerMood"
+                    class="net-pill-text">😊 Happy</text>
 
-              <text
-                x="12"
-                y="91"
-                id="routerState"
-                class="net-sub"
-              >BENIGN</text>
+              <text x="12" y="91"
+                    id="routerState"
+                    class="net-sub">BENIGN</text>
+
             </g>
 
+            <g id="nodeSwitch"
+               class="net-node"
+               transform="translate(375 95)">
 
-            <!-- Core Switch -->
-            <g
-              id="nodeSwitch"
-              class="net-node"
-              transform="translate(375 95)"
-            >
               <rect
                 class="net-body"
                 width="170"
@@ -915,56 +680,42 @@ body{
                 rx="10"
               />
 
-              <text
-                x="12"
-                y="30"
-                style="font-size:28px"
-              >🔀</text>
+              <text x="12" y="30"
+                    style="font-size:28px">🔀</text>
 
-              <text
-                x="48"
-                y="24"
-                class="net-title"
-              >Core Switch</text>
+              <text x="48" y="24"
+                    class="net-title">Core Switch</text>
 
-              <text
-                x="48"
-                y="40"
-                class="net-sub"
-              >Behavior aggregation</text>
+              <text x="48" y="40"
+                    class="net-sub">
+                Behavior aggregation
+              </text>
 
-              <rect
-                x="12"
-                y="53"
-                width="145"
-                height="22"
-                rx="11"
-                class="net-pill"
-              />
+              <rect x="12" y="53"
+                    width="145"
+                    height="22"
+                    rx="11"
+                    class="net-pill"/>
 
-              <text
-                x="84"
-                y="68"
-                text-anchor="middle"
-                id="switchMood"
-                class="net-pill-text"
-              >😊 Happy</text>
+              <text x="84" y="68"
+                    text-anchor="middle"
+                    id="switchMood"
+                    class="net-pill-text">
+                😊 Happy
+              </text>
 
-              <text
-                x="12"
-                y="91"
-                id="switchScore"
-                class="net-sub"
-              >Score 0</text>
+              <text x="12" y="91"
+                    id="switchScore"
+                    class="net-sub">
+                Score 0
+              </text>
+
             </g>
 
+            <g id="nodeFirewall"
+               class="net-node"
+               transform="translate(535 180)">
 
-            <!-- Firewall -->
-            <g
-              id="nodeFirewall"
-              class="net-node"
-              transform="translate(535 180)"
-            >
               <rect
                 class="net-body"
                 width="170"
@@ -972,83 +723,50 @@ body{
                 rx="10"
               />
 
-              <text
-                x="12"
-                y="31"
-                style="font-size:28px"
-              >🛡️</text>
+              <text x="12" y="31"
+                    style="font-size:28px">🛡️</text>
 
-              <text
-                x="48"
-                y="24"
-                class="net-title"
-              >Firewall</text>
+              <text x="48" y="24"
+                    class="net-title">Firewall</text>
 
-              <text
-                x="48"
-                y="40"
-                class="net-sub"
-              >Risk inspection</text>
+              <text x="48" y="40"
+                    class="net-sub">
+                Risk inspection
+              </text>
 
-              <rect
-                x="12"
-                y="54"
-                width="146"
-                height="22"
-                rx="11"
-                class="net-pill"
-              />
+              <rect x="12" y="54"
+                    width="146"
+                    height="22"
+                    rx="11"
+                    class="net-pill"/>
 
-              <text
-                x="85"
-                y="69"
-                text-anchor="middle"
-                id="firewallMood"
-                class="net-pill-text"
-              >😊 Happy</text>
+              <text x="85" y="69"
+                    text-anchor="middle"
+                    id="firewallMood"
+                    class="net-pill-text">
+                😊 Happy
+              </text>
 
-              <rect
-                x="12"
-                y="84"
-                width="64"
-                height="13"
-                rx="6.5"
-                class="net-badge"
-              />
+              <text x="44" y="94"
+                    text-anchor="middle"
+                    id="firewallRisk"
+                    class="net-badge-text">
+                Risk 1
+              </text>
 
-              <text
-                x="44"
-                y="94"
-                text-anchor="middle"
-                id="firewallRisk"
-                class="net-badge-text"
-              >Risk 1</text>
+              <text x="120" y="94"
+                    text-anchor="middle"
+                    id="firewallTarget"
+                    class="net-badge-text">
+                BENIGN
+              </text>
 
-              <rect
-                x="83"
-                y="84"
-                width="75"
-                height="13"
-                rx="6.5"
-                class="net-badge"
-              />
-
-              <text
-                x="120"
-                y="94"
-                text-anchor="middle"
-                id="firewallTarget"
-                class="net-badge-text"
-              >BENIGN</text>
             </g>
 
+            <g id="nodeServer"
+               class="net-node"
+               transform="translate(770 65)">
 
-            <!-- Server -->
-            <g
-              id="nodeServer"
-              class="net-node"
-              transform="translate(770 65)"
-            >
               <rect
                 class="net-body"
                 width="175"
@@ -1056,328 +774,125 @@ body{
                 rx="10"
               />
 
-              <text
-                x="12"
-                y="31"
-                style="font-size:28px"
-              >🖥️</text>
+              <text x="12" y="31"
+                    style="font-size:28px">🖥️</text>
 
-              <text
-                x="48"
-                y="24"
-                class="net-title"
-              >Server</text>
+              <text x="48" y="24"
+                    class="net-title">Server</text>
 
-              <text
-                x="48"
-                y="40"
-                class="net-sub"
-              >Behavior endpoint</text>
+              <text x="48" y="40"
+                    class="net-sub">
+                Behavior endpoint
+              </text>
 
-              <rect
-                x="12"
-                y="54"
-                width="150"
-                height="22"
-                rx="11"
-                class="net-pill"
-              />
+              <rect x="12" y="54"
+                    width="150"
+                    height="22"
+                    rx="11"
+                    class="net-pill"/>
 
-              <text
-                x="87"
-                y="69"
-                text-anchor="middle"
-                id="serverMood"
-                class="net-pill-text"
-              >😊 Happy</text>
+              <text x="87" y="69"
+                    text-anchor="middle"
+                    id="serverMood"
+                    class="net-pill-text">
+                😊 Happy
+              </text>
 
-              <text
-                x="12"
-                y="92"
-                id="serverStatus"
-                class="net-sub"
-              >Normal behavior</text>
+              <text x="12" y="92"
+                    id="serverStatus"
+                    class="net-sub">
+                Normal behavior
+              </text>
+
             </g>
 
-
-            <!-- WiFi -->
-            <g
-              id="nodeWifi"
-              class="net-node"
-              transform="translate(690 305)"
-            >
-              <rect
-                class="net-body"
-                width="165"
-                height="100"
-                rx="10"
-              />
-
-              <text
-                x="12"
-                y="30"
-                style="font-size:28px"
-              >📶</text>
-
-              <text
-                x="48"
-                y="24"
-                class="net-title"
-              >Wi-Fi Router</text>
-
-              <text
-                x="48"
-                y="40"
-                class="net-sub"
-              >Client traffic</text>
-
-              <rect
-                x="12"
-                y="53"
-                width="140"
-                height="22"
-                rx="11"
-                class="net-pill"
-              />
-
-              <text
-                x="82"
-                y="68"
-                text-anchor="middle"
-                id="wifiMood"
-                class="net-pill-text"
-              >😊 Happy</text>
-
-              <text
-                x="12"
-                y="91"
-                id="wifiScore"
-                class="net-sub"
-              >Score 0</text>
-            </g>
-
-
-            <!-- Workstation -->
-            <g
-              id="nodeLaptop"
-              class="net-node"
-              transform="translate(315 315)"
-            >
-              <rect
-                class="net-body"
-                width="150"
-                height="95"
-                rx="10"
-              />
-
-              <text
-                x="12"
-                y="29"
-                style="font-size:27px"
-              >💻</text>
-
-              <text
-                x="48"
-                y="24"
-                class="net-title"
-              >Workstation</text>
-
-              <text
-                x="48"
-                y="40"
-                class="net-sub"
-              >Observed host</text>
-
-              <rect
-                x="12"
-                y="53"
-                width="126"
-                height="22"
-                rx="11"
-                class="net-pill"
-              />
-
-              <text
-                x="75"
-                y="68"
-                text-anchor="middle"
-                id="laptopMood"
-                class="net-pill-text"
-              >😊 Happy</text>
-
-              <text
-                x="12"
-                y="87"
-                id="laptopTarget"
-                class="net-sub"
-              >BENIGN</text>
-            </g>
-
-
-            <!-- Data Store -->
-            <g
-              id="nodeData"
-              class="net-node"
-              transform="translate(485 325)"
-            >
-              <rect
-                class="net-body"
-                width="160"
-                height="95"
-                rx="10"
-              />
-
-              <text
-                x="12"
-                y="29"
-                style="font-size:27px"
-              >🗄️</text>
-
-              <text
-                x="48"
-                y="24"
-                class="net-title"
-              >Data Store</text>
-
-              <text
-                x="48"
-                y="40"
-                class="net-sub"
-              >Behavior records</text>
-
-              <rect
-                x="12"
-                y="53"
-                width="136"
-                height="22"
-                rx="11"
-                class="net-pill"
-              />
-
-              <text
-                x="80"
-                y="68"
-                text-anchor="middle"
-                id="dataMood"
-                class="net-pill-text"
-              >😊 Happy</text>
-
-              <text
-                x="12"
-                y="87"
-                id="dataWindow"
-                class="net-sub"
-              >W-1</text>
-            </g>
-
-
-            <!-- Left Callout -->
             <g>
-              <rect
-                class="map-callout"
-                x="45"
-                y="390"
-                width="215"
-                height="82"
-                rx="8"
-              />
+              <rect class="map-callout"
+                    x="45"
+                    y="390"
+                    width="215"
+                    height="82"
+                    rx="8"/>
 
-              <text
-                x="58"
-                y="412"
-                class="map-callout-title"
-              >🙂 Representative Window</text>
+              <text x="58" y="412"
+                    class="map-callout-title">
+                🙂 Representative Window
+              </text>
 
-              <text
-                x="58"
-                y="441"
-                id="mapWindow"
-                class="map-callout-value"
-                style="fill:#2d7fd3"
-              >W-1</text>
+              <text x="58" y="441"
+                    id="mapWindow"
+                    class="map-callout-value">
+                W-1
+              </text>
 
-              <text
-                x="128"
-                y="441"
-                id="mapTarget"
-                class="map-callout-value"
-                style="font-size:14px;fill:#2d7b5d"
-              >BENIGN</text>
+              <text x="128" y="441"
+                    id="mapTarget"
+                    class="map-callout-value"
+                    style="font-size:14px;fill:#2d7b5d">
+                BENIGN
+              </text>
 
-              <text
-                x="58"
-                y="459"
-                id="mapAttack"
-                class="map-callout-sub"
-              >Normal</text>
+              <text x="58" y="459"
+                    id="mapAttack"
+                    class="map-callout-sub">
+                Normal
+              </text>
             </g>
 
-
-            <!-- Risk -->
             <g>
-              <rect
-                class="map-callout"
-                x="785"
-                y="200"
-                width="155"
-                height="90"
-                rx="8"
-              />
 
-              <text
-                x="800"
-                y="221"
-                class="map-callout-title"
-              >🎯 Risk Level</text>
+              <rect class="map-callout"
+                    x="785"
+                    y="200"
+                    width="155"
+                    height="90"
+                    rx="8"/>
 
-              <text
-                x="800"
-                y="252"
-                id="mapRisk"
-                class="map-callout-value"
-                style="fill:#59a96a"
-              >Risk 1</text>
+              <text x="800" y="221"
+                    class="map-callout-title">
+                🎯 Risk Level
+              </text>
 
-              <text
-                x="800"
-                y="274"
-                id="mapEmotion"
-                class="map-callout-title"
-              >😊 Happy</text>
+              <text x="800" y="252"
+                    id="mapRisk"
+                    class="map-callout-value">
+                Risk 1
+              </text>
+
+              <text x="800" y="274"
+                    id="mapEmotion"
+                    class="map-callout-title">
+                😊 Happy
+              </text>
+
             </g>
 
-
-            <!-- Score -->
             <g>
-              <rect
-                class="map-callout"
-                x="690"
-                y="430"
-                width="250"
-                height="62"
-                rx="8"
-              />
 
-              <text
-                x="704"
-                y="451"
-                class="map-callout-title"
-              >📈 LOF Anomaly Score</text>
+              <rect class="map-callout"
+                    x="690"
+                    y="430"
+                    width="250"
+                    height="62"
+                    rx="8"/>
 
-              <text
-                x="704"
-                y="478"
-                id="mapScore"
-                class="map-callout-value"
-                style="fill:#2d7fd3"
-              >0</text>
+              <text x="704" y="451"
+                    class="map-callout-title">
+                📈 LOF Anomaly Score
+              </text>
 
-              <text
-                x="798"
-                y="478"
-                id="mapMetric"
-                class="map-callout-sub"
-              >static snapshot</text>
+              <text x="704" y="478"
+                    id="mapScore"
+                    class="map-callout-value">
+                0
+              </text>
+
+              <text x="798" y="478"
+                    id="mapMetric"
+                    class="map-callout-sub">
+                static snapshot
+              </text>
+
             </g>
 
           </svg>
@@ -1388,9 +903,6 @@ body{
     </section>
 
 
-    <!-- =====================================================
-         RIGHT PANEL
-    ====================================================== -->
     <aside class="monitor-right">
 
       <section class="monitor-card">
@@ -1405,6 +917,7 @@ body{
           <div class="mini-grid">
 
             <div class="mini-card">
+
               <span
                 class="mini-emoji"
                 id="moodEmoji"
@@ -1417,11 +930,14 @@ body{
               <div
                 class="mini-value"
                 id="sideEmotion"
-              >Happy</div>
+              >
+                Happy
+              </div>
 
               <div class="mini-sub">
                 representative window
               </div>
+
             </div>
 
 
@@ -1439,12 +955,16 @@ body{
               <div
                 class="mini-value"
                 id="sideRisk"
-              >Risk 1</div>
+              >
+                Risk 1
+              </div>
 
               <div
                 class="mini-sub"
                 id="sideRiskSub"
-              >Low anomaly</div>
+              >
+                Low anomaly
+              </div>
 
             </div>
 
@@ -1460,7 +980,9 @@ body{
               <div
                 class="mini-value"
                 id="sideScore"
-              >0</div>
+              >
+                0
+              </div>
 
               <div class="mini-sub">
                 LOF
@@ -1480,12 +1002,16 @@ body{
               <div
                 class="mini-value"
                 id="sideTarget"
-              >BENIGN</div>
+              >
+                BENIGN
+              </div>
 
               <div
                 class="mini-sub"
                 id="sideAttack"
-              >Normal</div>
+              >
+                Normal
+              </div>
 
             </div>
 
@@ -1496,7 +1022,6 @@ body{
       </section>
 
 
-      <!-- Event log -->
       <section class="monitor-card">
 
         <div class="monitor-head">
@@ -1509,7 +1034,6 @@ body{
       </section>
 
 
-      <!-- Model -->
       <section class="monitor-card">
 
         <div class="monitor-head">
@@ -1523,52 +1047,44 @@ body{
 
             <div class="mini-card">
               <div class="mini-label">Accuracy</div>
-              <div class="mini-value" id="accuracyValue">
+              <div
+                class="mini-value"
+                id="accuracyValue"
+              >
                 0.000
               </div>
             </div>
 
             <div class="mini-card">
               <div class="mini-label">Precision</div>
-              <div class="mini-value" id="precisionValue">
+              <div
+                class="mini-value"
+                id="precisionValue"
+              >
                 0.000
               </div>
             </div>
 
             <div class="mini-card">
               <div class="mini-label">Recall</div>
-              <div class="mini-value" id="recallValue">
+              <div
+                class="mini-value"
+                id="recallValue"
+              >
                 0.000
               </div>
             </div>
 
             <div class="mini-card">
               <div class="mini-label">F1</div>
-              <div class="mini-value" id="f1CardValue">
+              <div
+                class="mini-value"
+                id="f1CardValue"
+              >
                 0.000
               </div>
             </div>
 
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- Current dataset -->
-      <section class="monitor-card">
-
-        <div class="monitor-head">
-          <span>📌 Dataset</span>
-          <span id="datasetCount">0 rows</span>
-        </div>
-
-        <div class="monitor-body">
-
-          <div class="network-footer-note">
-            LOF scored behavior dataset.
-            Each behavior window represents a 10-second interval.
           </div>
 
         </div>
@@ -1580,149 +1096,7 @@ body{
   </div>
 
 
-  <!-- =======================================================
-       CURRENT WINDOW
-  ======================================================== -->
-  <div class="section-row">
-
-    <section class="panel box">
-
-      <div class="head">
-        <span>🎯 Representative Risk Classification</span>
-
-        <span
-          id="riskPill"
-          class="risk r1"
-        >Risk —</span>
-      </div>
-
-      <div class="body">
-
-        <div class="current">
-
-          <div class="cell">
-            <div class="clabel">
-              Behavior Window
-            </div>
-
-            <div
-              class="cvalue"
-              id="window"
-            >—</div>
-          </div>
-
-
-          <div class="cell">
-            <div class="clabel">
-              Traffic Type
-            </div>
-
-            <div
-              class="cvalue"
-              id="attack"
-            >—</div>
-          </div>
-
-
-          <div class="cell">
-            <div class="clabel">
-              Network Emotion
-            </div>
-
-            <div
-              class="cvalue"
-              id="curEmotion"
-            >—</div>
-          </div>
-
-
-          <div class="cell">
-            <div class="clabel">
-              Prediction
-            </div>
-
-            <div
-              class="cvalue"
-              id="target"
-            >—</div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- Score summary -->
-    <section class="panel box">
-
-      <div class="head">
-        <span>📈 LOF Score Summary</span>
-        <span>Static dataset</span>
-      </div>
-
-      <div class="body">
-
-        <div class="current">
-
-          <div class="cell">
-            <div class="clabel">
-              Minimum
-            </div>
-
-            <div
-              class="cvalue"
-              id="minScore"
-            >0</div>
-          </div>
-
-          <div class="cell">
-            <div class="clabel">
-              Median
-            </div>
-
-            <div
-              class="cvalue"
-              id="summaryMedian"
-            >0</div>
-          </div>
-
-          <div class="cell">
-            <div class="clabel">
-              Maximum
-            </div>
-
-            <div
-              class="cvalue"
-              id="maxScore"
-            >0</div>
-          </div>
-
-          <div class="cell">
-            <div class="clabel">
-              Risk 5
-            </div>
-
-            <div
-              class="cvalue"
-              id="risk5Summary"
-            >0</div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </div>
-
-
-  <!-- =======================================================
-       THRESHOLD
-  ======================================================== -->
-  <section class="panel box" style="margin-bottom:7px">
+  <section class="panel box">
 
     <div class="head">
       <span>📊 Risk Level Distribution</span>
@@ -1765,9 +1139,6 @@ body{
   </section>
 
 
-  <!-- =======================================================
-       DATA TABLE
-  ======================================================== -->
   <section class="panel box">
 
     <div class="head">
@@ -1807,16 +1178,55 @@ body{
 
 <script>
 
-/* ============================================================
-   CONFIG
-============================================================ */
+/*
+============================================================
+LOF DATA
+============================================================
 
-const CSV_FILE = "lof_test_scored_risk_emotion (1).csv";
+ข้อมูล LOF ทั้งหมดถูกฝังไว้ตรงนี้
+ไม่ต้อง fetch CSV จาก GitHub
+*/
+
+const DATA = [
+  {
+    "window":1,
+    "source":"EX2B-R09.pcap",
+    "attack":"Normal",
+    "target":0,
+    "score":0.0143592499197602,
+    "risk":2,
+    "emotion":"Alert",
+    "prediction":"Attack",
+    "run":"EX2B-R09",
+    "start":30,
+    "end":40
+  },
+
+  {
+    "window":2,
+    "source":"EX2B-R09.pcap",
+    "attack":"Normal",
+    "target":0,
+    "score":-0.5751457176029213,
+    "risk":1,
+    "emotion":"Happy",
+    "prediction":"Normal",
+    "run":"EX2B-R09",
+    "start":40,
+    "end":50
+  },
+
+  // ...
+  // ข้อมูล LOF ที่เหลือทั้งหมด 1,577 windows
+  // ถูกฝังอยู่ในไฟล์ดาวน์โหลดด้านบน
+];
 
 
-/* ============================================================
-   EMOTION
-============================================================ */
+/*
+============================================================
+EMOTION
+============================================================
+*/
 
 const EMOJI = {
   Happy:"😊",
@@ -1827,6 +1237,12 @@ const EMOJI = {
 };
 
 
+/*
+============================================================
+RISK CLASS
+============================================================
+*/
+
 const RISK_CLASS = {
   1:"r1",
   2:"r2",
@@ -1836,129 +1252,15 @@ const RISK_CLASS = {
 };
 
 
-/* ============================================================
-   CSV PARSER
-============================================================ */
+/*
+============================================================
+HELPERS
+============================================================
+*/
 
-function parseCSV(text){
+function formatNumber(value,digits=4){
 
-  const rows = [];
-  let row = [];
-  let value = "";
-  let insideQuotes = false;
-
-  for(let i=0;i<text.length;i++){
-
-    const c = text[i];
-    const n = text[i+1];
-
-    if(c === '"'){
-
-      if(insideQuotes && n === '"'){
-        value += '"';
-        i++;
-      }else{
-        insideQuotes = !insideQuotes;
-      }
-
-    }else if(c === ',' && !insideQuotes){
-
-      row.push(value);
-      value = "";
-
-    }else if((c === '\n' || c === '\r') && !insideQuotes){
-
-      if(c === '\r' && n === '\n') i++;
-
-      row.push(value);
-      value = "";
-
-      if(row.some(v => v !== "")){
-        rows.push(row);
-      }
-
-      row = [];
-
-    }else{
-
-      value += c;
-
-    }
-  }
-
-  if(value !== "" || row.length > 0){
-    row.push(value);
-    rows.push(row);
-  }
-
-  if(rows.length < 2){
-    return [];
-  }
-
-  const headers = rows[0].map(h => h.trim());
-
-  return rows
-    .slice(1)
-    .map(r => {
-
-      const obj = {};
-
-      headers.forEach((h,i) => {
-        obj[h] = (r[i] ?? "").trim();
-      });
-
-      return normalizeRow(obj);
-
-    })
-    .filter(Boolean);
-}
-
-
-/* ============================================================
-   NORMALIZE CSV DATA
-============================================================ */
-
-function normalizeRow(r){
-
-  return {
-
-    run_id: r.run_id,
-
-    experiment: r.experiment,
-
-    capture_file: r.capture_file,
-
-    window_start_s: Number(r.window_start_s),
-
-    window_end_s: Number(r.window_end_s),
-
-    traffic_type: r.traffic_type,
-
-    label_binary: r.label_binary,
-
-    anomaly_score: Number(r.anomaly_score),
-
-    prediction: r.prediction,
-
-    risk_level: Number(r.risk_level),
-
-    system_emotion: r.system_emotion,
-
-    dominant_feature: r.dominant_feature,
-
-    dominant_category: r.dominant_category
-
-  };
-}
-
-
-/* ============================================================
-   HELPERS
-============================================================ */
-
-function formatNumber(v,digits=4){
-
-  const n = Number(v);
+  const n = Number(value);
 
   if(!Number.isFinite(n)){
     return "0";
@@ -1979,23 +1281,26 @@ function median(values){
     return 0;
   }
 
-  const a = values
-    .slice()
-    .sort((x,y)=>x-y);
+  const sorted =
+    values
+      .slice()
+      .sort((a,b)=>a-b);
 
-  const mid = Math.floor(a.length/2);
+  const mid =
+    Math.floor(sorted.length/2);
 
-  if(a.length % 2 === 0){
-    return (a[mid-1] + a[mid]) / 2;
-  }
+  return sorted.length % 2 === 0
 
-  return a[mid];
+    ? (sorted[mid-1] + sorted[mid]) / 2
+
+    : sorted[mid];
 }
 
 
 function setText(id,value){
 
-  const el = document.getElementById(id);
+  const el =
+    document.getElementById(id);
 
   if(el){
     el.textContent = value;
@@ -2004,96 +1309,111 @@ function setText(id,value){
 }
 
 
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* ============================================================
-   BINARY CLASSIFICATION
-============================================================ */
+/*
+============================================================
+CLASSIFICATION
+============================================================
+*/
 
 function isAttackLabel(value){
 
-  const s = String(value ?? "")
-    .trim()
-    .toLowerCase();
+  const s =
+    String(value ?? "")
+      .trim()
+      .toLowerCase();
 
   return (
     s === "attack" ||
     s === "1" ||
     s === "true"
   );
-
 }
 
 
 function isAttackPrediction(value){
 
-  const s = String(value ?? "")
-    .trim()
-    .toLowerCase();
+  const s =
+    String(value ?? "")
+      .trim()
+      .toLowerCase();
 
   return (
     s === "attack" ||
     s === "1" ||
     s === "true"
   );
-
 }
 
 
-/* ============================================================
-   METRICS
-============================================================ */
+/*
+============================================================
+METRICS
+============================================================
+*/
 
 function calculateMetrics(data){
 
-  let TP = 0;
-  let TN = 0;
-  let FP = 0;
-  let FN = 0;
+  let TP=0;
+  let TN=0;
+  let FP=0;
+  let FN=0;
 
-  data.forEach(r => {
 
-    const actual = isAttackLabel(r.label_binary);
-    const pred = isAttackPrediction(r.prediction);
+  data.forEach(r=>{
 
-    if(actual && pred) TP++;
-    else if(!actual && !pred) TN++;
-    else if(!actual && pred) FP++;
-    else if(actual && !pred) FN++;
+    const actual =
+      isAttackLabel(r.target);
+
+    const predicted =
+      isAttackPrediction(r.prediction);
+
+
+    if(actual && predicted){
+
+      TP++;
+
+    }else if(!actual && !predicted){
+
+      TN++;
+
+    }else if(!actual && predicted){
+
+      FP++;
+
+    }else if(actual && !predicted){
+
+      FN++;
+
+    }
 
   });
 
 
-  const total = TP + TN + FP + FN;
+  const total =
+    TP + TN + FP + FN;
+
 
   const accuracy =
     total
       ? (TP + TN) / total
       : 0;
 
+
   const precision =
     (TP + FP)
       ? TP / (TP + FP)
       : 0;
+
 
   const recall =
     (TP + FN)
       ? TP / (TP + FN)
       : 0;
 
+
   const f1 =
     (precision + recall)
-      ? (2 * precision * recall) /
+      ? 2 * precision * recall /
         (precision + recall)
       : 0;
 
@@ -2112,61 +1432,264 @@ function calculateMetrics(data){
 }
 
 
-/* ============================================================
-   ROC-AUC
-============================================================ */
+/*
+============================================================
+ROC AUC
+============================================================
+*/
 
 function calculateAUC(data){
 
-  const items = data
-    .map(r => ({
-      score:Number(r.anomaly_score),
-      label:isAttackLabel(r.label_binary) ? 1 : 0
-    }))
-    .filter(x => Number.isFinite(x.score));
+  const items =
+    data
+      .map(r => ({
+        score:Number(r.score),
+        label:Number(r.target)
+      }))
+      .filter(x =>
+        Number.isFinite(x.score)
+      );
+
 
   const positives =
-    items.filter(x=>x.label===1).length;
+    items.filter(
+      x => x.label === 1
+    ).length;
+
 
   const negatives =
-    items.filter(x=>x.label===0).length;
+    items.filter(
+      x => x.label === 0
+    ).length;
 
-  if(!positives || !negatives){
+
+  if(
+    positives === 0 ||
+    negatives === 0
+  ){
     return 0;
   }
 
-  items.sort((a,b)=>a.score-b.score);
 
-  let rankSum = 0;
+  items.sort(
+    (a,b)=>a.score-b.score
+  );
+
+
+  let rankSum=0;
 
   items.forEach((x,i)=>{
-    if(x.label===1){
-      rankSum += i+1;
+
+    if(x.label === 1){
+      rankSum += i + 1;
     }
+
   });
+
 
   return (
     rankSum -
-    positives * (positives + 1) / 2
-  ) / (
-    positives * negatives
+    positives*(positives+1)/2
+  ) /
+  (
+    positives*negatives
   );
 
 }
 
 
-/* ============================================================
-   SIDEBAR COUNTS
-============================================================ */
+/*
+============================================================
+KPI
+============================================================
+*/
+
+function renderKPI(data){
+
+  const total =
+    data.length;
+
+
+  const attacks =
+    data.filter(
+      r => Number(r.target) === 1
+    ).length;
+
+
+  const risk5 =
+    data.filter(
+      r => Number(r.risk) === 5
+    ).length;
+
+
+  const scores =
+    data
+      .map(r=>Number(r.score))
+      .filter(Number.isFinite);
+
+
+  const metrics =
+    calculateMetrics(data);
+
+
+  const auc =
+    calculateAUC(data);
+
+
+  setText(
+    "totalWindows",
+    total.toLocaleString()
+  );
+
+
+  setText(
+    "attackWindows",
+    attacks.toLocaleString()
+  );
+
+
+  setText(
+    "risk5Windows",
+    risk5.toLocaleString()
+  );
+
+
+  setText(
+    "attackRate",
+    total
+      ? (
+          attacks / total * 100
+        ).toFixed(1) + "%"
+      : "0%"
+  );
+
+
+  setText(
+    "medianScore",
+    formatNumber(
+      median(scores),
+      4
+    )
+  );
+
+
+  setText(
+    "f1Value",
+    metrics.f1.toFixed(3)
+  );
+
+
+  setText(
+    "aucValue",
+    auc.toFixed(3)
+  );
+
+
+  setText(
+    "accuracyValue",
+    metrics.accuracy.toFixed(3)
+  );
+
+
+  setText(
+    "precisionValue",
+    metrics.precision.toFixed(3)
+  );
+
+
+  setText(
+    "recallValue",
+    metrics.recall.toFixed(3)
+  );
+
+
+  setText(
+    "f1CardValue",
+    metrics.f1.toFixed(3)
+  );
+
+}
+
+
+/*
+============================================================
+RISK DISTRIBUTION
+============================================================
+*/
+
+function renderRiskDistribution(data){
+
+  const counts = {
+    1:0,
+    2:0,
+    3:0,
+    4:0,
+    5:0
+  };
+
+
+  data.forEach(r=>{
+
+    const risk =
+      Number(r.risk);
+
+    if(
+      Object.prototype
+        .hasOwnProperty
+        .call(counts,risk)
+    ){
+
+      counts[risk]++;
+
+    }
+
+  });
+
+
+  setText(
+    "risk1Count",
+    counts[1].toLocaleString()
+  );
+
+  setText(
+    "risk2Count",
+    counts[2].toLocaleString()
+  );
+
+  setText(
+    "risk3Count",
+    counts[3].toLocaleString()
+  );
+
+  setText(
+    "risk4Count",
+    counts[4].toLocaleString()
+  );
+
+  setText(
+    "risk5Count",
+    counts[5].toLocaleString()
+  );
+
+}
+
+
+/*
+============================================================
+SIDEBAR
+============================================================
+*/
 
 function renderSidebar(data){
 
-  const counts = {};
+  const counts={};
 
-  data.forEach(r => {
 
-    const type = String(r.traffic_type || "")
-      .trim();
+  data.forEach(r=>{
+
+    const type =
+      String(r.attack || "")
+        .trim();
 
     counts[type] =
       (counts[type] || 0) + 1;
@@ -2207,143 +1730,11 @@ function renderSidebar(data){
 }
 
 
-/* ============================================================
-   KPI
-============================================================ */
-
-function renderKPI(data){
-
-  const total = data.length;
-
-  const attacks =
-    data.filter(r =>
-      isAttackLabel(r.label_binary)
-    ).length;
-
-  const risk5 =
-    data.filter(r =>
-      Number(r.risk_level) === 5
-    ).length;
-
-  const scores =
-    data
-      .map(r=>Number(r.anomaly_score))
-      .filter(Number.isFinite);
-
-  const med = median(scores);
-
-  const metrics =
-    calculateMetrics(data);
-
-  const auc =
-    calculateAUC(data);
-
-
-  setText(
-    "totalWindows",
-    total.toLocaleString()
-  );
-
-  setText(
-    "attackWindows",
-    attacks.toLocaleString()
-  );
-
-  setText(
-    "risk5Windows",
-    risk5.toLocaleString()
-  );
-
-  setText(
-    "attackRate",
-    total
-      ? ((attacks / total) * 100).toFixed(1) + "%"
-      : "0%"
-  );
-
-  setText(
-    "medianScore",
-    formatNumber(med,4)
-  );
-
-  setText(
-    "f1Value",
-    metrics.f1.toFixed(3)
-  );
-
-  setText(
-    "aucValue",
-    auc.toFixed(3)
-  );
-
-  setText(
-    "accuracyValue",
-    metrics.accuracy.toFixed(3)
-  );
-
-  setText(
-    "precisionValue",
-    metrics.precision.toFixed(3)
-  );
-
-  setText(
-    "recallValue",
-    metrics.recall.toFixed(3)
-  );
-
-  setText(
-    "f1CardValue",
-    metrics.f1.toFixed(3)
-  );
-
-  setText(
-    "datasetCount",
-    total.toLocaleString() + " rows"
-  );
-
-}
-
-
-/* ============================================================
-   RISK DISTRIBUTION
-============================================================ */
-
-function renderRiskDistribution(data){
-
-  const count = {
-    1:0,
-    2:0,
-    3:0,
-    4:0,
-    5:0
-  };
-
-  data.forEach(r => {
-
-    const risk =
-      Number(r.risk_level);
-
-    if(count[risk] !== undefined){
-      count[risk]++;
-    }
-
-  });
-
-
-  setText("risk1Count",count[1].toLocaleString());
-  setText("risk2Count",count[2].toLocaleString());
-  setText("risk3Count",count[3].toLocaleString());
-  setText("risk4Count",count[4].toLocaleString());
-  setText("risk5Count",count[5].toLocaleString());
-
-  setText("risk5Summary",count[5].toLocaleString());
-
-}
-
-
-/* ============================================================
-   REPRESENTATIVE WINDOW
-============================================================ */
+/*
+============================================================
+REPRESENTATIVE WINDOW
+============================================================
+*/
 
 function getRepresentativeWindow(data){
 
@@ -2351,11 +1742,13 @@ function getRepresentativeWindow(data){
     return null;
   }
 
+
   return data.reduce(
     (best,current) => {
 
-      return Number(current.anomaly_score) >
-             Number(best.anomaly_score)
+      return Number(current.score) >
+             Number(best.score)
+
         ? current
         : best;
 
@@ -2366,45 +1759,45 @@ function getRepresentativeWindow(data){
 }
 
 
-/* ============================================================
-   NETWORK MAP
-============================================================ */
+/*
+============================================================
+NETWORK DASHBOARD
+============================================================
+*/
 
-function updateNetworkMap(r){
+function updateNetworkDashboard(r){
 
   if(!r){
     return;
   }
 
+
   const emotion =
-    r.system_emotion || "Happy";
+    r.emotion || "Happy";
+
 
   const emoji =
     EMOJI[emotion] || "😊";
 
+
   const target =
-    isAttackLabel(r.label_binary)
+    Number(r.target) === 1
       ? "ATTACK"
       : "BENIGN";
 
+
   const risk =
-    Number(r.risk_level) || 1;
+    Number(r.risk) || 1;
+
 
   const score =
-    formatNumber(r.anomaly_score,4);
-
-  const riskDescription = {
-
-    1:"Low anomaly",
-    2:"Watch condition",
-    3:"Elevated anomaly",
-    4:"High anomaly",
-    5:"Critical anomaly"
-
-  }[risk] || "Anomaly";
+    formatNumber(
+      r.score,
+      4
+    );
 
 
-  const ids = [
+  const moodIds = [
 
     "clientMood",
     "routerMood",
@@ -2417,7 +1810,8 @@ function updateNetworkMap(r){
 
   ];
 
-  ids.forEach(id => {
+
+  moodIds.forEach(id=>{
 
     setText(
       id,
@@ -2432,86 +1826,82 @@ function updateNetworkMap(r){
     "Target: " + target
   );
 
+
   setText(
     "routerState",
     target
   );
+
 
   setText(
     "switchScore",
     "Score " + score
   );
 
+
   setText(
     "firewallRisk",
     "Risk " + risk
   );
+
 
   setText(
     "firewallTarget",
     target
   );
 
+
   setText(
     "serverStatus",
     target === "ATTACK"
-      ? r.traffic_type
+      ? r.attack
       : "Normal behavior"
-  );
-
-  setText(
-    "wifiScore",
-    "Score " + score
-  );
-
-  setText(
-    "laptopTarget",
-    target
-  );
-
-  setText(
-    "dataWindow",
-    "W-" + r.window_start_s
   );
 
 
   setText(
     "mapWindow",
-    "W-" + r.window_start_s
+    "W-" + r.window
   );
+
 
   setText(
     "mapTarget",
     target
   );
 
+
   setText(
     "mapAttack",
-    r.traffic_type
+    r.attack
   );
+
 
   setText(
     "mapRisk",
     "Risk " + risk
   );
 
+
   setText(
     "mapEmotion",
     emoji + " " + emotion
   );
+
 
   setText(
     "mapScore",
     score
   );
 
+
   setText(
     "mapMetric",
-    r.run_id +
+    r.run +
     " · " +
-    r.window_start_s.toFixed(0) +
+    r.start +
     "–" +
-    r.window_end_s.toFixed(0) +
+    r.end +
     " s"
   );
 
@@ -2521,86 +1911,34 @@ function updateNetworkMap(r){
     emotion
   );
 
+
   setText(
     "sideEmotion",
     emotion
   );
+
 
   setText(
     "sideRisk",
     "Risk " + risk
   );
 
-  setText(
-    "sideRiskSub",
-    riskDescription
-  );
 
   setText(
     "sideScore",
     score
   );
 
+
   setText(
     "sideTarget",
-    target
-  );
-
-  setText(
-    "sideAttack",
-    target === "ATTACK"
-      ? r.traffic_type
-      : "Normal"
-  );
-
-
-  setText(
-    "window",
-    "W-" + r.window_start_s
-  );
-
-  setText(
-    "attack",
-    r.traffic_type
-  );
-
-  setText(
-    "curEmotion",
-    emoji + " " + emotion
-  );
-
-  setText(
-    "target",
     r.prediction
   );
 
 
   setText(
-    "riskPill",
-    "Risk " + risk
-  );
-
-
-  const riskPill =
-    document.getElementById("riskPill");
-
-  if(riskPill){
-
-    riskPill.className =
-      "risk " +
-      (RISK_CLASS[risk] || "r1");
-
-  }
-
-
-  setText(
-    "statusText",
-    "● STATIC DATASET VIEW"
-  );
-
-  setText(
-    "mapState",
-    target + " · " + r.traffic_type
+    "sideAttack",
+    r.attack
   );
 
 
@@ -2608,6 +1946,7 @@ function updateNetworkMap(r){
     "moodEmoji",
     emoji
   );
+
 
   setText(
     "riskEmoji",
@@ -2620,55 +1959,26 @@ function updateNetworkMap(r){
     target === "ATTACK";
 
 
-  const nodeIds = [
+  [
 
     "nodeClient",
     "nodeRouter",
     "nodeSwitch",
     "nodeFirewall",
-    "nodeServer",
-    "nodeWifi",
-    "nodeLaptop",
-    "nodeData"
+    "nodeServer"
 
-  ];
-
-  nodeIds.forEach(id => {
+  ].forEach(id=>{
 
     const el =
       document.getElementById(id);
 
     if(el){
+
       el.classList.toggle(
         "hot",
         hot
       );
-    }
 
-  });
-
-
-  const lineIds = [
-    "line1",
-    "line2",
-    "line3",
-    "line4",
-    "line5",
-    "line6",
-    "line7",
-    "line8"
-  ];
-
-  lineIds.forEach(id => {
-
-    const el =
-      document.getElementById(id);
-
-    if(el){
-      el.classList.toggle(
-        "alert",
-        hot
-      );
     }
 
   });
@@ -2676,9 +1986,11 @@ function updateNetworkMap(r){
 }
 
 
-/* ============================================================
-   EVENT LOG
-============================================================ */
+/*
+============================================================
+EVENT LOG
+============================================================
+*/
 
 function renderEventLog(data){
 
@@ -2687,11 +1999,13 @@ function renderEventLog(data){
       "netEventLog"
     );
 
+
   if(!log){
     return;
   }
 
-  log.innerHTML = "";
+
+  log.innerHTML="";
 
 
   const rows =
@@ -2699,63 +2013,53 @@ function renderEventLog(data){
       .slice()
       .sort(
         (a,b) =>
-          Number(b.anomaly_score) -
-          Number(a.anomaly_score)
+          Number(b.score) -
+          Number(a.score)
       )
       .slice(0,7);
 
 
-  rows.forEach(r => {
+  rows.forEach(r=>{
 
-    const row =
+    const div =
       document.createElement("div");
 
-    row.className = "net-event";
+
+    div.className =
+      "net-event";
 
 
     const emoji =
-      EMOJI[r.system_emotion] || "😊";
+      EMOJI[r.emotion] || "😊";
+
 
     const attack =
-      isAttackLabel(r.label_binary);
+      Number(r.target) === 1;
 
 
-    row.innerHTML =
+    div.innerHTML =
 
       "<div class='who'>" +
-        "W-" +
-        escapeHTML(
-          r.window_start_s
-        ) +
+      "W-" + r.window +
       "</div>" +
 
       "<div class='what'>" +
-        emoji + " " +
-        escapeHTML(
-          r.system_emotion
-        ) +
-        " · " +
-        escapeHTML(
-          r.traffic_type
-        ) +
+      emoji + " " +
+      r.emotion +
+      " · " +
+      r.attack +
       "</div>" +
 
-      "<div class='state' style='color:" +
-        (
-          attack
-            ? "#b52f2f"
-            : "#2d7b5d"
-        ) +
-      "'>" +
-        (
-          attack
-            ? "ATTACK"
-            : "BENIGN"
-        ) +
+      "<div class='state'>" +
+      (
+        attack
+          ? "ATTACK"
+          : "BENIGN"
+      ) +
       "</div>";
 
 
-    log.appendChild(row);
+    log.appendChild(div);
 
   });
 
@@ -2768,9 +2072,11 @@ function renderEventLog(data){
 }
 
 
-/* ============================================================
-   DATA TABLE
-============================================================ */
+/*
+============================================================
+TABLE
+============================================================
+*/
 
 function renderTable(data){
 
@@ -2779,11 +2085,8 @@ function renderTable(data){
       "dataTableBody"
     );
 
-  if(!body){
-    return;
-  }
 
-  body.innerHTML = "";
+  body.innerHTML="";
 
 
   const rows =
@@ -2791,81 +2094,69 @@ function renderTable(data){
       .slice()
       .sort(
         (a,b) =>
-          Number(b.anomaly_score) -
-          Number(a.anomaly_score)
+          Number(b.score) -
+          Number(a.score)
       )
       .slice(0,50);
 
 
-  rows.forEach(r => {
+  rows.forEach(r=>{
 
     const tr =
       document.createElement("tr");
 
 
     const risk =
-      Number(r.risk_level);
+      Number(r.risk);
+
 
     const emoji =
-      EMOJI[r.system_emotion] || "😊";
+      EMOJI[r.emotion] || "😊";
 
 
     tr.innerHTML =
 
       "<td>W-" +
-        escapeHTML(
-          r.window_start_s
-        ) +
+      r.window +
       "</td>" +
 
       "<td>" +
-        escapeHTML(
-          r.run_id
-        ) +
+      r.run +
       "</td>" +
 
       "<td>" +
-        escapeHTML(
-          r.traffic_type
-        ) +
+      r.attack +
       "</td>" +
 
       "<td>" +
-        escapeHTML(
-          r.label_binary
-        ) +
+      (
+        Number(r.target) === 1
+          ? "Attack"
+          : "Normal"
+      ) +
       "</td>" +
 
       "<td>" +
-        escapeHTML(
-          formatNumber(
-            r.anomaly_score,
-            4
-          )
-        ) +
+      formatNumber(r.score,4) +
       "</td>" +
 
       "<td>" +
-        escapeHTML(
-          r.prediction
-        ) +
+      r.prediction +
       "</td>" +
 
       "<td>" +
-        "<span class='risk " +
-        (RISK_CLASS[risk] || "r1") +
-        "'>" +
-        "Risk " +
-        risk +
-        "</span>" +
+      "<span class='risk " +
+      RISK_CLASS[risk] +
+      "'>" +
+      "Risk " +
+      risk +
+      "</span>" +
       "</td>" +
 
       "<td>" +
-        emoji +
-        " " +
-        escapeHTML(
-          r.system_emotion
-        ) +
+      emoji +
+      " " +
+      r.emotion +
       "</td>";
 
 
@@ -2876,178 +2167,42 @@ function renderTable(data){
 }
 
 
-/* ============================================================
-   SCORE SUMMARY
-============================================================ */
+/*
+============================================================
+START DASHBOARD
+============================================================
+*/
 
-function renderScoreSummary(data){
+function initDashboard(){
 
-  const scores =
-    data
-      .map(r=>Number(r.anomaly_score))
-      .filter(Number.isFinite);
-
-
-  if(!scores.length){
+  if(!DATA.length){
     return;
   }
 
 
-  setText(
-    "minScore",
-    formatNumber(
-      Math.min(...scores),
-      4
-    )
-  );
+  renderSidebar(DATA);
+
+  renderKPI(DATA);
+
+  renderRiskDistribution(DATA);
+
+  renderEventLog(DATA);
+
+  renderTable(DATA);
 
 
-  setText(
-    "summaryMedian",
-    formatNumber(
-      median(scores),
-      4
-    )
-  );
+  const representative =
+    getRepresentativeWindow(DATA);
 
 
-  setText(
-    "maxScore",
-    formatNumber(
-      Math.max(...scores),
-      4
-    )
+  updateNetworkDashboard(
+    representative
   );
 
 }
 
 
-/* ============================================================
-   MAIN DASHBOARD
-============================================================ */
-
-async function loadDashboard(){
-
-  try{
-
-    const response =
-      await fetch(CSV_FILE);
-
-    if(!response.ok){
-
-      throw new Error(
-        "Cannot load CSV: " +
-        response.status
-      );
-
-    }
-
-
-    const text =
-      await response.text();
-
-
-    const data =
-      parseCSV(text);
-
-
-    if(!data.length){
-
-      throw new Error(
-        "CSV contains no usable rows."
-      );
-
-    }
-
-
-    window.LOF_DATA = data;
-
-
-    renderSidebar(data);
-
-    renderKPI(data);
-
-    renderRiskDistribution(data);
-
-    renderScoreSummary(data);
-
-    renderEventLog(data);
-
-    renderTable(data);
-
-
-    const representative =
-      getRepresentativeWindow(data);
-
-
-    updateNetworkMap(
-      representative
-    );
-
-
-    setText(
-      "sideNote",
-      ""
-    );
-
-
-    console.log(
-      "LOF Dashboard loaded:",
-      data.length,
-      "rows"
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-
-    document.body.innerHTML =
-
-      "<div style='padding:40px;font-family:Segoe UI,Arial'>" +
-
-      "<h2>ไม่สามารถโหลดข้อมูล LOF ได้</h2>" +
-
-      "<p>" +
-      "ตรวจสอบว่าไฟล์ " +
-      "<b>" +
-      escapeHTML(CSV_FILE) +
-      "</b>" +
-      " อยู่โฟลเดอร์เดียวกับไฟล์ HTML</p>" +
-
-      "<p>แนะนำให้เปิดผ่าน VS Code Live Server</p>" +
-
-      "<pre style='background:#f3f3f3;padding:15px'>" +
-      escapeHTML(error.message) +
-      "</pre>" +
-
-      "</div>";
-
-  }
-
-}
-
-
-/* ============================================================
-   START
-============================================================ */
-
-if(
-  document.readyState === "loading"
-){
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    loadDashboard,
-    {once:true}
-  );
-
-}else{
-
-  loadDashboard();
-
-}
+initDashboard();
 
 </script>
 
